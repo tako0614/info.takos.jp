@@ -119,6 +119,10 @@ function App() {
                 <h3 class="font-medium mb-2">Tools</h3>
                 <p class="text-gray-400">Git, Docker, Deno deploy</p>
               </div>
+              <div class="bg-[#232323]/50 p-4 rounded-lg">
+                <h3 class="font-medium mb-2">infrastructure</h3>
+                <p class="text-gray-400">proxmox, k8s, Linux</p>
+              </div>
             </div>
           </section>
 
@@ -142,22 +146,22 @@ function App() {
             <h2 class="text-3xl font-semibold mb-6">Contact</h2>
             <div class="flex justify-center space-x-6">
               <a
-                href="mailto:your@email.com"
+                href="https://line.me/ti/g2/Q0c8YJlkh5f_hkDuODxp39XF9A7BOCFqezaAHA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
                 class="text-gray-400 hover:text-white transition-colors"
               >
-                Email
+                OpenChat
               </a>
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/tako0614"
                 class="text-gray-400 hover:text-white transition-colors"
               >
                 GitHub
               </a>
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://x.com/takoserver_com"
                 class="text-gray-400 hover:text-white transition-colors"
               >
-                LinkedIn
+                twitter・X
               </a>
             </div>
           </section>
