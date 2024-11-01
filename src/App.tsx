@@ -1,6 +1,6 @@
 function App() {
   return (
-    <div class="bg-[url(./nya.jpg)] bg-cover bg-fixed bg-center w-full min-h-screen no-scrollbar">
+    <div class="bg-[url(/nya.jpg)] bg-cover bg-fixed bg-center w-full min-h-screen no-scrollbar">
       <div class="text-white w-full min-h-screen p-8 bg-black/30 no-scrollbar">
         {/* ヘッダーセクション */}
         <header class="max-w-4xl mx-auto text-center py-16">
