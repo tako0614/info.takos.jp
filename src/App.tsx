@@ -140,6 +140,36 @@ function App() {
               {/* 必要に応じて追加のプロジェクトカードを追加 */}
             </div>
           </section>
+          {/*相互リンク */}
+
+          <section class="mb-16">
+            <h2 class="text-3xl font-semibold mb-6">相互Links</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="bg-[#232323]/50 p-6 rounded-lg">
+                <h3 class="text-xl font-medium mb-2">akku</h3>
+                <p class="text-gray-400">
+                  <a
+                    href="https://akku1139.github.io/"
+                    class="text-blue-400 hover:underline"
+                  >
+                    https://akku1139.github.io/
+                  </a>
+                </p>
+              </div>
+              
+              <div class="bg-[#232323]/50 p-6 rounded-lg">
+                <h3 class="text-xl font-medium mb-2">tech_fish</h3>
+                <p class="text-gray-400">
+                  <a
+                    href="https://sakana11.org"
+                    class="text-blue-400 hover:underline"
+                  >
+                    https://sakana11.org
+                  </a>
+                </p>
+              </div>
+            </div>
+          </section>
 
           {/* コンタクト */}
           <section class="text-center pb-8">
