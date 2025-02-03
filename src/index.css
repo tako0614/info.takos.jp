@@ -13,3 +13,27 @@
     scrollbar-width: none;
   }
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes backgroundZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+.animate-backgroundZoom {
+  animation: backgroundZoom 30s ease-in-out infinite alternate;
+}
+
+@keyframes spinOnce {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spinOnce {
+  animation: spinOnce 0.8s ease-out forwards;
+}
