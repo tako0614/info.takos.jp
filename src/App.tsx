@@ -1,4 +1,4 @@
-import { Component, createSignal, onMount, onCleanup, Show } from 'solid-js';
+import { Component, createSignal, onMount, onCleanup, Show, createEffect } from 'solid-js';
 
 /**
  * FadeIn コンポーネント
@@ -27,6 +27,133 @@ const FadeIn: Component<{ children: any; class?: string }> = (props) => {
   return (
     <div ref={el} class={`opacity-0 ${props.class}`}>
       {props.children}
+    </div>
+  );
+};
+
+/**
+ * MovingParticles コンポーネント
+ * 背景に常に浮遊する粒子アニメーション
+ */
+const MovingParticles: Component<{ darkMode: boolean }> = (props) => {
+  const particleCount = 40;
+  let containerRef!: HTMLDivElement;
+
+  onMount(() => {
+    const container = containerRef;
+    const width = container.offsetWidth;
+    const height = container.offsetHeight;
+
+    for (let i = 0; i < particleCount; i++) {
+      createParticle(container, width, height, props.darkMode);
+    }
+  });
+
+  createEffect(() => {
+    if (containerRef) {
+      // 既存の粒子を削除
+      containerRef.innerHTML = '';
+      
+      // 新しい粒子を作成
+      const width = containerRef.offsetWidth;
+      const height = containerRef.offsetHeight;
+      
+      for (let i = 0; i < particleCount; i++) {
+        createParticle(containerRef, width, height, props.darkMode);
+      }
+    }
+  });
+
+  function createParticle(container: HTMLDivElement, width: number, height: number, isDark: boolean) {
+    const particle = document.createElement('div');
+    const size = Math.random() * 6 + 2;
+    
+    const colorClass = isDark 
+      ? ['bg-purple-400/20', 'bg-blue-400/20', 'bg-pink-400/20', 'bg-cyan-400/20'] 
+      : ['bg-purple-600/10', 'bg-blue-600/10', 'bg-pink-600/10', 'bg-cyan-600/10'];
+    
+    particle.className = `absolute rounded-full ${colorClass[Math.floor(Math.random() * colorClass.length)]}`;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.left = `${Math.random() * width}px`;
+    particle.style.top = `${Math.random() * height}px`;
+    
+    // ランダムなアニメーション
+    const duration = Math.random() * 50 + 30;
+    particle.style.animation = `
+      floatParticle ${duration}s infinite ease-in-out,
+      fadeInOut ${(Math.random() * 5) + 5}s infinite ease-in-out ${Math.random() * 5}s
+    `;
+    particle.style.animationDelay = `${Math.random() * 10}s`;
+    
+    container.appendChild(particle);
+  }
+  
+  return (
+    <div 
+      ref={containerRef} 
+      class="fixed inset-0 pointer-events-none z-0 overflow-hidden"
+    />
+  );
+};
+
+/**
+ * WaveEffect コンポーネント
+ * 波紋のようなアニメーション効果
+ */
+const WaveEffect: Component<{ darkMode: boolean }> = (props) => {
+  return (
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      <div 
+        class={`absolute w-[150%] h-[150%] left-[-25%] bottom-[-25%] rounded-[40%] animate-wave ${
+          props.darkMode ? 'bg-purple-600/5' : 'bg-blue-600/5'
+        }`}
+        style={{ "animation-delay": "0s" }}
+      ></div>
+      <div 
+        class={`absolute w-[150%] h-[150%] left-[-25%] bottom-[-25%] rounded-[40%] animate-wave ${
+          props.darkMode ? 'bg-blue-600/5' : 'bg-purple-600/5'
+        }`}
+        style={{ "animation-delay": "5s" }}
+      ></div>
+      <div 
+        class={`absolute w-[150%] h-[150%] left-[-25%] bottom-[-25%] rounded-[40%] animate-wave ${
+          props.darkMode ? 'bg-pink-600/5' : 'bg-teal-600/5'
+        }`}
+        style={{ "animation-delay": "10s" }}
+      ></div>
+    </div>
+  );
+};
+
+/**
+ * MovingGradient コンポーネント
+ * 色が変化し続けるグラデーション背景
+ */
+const MovingGradient: Component<{ darkMode: boolean }> = (props) => {
+  return (
+    <div class="fixed inset-0 pointer-events-none z-0">
+      <div 
+        class={`absolute inset-0 animate-gradientShift ${
+          props.darkMode 
+            ? 'bg-gradient-to-br from-transparent via-purple-900/10 to-transparent' 
+            : 'bg-gradient-to-br from-transparent via-blue-300/20 to-transparent'
+        }`}
+      ></div>
+      <div 
+        class={`absolute inset-0 animate-gradientShiftAlt ${
+          props.darkMode 
+            ? 'bg-gradient-to-tl from-transparent via-blue-900/10 to-transparent' 
+            : 'bg-gradient-to-tl from-transparent via-purple-300/20 to-transparent'
+        }`}
+      ></div>
+      <div 
+        class={`absolute w-full h-full animate-pulse ${
+          props.darkMode 
+            ? 'bg-radial-pulse-dark' 
+            : 'bg-radial-pulse-light'
+        }`}
+      ></div>
     </div>
   );
 };
@@ -81,6 +208,11 @@ const App: Component = () => {
 
   return (
     <div class={`min-h-screen relative overflow-hidden transition-colors duration-500 ${darkMode() ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700' : 'bg-gradient-to-br from-blue-50 via-indigo-100 to-purple-200'}`}>
+      {/* 新しいアニメーション要素 */}
+      <MovingParticles darkMode={darkMode()} />
+      <WaveEffect darkMode={darkMode()} />
+      <MovingGradient darkMode={darkMode()} />
+      
       {/* テーマ切り替えボタン */}
       <button 
         onClick={() => setDarkMode(!darkMode())} 
