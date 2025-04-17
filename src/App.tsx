@@ -281,7 +281,6 @@ const App: Component = () => {
 
         <main class="max-w-4xl mx-auto space-y-20">
           {/* About Me - 拡張セクション */}
-          <FadeIn>
             <section>
               <h2 class={`text-3xl font-semibold mb-8 pb-2 ${darkMode() ? 'border-purple-500/50' : 'border-purple-700/50'} border-b-2`}>
                 <span class={`${darkMode() ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300' : 'text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-blue-600'}`}>About Me</span>
@@ -317,8 +316,6 @@ const App: Component = () => {
                 </ExpandableText>
               </div>
             </section>
-            
-          </FadeIn>
           {/* 今日の名言ミニ機能 */}
           <FadeIn>
           <h2 class={`text-3xl font-semibold mb-8 pb-2 ${darkMode() ? 'border-purple-500/50' : 'border-purple-700/50'} border-b-2`}>
