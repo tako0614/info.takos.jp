@@ -1,4 +1,4 @@
-import { Component, createSignal, onMount, onCleanup, Show, createEffect } from 'solid-js';
+import { Component, createSignal, onMount, onCleanup, Show, createEffect, For } from 'solid-js';
 
 /**
  * FadeIn コンポーネント
@@ -159,6 +159,100 @@ const MovingGradient: Component<{ darkMode: boolean }> = (props) => {
 };
 
 /**
+ * TakoAnimation コンポーネント
+ * たこが画面上を動き回るアニメーション
+ */
+const TakoAnimation: Component<{ id: number; onClick: () => void }> = (props) => {
+  let takoRef!: HTMLImageElement;
+  const speed = 1.5; // 移動速度を調整 (以前は0.5)
+  let x = 0;
+  let y = 0;
+  let dx = 0;
+  let dy = 0;
+
+  const initTako = () => {
+    if (!takoRef) return;
+    // 画像の実際のサイズを取得
+    const takoWidth = takoRef.offsetWidth || 50; // デフォルト幅
+    const takoHeight = takoRef.offsetHeight || 50; // デフォルト高さ
+
+    x = Math.random() * (window.innerWidth - takoWidth);
+    y = Math.random() * (window.innerHeight - takoHeight);
+    dx = (Math.random() - 0.5) * 2 * speed;
+    dy = (Math.random() - 0.5) * 2 * speed;
+
+    takoRef.style.left = `${x}px`;
+    takoRef.style.top = `${y}px`;
+  };
+
+  const updatePosition = () => {
+    if (!takoRef) return;
+
+    // 画像の実際のサイズを取得
+    const takoWidth = takoRef.offsetWidth || 50;
+    const takoHeight = takoRef.offsetHeight || 50;
+
+    x += dx;
+    y += dy;
+
+    // 画面端での反射ロジック
+    if (x < 0) {
+      x = 0;
+      dx *= -1;
+    } else if (x > window.innerWidth - takoWidth) {
+      x = window.innerWidth - takoWidth;
+      dx *= -1;
+    }
+
+    if (y < 0) {
+      y = 0;
+      dy *= -1;
+    } else if (y > window.innerHeight - takoHeight) {
+      y = window.innerHeight - takoHeight;
+      dy *= -1;
+    }
+
+    takoRef.style.left = `${x}px`;
+    takoRef.style.top = `${y}px`;
+
+    requestAnimationFrame(updatePosition);
+  };
+
+  onMount(() => {
+    // 画像が読み込まれてサイズが確定してから初期化とアニメーション開始
+    if (takoRef.complete) {
+      initTako();
+      requestAnimationFrame(updatePosition);
+    } else {
+      takoRef.onload = () => {
+        initTako();
+        requestAnimationFrame(updatePosition);
+      };
+      // 画像が読み込まれない場合のエラーハンドリング（オプション）
+      takoRef.onerror = () => {
+        // 例えば、コンソールにエラーを出力したり、代替表示をするなど
+        console.error(`Failed to load tako image for id: ${props.id}`);
+        // 必要であれば、ここで要素を非表示にするなどの処理も可能
+        if(takoRef) takoRef.style.display = 'none';
+      }
+    }
+    // ウィンドウリサイズ時にも位置を再計算（オプション）
+    // window.addEventListener('resize', initTako);
+    // onCleanup(() => window.removeEventListener('resize', initTako));
+  });
+
+  return (
+    <img
+      ref={takoRef}
+      src="./tako.png"
+      alt="たこ"
+      class="fixed w-12 h-12 z-20 pointer-events-auto cursor-pointer rounded-full"
+      onClick={() => props.onClick()}
+    />
+  );
+};
+
+/**
  * ExpandableText コンポーネント
  * 長文を折りたたみ可能に表示
  */
@@ -196,6 +290,12 @@ const App: Component = () => {
   // アイコンクリック時のアニメーション状態（トグル）
   const [rotate, setRotate] = createSignal(false);
   const [darkMode, setDarkMode] = createSignal(true);
+  const [takoInstances, setTakoInstances] = createSignal([{ id: Date.now() }]);
+
+  const addTako = () => {
+    setTakoInstances([...takoInstances(), { id: Date.now() }]);
+  };
+
   const quotes = [
     "自分の努力不足を開発者に転嫁するな",
     "思想がない人に価値はない",
@@ -213,6 +313,10 @@ const App: Component = () => {
       <MovingParticles darkMode={darkMode()} />
       <WaveEffect darkMode={darkMode()} />
       <MovingGradient darkMode={darkMode()} />
+      {/* TakoAnimationコンポーネントを<For>でレンダリング */}
+      <For each={takoInstances()}>
+        {(tako) => <TakoAnimation id={tako.id} onClick={addTako} />}
+      </For>
       
       {/* テーマ切り替えボタン */}
       <button 
@@ -220,6 +324,15 @@ const App: Component = () => {
         class="fixed top-4 right-4 z-50 bg-white/20 backdrop-blur-md p-2 rounded-full shadow-lg transition-all hover:scale-110"
       >
         <span class="text-2xl">{darkMode() ? '🌙' : '☀️'}</span>
+      </button>
+
+      {/* たこを増やすボタン */}
+      <button
+        onClick={addTako}
+        class="fixed top-16 right-4 z-50 bg-pink-500/50 hover:bg-pink-600/70 backdrop-blur-md p-2 rounded-full shadow-lg transition-all hover:scale-110 text-white"
+        title="たこを増やす"
+      >
+        <span class="text-xl">🐙+</span>
       </button>
 
       {/* 背景エフェクト */}
