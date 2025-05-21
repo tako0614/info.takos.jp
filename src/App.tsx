@@ -167,6 +167,7 @@ const ExpandableText: Component<{
   children: any;
   class?: string;
   initiallyExpanded?: boolean;
+  darkMode?: boolean; // darkMode プロパティを追加
 }> = (props) => {
   const [expanded, setExpanded] = createSignal(props.initiallyExpanded || false);
   
@@ -183,7 +184,7 @@ const ExpandableText: Component<{
         </span>
       </div>
       <Show when={expanded()}>
-        <div class="mt-4 text-gray-200 leading-relaxed">
+        <div class={`mt-4 ${props.darkMode ?? true ? 'text-gray-200' : 'text-gray-700'} leading-relaxed`}>
           {props.children}
         </div>
       </Show>
@@ -292,7 +293,7 @@ const App: Component = () => {
                 </p>
                 
 
-                  <ExpandableText title="私のビジョン" initiallyExpanded={true}>
+                  <ExpandableText title="私のビジョン" initiallyExpanded={true} darkMode={darkMode()}>
                     趣味はプログラミング以外にも、アニメや漫画を見ることです。将来の夢は、プログラマーではなく起業家や実業家になることです。AIの進歩により近い将来不老不死が実現されると考え、上級国民になることでいち早くその恩恵を受けようと目論んでいます。
                     
                     <p class="mt-4">
@@ -307,7 +308,7 @@ const App: Component = () => {
                   </ExpandableText>
 
                 
-                <ExpandableText title="私の哲学と価値観" initiallyExpanded={true}>
+                <ExpandableText title="私の哲学と価値観" initiallyExpanded={true} darkMode={darkMode()}>
                   <p>私は中学生の頃、哲学者の考えを調べて自分に反映することにハマって今の正確の形成に大きく関与したと思っています。</p>
                   <p class="mt-4">特に影響を受けたのは、ニーチェの考え方です。彼の思想である、「人間が自らの力で新しい価値を創造し、より高い段階の存在へと進化しようとする超人思想」はとても共感しています。</p>
                   <p class="mt-4">また、実存主義にも関心があり、サルトルやカミュの思想から「実存は本質に先立つ」という教えに影響を受けています。これは、自分を定義するのは他者でも社会でもなく、自分自身の行動と選択であるという強い信念につながっています。</p>
@@ -420,7 +421,7 @@ const App: Component = () => {
 
               {/* 日常生活の節を追加 */}
               <div class="mt-8">
-                <ExpandableText title="私の日常" initiallyExpanded={true}>
+                <ExpandableText title="私の日常" initiallyExpanded={true} darkMode={darkMode()}>
                   <p>平日は学校が終わった後予備校に行き9時まで勉強して家に帰ってから2時までtakosの開発に励んでいます。</p>
                   <p class="mt-4">休日はtakosの開発をしていますが、開発が終了したら土日も予備校に行きたいと考えています。</p>
                 </ExpandableText>
@@ -438,7 +439,6 @@ const App: Component = () => {
               <div class="relative border-l-4 border-purple-400/30 ml-6 space-y-10 py-4">
                 {[
                   { year: "2008", title: "誕生", text: "大阪府で生まれる" },
-                  { yaer: "2021", title: "中学入学", text: "中学受験失敗" },
                   { year: "2024", title: "高校入学", text: "清水谷高校に入学" },
                 ].map((item) => (
                   <div class="relative">
@@ -452,7 +452,7 @@ const App: Component = () => {
               </div>
               
               <div class="mt-8">
-                <ExpandableText title="将来の展望" initiallyExpanded={true}>
+                <ExpandableText title="将来の展望" initiallyExpanded={true} darkMode={darkMode()}>
                   <p>今後5年間は技術スキルを磨きながら、自分のプロジェクトの規模を拡大していきたいと考えています。高校卒業後は、大学で情報科学と経営学を学びつつ、スタートアップの立ち上げも視野に入れています。</p>
                   
                   <p class="mt-4">夢は、不老不死になることです。ついでに日本を再び強国にすることです。</p>
@@ -493,7 +493,7 @@ const App: Component = () => {
               </div>
               
               <div class="mt-8">
-                <ExpandableText title="学習中の技術">
+                <ExpandableText title="学習中の技術" darkMode={darkMode()}>
                   <p>現在はRustとWebAssemblyを重点的に学習しています。高パフォーマンスな分散型アプリケーション開発のために必要だと感じています。また、暗号技術とP2P通信についても理解を深めるため、関連書籍や論文を読んでいます。</p>
                 </ExpandableText>
               </div>
@@ -529,7 +529,7 @@ const App: Component = () => {
               </div>
               
               <div class="mt-8">
-                <ExpandableText title="プロジェクト開発ポリシー">
+                <ExpandableText title="プロジェクト開発ポリシー" darkMode={darkMode()}>
                   <p>私のプロジェクト開発において最も重視しているのは、<strong>シンプル</strong>と<strong>機能性</strong>の両立です。多くの現代サービスは便利さとプライバシーを天秤にかけていますが、私は両方を同時に実現できると信じています。</p>
                   
                   <p class="mt-4">また、持続可能な開発のために、コードの品質と再利用性も重視しています。きれいなコード構造と十分なドキュメントは、長期的にプロジェクトを維持するために不可欠だと考えています。</p>
