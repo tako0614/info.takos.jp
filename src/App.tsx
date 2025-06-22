@@ -33,10 +33,10 @@ const FadeIn: Component<{ children: any; class?: string }> = (props) => {
 
 /**
  * MovingParticles コンポーネント
- * 背景に常に浮遊する粒子アニメーション
+ * 背景に常に浮遊する粒子アニメーション（軽量化版）
  */
 const MovingParticles: Component<{ darkMode: boolean }> = (props) => {
-  const particleCount = 40;
+  const particleCount = 15; // 40から15に削減
   let containerRef!: HTMLDivElement;
 
   onMount(() => {
@@ -98,60 +98,17 @@ const MovingParticles: Component<{ darkMode: boolean }> = (props) => {
 };
 
 /**
- * WaveEffect コンポーネント
- * 波紋のようなアニメーション効果
+ * LightBackgroundEffect コンポーネント
+ * 軽量版背景エフェクト
  */
-const WaveEffect: Component<{ darkMode: boolean }> = (props) => {
+const LightBackgroundEffect: Component<{ darkMode: boolean }> = (props) => {
   return (
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
       <div 
-        class={`absolute w-[150%] h-[150%] left-[-25%] bottom-[-25%] rounded-[40%] animate-wave ${
-          props.darkMode ? 'bg-purple-600/5' : 'bg-blue-600/5'
-        }`}
-        style={{ "animation-delay": "0s" }}
-      ></div>
-      <div 
-        class={`absolute w-[150%] h-[150%] left-[-25%] bottom-[-25%] rounded-[40%] animate-wave ${
-          props.darkMode ? 'bg-blue-600/5' : 'bg-purple-600/5'
-        }`}
-        style={{ "animation-delay": "5s" }}
-      ></div>
-      <div 
-        class={`absolute w-[150%] h-[150%] left-[-25%] bottom-[-25%] rounded-[40%] animate-wave ${
-          props.darkMode ? 'bg-pink-600/5' : 'bg-teal-600/5'
-        }`}
-        style={{ "animation-delay": "10s" }}
-      ></div>
-    </div>
-  );
-};
-
-/**
- * MovingGradient コンポーネント
- * 色が変化し続けるグラデーション背景
- */
-const MovingGradient: Component<{ darkMode: boolean }> = (props) => {
-  return (
-    <div class="fixed inset-0 pointer-events-none z-0">
-      <div 
-        class={`absolute inset-0 animate-gradientShift ${
+        class={`absolute w-full h-full ${
           props.darkMode 
-            ? 'bg-gradient-to-br from-transparent via-purple-900/10 to-transparent' 
-            : 'bg-gradient-to-br from-transparent via-blue-300/20 to-transparent'
-        }`}
-      ></div>
-      <div 
-        class={`absolute inset-0 animate-gradientShiftAlt ${
-          props.darkMode 
-            ? 'bg-gradient-to-tl from-transparent via-blue-900/10 to-transparent' 
-            : 'bg-gradient-to-tl from-transparent via-purple-300/20 to-transparent'
-        }`}
-      ></div>
-      <div 
-        class={`absolute w-full h-full animate-pulse ${
-          props.darkMode 
-            ? 'bg-radial-pulse-dark' 
-            : 'bg-radial-pulse-light'
+            ? 'bg-gradient-to-br from-purple-900/5 via-transparent to-blue-900/5' 
+            : 'bg-gradient-to-br from-blue-300/10 via-transparent to-purple-300/10'
         }`}
       ></div>
     </div>
@@ -164,17 +121,17 @@ const MovingGradient: Component<{ darkMode: boolean }> = (props) => {
  */
 const TakoAnimation: Component<{ id: number; onClick: () => void }> = (props) => {
   let takoRef!: HTMLImageElement;
-  const speed = 1.5; // 移動速度を調整 (以前は0.5)
+  const speed = 1.0; // 移動速度を軽量化（1.5から1.0に）
   let x = 0;
   let y = 0;
   let dx = 0;
   let dy = 0;
+  let animationId: number;
 
   const initTako = () => {
     if (!takoRef) return;
-    // 画像の実際のサイズを取得
-    const takoWidth = takoRef.offsetWidth || 50; // デフォルト幅
-    const takoHeight = takoRef.offsetHeight || 50; // デフォルト高さ
+    const takoWidth = takoRef.offsetWidth || 50;
+    const takoHeight = takoRef.offsetHeight || 50;
 
     x = Math.random() * (window.innerWidth - takoWidth);
     y = Math.random() * (window.innerHeight - takoHeight);
@@ -188,7 +145,6 @@ const TakoAnimation: Component<{ id: number; onClick: () => void }> = (props) =>
   const updatePosition = () => {
     if (!takoRef) return;
 
-    // 画像の実際のサイズを取得
     const takoWidth = takoRef.offsetWidth || 50;
     const takoHeight = takoRef.offsetHeight || 50;
 
@@ -214,31 +170,29 @@ const TakoAnimation: Component<{ id: number; onClick: () => void }> = (props) =>
 
     takoRef.style.left = `${x}px`;
     takoRef.style.top = `${y}px`;
-
-    requestAnimationFrame(updatePosition);
   };
 
   onMount(() => {
-    // 画像が読み込まれてサイズが確定してから初期化とアニメーション開始
     if (takoRef.complete) {
       initTako();
-      requestAnimationFrame(updatePosition);
+      // 軽量化：60FPSから30FPSに変更
+      animationId = setInterval(updatePosition, 33) as unknown as number;
     } else {
       takoRef.onload = () => {
         initTako();
-        requestAnimationFrame(updatePosition);
+        animationId = setInterval(updatePosition, 33) as unknown as number;
       };
-      // 画像が読み込まれない場合のエラーハンドリング（オプション）
       takoRef.onerror = () => {
-        // 例えば、コンソールにエラーを出力したり、代替表示をするなど
         console.error(`Failed to load tako image for id: ${props.id}`);
-        // 必要であれば、ここで要素を非表示にするなどの処理も可能
         if(takoRef) takoRef.style.display = 'none';
       }
     }
-    // ウィンドウリサイズ時にも位置を再計算（オプション）
-    // window.addEventListener('resize', initTako);
-    // onCleanup(() => window.removeEventListener('resize', initTako));
+  });
+
+  onCleanup(() => {
+    if (animationId) {
+      clearInterval(animationId);
+    }
   });
 
   return (
@@ -320,16 +274,24 @@ const App: Component = () => {
       url: "https://ynai20.vercel.app",
       banner: "https://ynai20.vercel.app/banner.png", 
       description: "Yunaiの公式サイトです"
+    },
+    {
+      name: "t3traちゃん",
+      url: "https://t3tra.dev",
+      banner: "https://t3tra.dev/images/banner_dark.png",
+    },
+    {
+      name: "akku",
+      url: "https://akku1139.github.io",
+      banner: "https://akku1139.github.io/banners/320x100.png",
     }
     // 必要に応じてここに追加できます
   ];
 
-  return (
-    <div class={`min-h-screen relative overflow-hidden transition-colors duration-500 ${darkMode() ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700' : 'bg-gradient-to-br from-blue-50 via-indigo-100 to-purple-200'}`}>
-      {/* 新しいアニメーション要素 */}
+  return (    <div class={`min-h-screen relative overflow-hidden transition-colors duration-500 ${darkMode() ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700' : 'bg-gradient-to-br from-blue-50 via-indigo-100 to-purple-200'}`}>
+      {/* 軽量化されたアニメーション要素 */}
       <MovingParticles darkMode={darkMode()} />
-      <WaveEffect darkMode={darkMode()} />
-      <MovingGradient darkMode={darkMode()} />
+      <LightBackgroundEffect darkMode={darkMode()} />
       {/* TakoAnimationコンポーネントを<For>でレンダリング */}
       <For each={takoInstances()}>
         {(tako) => <TakoAnimation id={tako.id} onClick={addTako} />}
@@ -350,25 +312,22 @@ const App: Component = () => {
         title="たこを増やす"
       >
         <span class="text-xl">🐙+</span>
-      </button>
-
-      {/* 背景エフェクト */}
+      </button>      {/* 軽量化された背景エフェクト */}
       <div
-        class="absolute inset-0 bg-[url('/nya.jpg')] bg-cover bg-center animate-backgroundZoom opacity-30 mix-blend-overlay"
+        class="absolute inset-0 bg-[url('/nya.jpg')] bg-cover bg-center opacity-20 mix-blend-overlay"
         aria-hidden="true"
       ></div>
       
-      {/* グラデーションオーバーレイ */}
+      {/* シンプルなグラデーションオーバーレイ */}
       <div 
-        class={`absolute inset-0 ${darkMode() ? 'bg-gradient-radial from-purple-900/20 to-transparent' : 'bg-gradient-radial from-blue-300/20 to-transparent'}`}
+        class={`absolute inset-0 ${darkMode() ? 'bg-gradient-to-br from-purple-900/10 to-transparent' : 'bg-gradient-to-br from-blue-300/10 to-transparent'}`}
         aria-hidden="true"
       ></div>
       
-      {/* モダンな幾何学模様の装飾 */}
+      {/* 軽量化された装飾（アニメーション削除） */}
       <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div class="absolute -top-20 -left-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float"></div>
-        <div class="absolute top-1/3 -right-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-float-delayed"></div>
-        <div class="absolute -bottom-20 left-1/3 w-72 h-72 bg-pink-500/10 rounded-full blur-3xl animate-float-slow"></div>
+        <div class="absolute -top-20 -left-20 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/3 -right-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
       </div>
 
       <div class={`relative z-10 ${darkMode() ? 'text-white' : 'text-gray-800'} min-h-screen p-8 backdrop-blur-sm`}>
