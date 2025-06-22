@@ -548,96 +548,73 @@ const ARHudOverlay: Component = () => {
     checkDevice();
     window.addEventListener('resize', checkDevice);
     onCleanup(() => window.removeEventListener('resize', checkDevice));  });
-  // User Agent 情報を取得・解析
-  const [userAgentInfo, setUserAgentInfo] = createSignal({
-    browser: 'Unknown',
-    os: 'Unknown',
-    device: 'Unknown',
-    memory: 'Unknown'
-  });
+  // User Agent 情報の初期解析
+  function parseUA(ua: string) {
+    let browser = 'Unknown';
+    let os = 'Unknown';
+    let device = 'Desktop';
+    
+    if (ua.includes('Chrome') && !ua.includes('Edg')) browser = 'Chrome';
+    else if (ua.includes('Firefox')) browser = 'Firefox';
+    else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari';
+    else if (ua.includes('Edg')) browser = 'Edge';
+    else if (ua.includes('Opera')) browser = 'Opera';
 
-  const [systemInfo, setSystemInfo] = createSignal({
-    connection: 'Unknown',
-    cookieEnabled: false,
-    language: 'Unknown',
-    platform: 'Unknown'
-  });
+    if (ua.includes('Windows NT')) {
+      const match = ua.match(/Windows NT (\d+\.\d+)/);
+      const version = match ? match[1] : '';
+      const versions: Record<string,string> = { '10.0':'10/11','6.3':'8.1','6.2':'8','6.1':'7' };
+      os = version && versions[version] ? `Win${versions[version]}` : 'Windows';
+    } else if (ua.includes('Mac OS X')) {
+      const m = ua.match(/Mac OS X (\d+_\d+)/);
+      os = m ? `macOS ${m[1].replace('_','.')} ` : 'macOS';
+    } else if (ua.includes('Linux')) os = 'Linux';
+    else if (ua.includes('Android')) {
+      const m = ua.match(/Android (\d+)/);
+      os = m ? `Android ${m[1]}` : 'Android';
+    } else if (ua.includes('iPhone')||ua.includes('iPad')) {
+      const m = ua.match(/OS (\d+_\d+)/);
+      os = m ? `iOS ${m[1].replace('_','.')}` : 'iOS';
+    }
 
-  onMount(() => {
-    const parseUserAgent = () => {
-      const ua = navigator.userAgent;
-      let browser = 'Unknown';
-      let os = 'Unknown';
-      let device = 'Desktop';
+    if (ua.includes('Mobile')|| ua.includes('Android')) device = 'Mobile';
+    else if (ua.includes('Tablet')||ua.includes('iPad')) device = 'Tablet';
 
-      // ブラウザ判定
-      if (ua.includes('Chrome') && !ua.includes('Edg')) browser = 'Chrome';
-      else if (ua.includes('Firefox')) browser = 'Firefox';
-      else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari';
-      else if (ua.includes('Edg')) browser = 'Edge';
-      else if (ua.includes('Opera')) browser = 'Opera';
+    let memory = 'N/A';
+    if ('deviceMemory' in navigator) memory = `${(navigator as any).deviceMemory}GB`;
+    
+    return { browser, os, device, memory };
+  }
 
-      // OS判定
-      if (ua.includes('Windows NT')) {
-        const match = ua.match(/Windows NT (\d+\.\d+)/);
-        const version = match ? match[1] : '';
-        const windowsVersions: { [key: string]: string } = {
-          '10.0': '10/11',
-          '6.3': '8.1',
-          '6.2': '8',
-          '6.1': '7'
-        };
-        os = version && windowsVersions[version] ? `Win${windowsVersions[version]}` : 'Windows';
-      }
-      else if (ua.includes('Mac OS X')) {
-        const match = ua.match(/Mac OS X (\d+_\d+)/);
-        const version = match ? match[1].replace('_', '.') : '';
-        os = version ? `macOS ${version}` : 'macOS';
-      }
-      else if (ua.includes('Linux')) os = 'Linux';
-      else if (ua.includes('Android')) {
-        const match = ua.match(/Android (\d+)/);
-        const version = match ? match[1] : '';
-        os = version ? `Android ${version}` : 'Android';
-      }
-      else if (ua.includes('iPhone') || ua.includes('iPad')) {
-        const match = ua.match(/OS (\d+_\d+)/);
-        const version = match ? match[1].replace('_', '.') : '';
-        os = version ? `iOS ${version}` : 'iOS';
-      }
-
-      // デバイス判定
-      if (ua.includes('Mobile') || ua.includes('Android')) device = 'Mobile';
-      else if (ua.includes('Tablet') || ua.includes('iPad')) device = 'Tablet';
-
-      // メモリ情報（対応ブラウザのみ）
-      let memory = 'N/A';
-      if ('deviceMemory' in navigator) {
-        memory = `${(navigator as any).deviceMemory}GB`;
-      }
-
-      setUserAgentInfo({ browser, os, device, memory });
-
-      // その他のシステム情報
-      let connection = 'Unknown';
-      if ('connection' in navigator) {
-        const conn = (navigator as any).connection;
-        if (conn && conn.effectiveType) {
-          connection = conn.effectiveType.toUpperCase();
-        }
-      }
-
-      setSystemInfo({
-        connection,
-        cookieEnabled: navigator.cookieEnabled,
-        language: navigator.language,
-        platform: navigator.platform
-      });
+  // その他システム情報取得
+  function getSystem() {
+    let connection = 'Unknown';
+    if ('connection' in navigator) {
+      const conn = (navigator as any).connection;
+      if (conn?.effectiveType) connection = conn.effectiveType.toUpperCase();
+    }
+    return {
+      connection,
+      cookieEnabled: navigator.cookieEnabled,
+      language: navigator.language,
+      platform: navigator.platform
     };
+  }
 
-    parseUserAgent();
+  // シグナル初期化
+  const [userAgentInfo] = createSignal(parseUA(navigator.userAgent));
+  const [systemInfo] = createSignal(getSystem());
+
+  // ウィンドウリサイズのみ再評価
+  onMount(() => {
+    const checkDevice = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      setWindowSize({ width:w, height:h });
+    };
+    checkDevice(); window.addEventListener('resize', checkDevice);
+    onCleanup(() => window.removeEventListener('resize', checkDevice));
   });
-
   // スクロール進捗を取得
   const [scrollProgress, setScrollProgress] = createSignal(0);
   onMount(() => {
@@ -718,32 +695,38 @@ const ARHudOverlay: Component = () => {
         AR HUD ACTIVE | {windowSize().width}x{windowSize().height}
       </div>
       
-      {/* メインHUDパネル - 右上 */}      <div class={`absolute top-4 right-4 transition-all duration-700 ${isMinimized() ? 'transform translate-x-80' : ''}`}>
-        <div 
+      {/* メインHUDパネル - 右上 */}      <div class={`absolute top-4 right-4 transition-all duration-700 ${isMinimized() ? 'transform translate-x-80' : ''}`}>        <div 
           class="ar-hud-panel p-6 w-80"
           style={{
-            background: 'rgba(0, 0, 0, 0.15)',
-            'backdrop-filter': 'blur(20px)',
-            border: '1px solid rgba(0, 255, 255, 0.2)',
-            'border-radius': '12px',
-            'box-shadow': '0 0 20px rgba(0, 255, 255, 0.1)',
+            background: 'rgba(0, 20, 40, 0.25)',
+            'backdrop-filter': 'blur(25px)',
+            border: '2px solid rgba(0, 255, 255, 0.4)',
+            'border-radius': '16px',
+            'box-shadow': '0 0 30px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1)',
             position: 'relative',
             overflow: 'hidden'
           }}
         >
-          {/* ヘッダー */}
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center space-x-2">
-              <div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
-              <span class="text-cyan-400 text-sm font-mono">TAKO_INDEX_v2.0</span>
+          {/* 発光効果のためのオーバーレイ */}
+          <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 rounded-2xl"></div>
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 opacity-60"></div>
+          
+          <div class="relative z-10">
+            {/* ヘッダー */}
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-4 h-4 rounded-full bg-green-400 animate-pulse shadow-lg shadow-green-400/50"></div>
+                <span class="text-cyan-300 text-base font-mono font-bold tracking-wide drop-shadow-lg">TAKO_INDEX_v2.0</span>
+              </div>
+              <button 
+                onClick={() => setIsMinimized(!isMinimized())}
+                class="pointer-events-auto text-gray-300 hover:text-cyan-400 transition-colors text-lg"
+              >
+                {isMinimized() ? '◀' : '▶'}
+              </button>
             </div>
-            <button 
-              onClick={() => setIsMinimized(!isMinimized())}
-              class="pointer-events-auto text-gray-400 hover:text-white transition-colors"
-            >
-              {isMinimized() ? '◀' : '▶'}
-            </button>
-          </div>          {/* 時間表示 */}
+
+            {/* 時間表示 */}
           <div class="mb-6 text-center">
             <div class="text-2xl font-mono text-white mb-1">
               {currentTime().toLocaleTimeString('ja-JP', { hour12: false })}
@@ -758,33 +741,34 @@ const ARHudOverlay: Component = () => {
             </div>
             <div class="text-xs text-purple-400 font-mono mt-1">
               JST+09:00 | TAKO_TIME
-            </div>
-          </div>          {/* たこ索引セクション - 常に展開 */}
+            </div>          </div>
+
+          {/* たこ索引セクション - 常に展開 */}
           <div class="space-y-3">
             <For each={Object.entries(mainHudSection)}>
               {([sectionName, section]) => (
                 <div class="ar-hud-section pointer-events-auto">
-                  <div class="flex items-center justify-between p-3">
-                    <div class="flex items-center space-x-2">
-                      <span class="text-lg">{section.icon}</span>
-                      <span class="text-white text-sm font-medium">{sectionName}</span>
+                  <div class="flex items-center justify-between p-3 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent rounded-lg">
+                    <div class="flex items-center space-x-3">
+                      <span class="text-xl drop-shadow-lg">{section.icon}</span>
+                      <span class="text-cyan-200 text-base font-bold tracking-wide drop-shadow-lg">{sectionName}</span>
                     </div>
-                    <div class="w-2 h-2 rounded-full bg-cyan-400"></div>
+                    <div class="w-3 h-3 rounded-full bg-cyan-400 animate-pulse shadow-lg shadow-cyan-400/50"></div>
                   </div>
                   
-                  <div class="mt-2 pl-4 space-y-2 border-l border-cyan-500/30">
+                  <div class="mt-3 pl-6 space-y-3 border-l-2 border-cyan-400/50">
                     <For each={section.data}>
                       {(item: any) => (
                         <div 
-                          class={`flex justify-between items-center text-xs ${
-                            item.category ? 'cursor-pointer hover:bg-white/5 p-1 rounded' : ''
+                          class={`flex justify-between items-center text-sm ${
+                            item.category ? 'cursor-pointer hover:bg-cyan-500/20 p-2 rounded-lg transition-all duration-300 border border-transparent hover:border-cyan-400/30' : 'p-2'
                           }`}
                           onClick={() => item.category && setSelectedTakoIndex(
                             selectedTakoIndex() === item.category ? null : item.category
                           )}
                         >
-                          <span class="text-gray-300">{item.label}</span>
-                          <span class={`${item.color} font-mono`}>{item.value}</span>
+                          <span class="text-gray-200 font-medium">{item.label}</span>
+                          <span class={`${item.color} font-mono font-bold drop-shadow-sm`}>{item.value}</span>
                         </div>
                       )}
                     </For>
@@ -792,69 +776,91 @@ const ARHudOverlay: Component = () => {
                 </div>
               )}
             </For>
-          </div></div>
+          </div>
+          </div>
+        </div>
       </div>      {/* たこ索引詳細パネル */}
       <Show when={selectedTakoIndex()}>
         <div class="absolute top-4 right-96 w-80">
-          <div class="ar-hud-panel p-4">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-cyan-400 text-sm font-mono">{selectedTakoIndex()}</h3>
-              <button 
-                onClick={() => {
-                  setSelectedTakoIndex(null);
-                  setSelectedQuestion(null);
-                }}
-                class="pointer-events-auto text-gray-400 hover:text-white text-xs"
-              >
-                ✕
-              </button>
-            </div>            {/* 質問が選択されていない場合：質問一覧を表示 */}
-            <Show when={!selectedQuestion()}>
-              <div class="space-y-2">
-                <For each={Object.keys((qaData as any)[selectedTakoIndex()!]?.questions || {})}>
-                  {(questionTitle: string) => (
-                    <div 
-                      class="text-xs text-gray-300 p-2 rounded bg-black/30 hover:bg-white/5 transition-colors pointer-events-auto cursor-pointer"
-                      onClick={() => {
-                        console.log(`ARHud: Clicked question "${questionTitle}" in category "${selectedTakoIndex()}"`);
-                        setSelectedQuestion(questionTitle);
-                      }}
-                    >
-                      {questionTitle}
-                    </div>
-                  )}
-                </For>
-              </div>
-            </Show>
+          <div 
+            class="ar-hud-panel p-5"
+            style={{
+              background: 'rgba(10, 25, 50, 0.3)',
+              'backdrop-filter': 'blur(25px)',
+              border: '2px solid rgba(168, 85, 247, 0.4)',
+              'border-radius': '16px',
+              'box-shadow': '0 0 25px rgba(168, 85, 247, 0.3), inset 0 0 15px rgba(168, 85, 247, 0.1)',
+            }}
+          >
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10 rounded-2xl"></div>
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 opacity-60"></div>
             
-            {/* 質問が選択されている場合：回答を表示 */}
-            <Show when={selectedQuestion()}>
-              <div class="space-y-3">
-                <div class="flex items-center justify-between">
-                  <h4 class="text-purple-400 text-xs font-mono">{selectedQuestion()}</h4>
-                  <button 
-                    onClick={() => setSelectedQuestion(null)}
-                    class="pointer-events-auto text-gray-400 hover:text-white text-xs"
-                  >
-                    ← 戻る
-                  </button>
-                </div>                <div class="text-xs text-gray-200 leading-relaxed p-3 rounded bg-black/30 border border-cyan-500/20">
-                  {(() => {
-                    const category = selectedTakoIndex();
-                    const question = selectedQuestion();
-                    if (!category || !question) return "カテゴリまたは質問が選択されていません";
-                    
-                    const categoryData = (qaData as any)[category];
-                    if (!categoryData) return `カテゴリ "${category}" が見つかりません`;
-                    
-                    const questionData = categoryData.questions?.[question];
-                    if (!questionData) return `質問 "${question}" が見つかりません`;
-                    
-                    return questionData.content || "回答内容が設定されていません";
-                  })()}
-                </div>
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-purple-300 text-base font-mono font-bold tracking-wide drop-shadow-lg">{selectedTakoIndex()}</h3>
+                <button 
+                  onClick={() => {
+                    setSelectedTakoIndex(null);
+                    setSelectedQuestion(null);
+                  }}
+                  class="pointer-events-auto text-gray-300 hover:text-purple-400 text-sm transition-colors"
+                >
+                  ✕
+                </button>
               </div>
-            </Show>
+
+              {/* 質問が選択されていない場合：質問一覧を表示 */}
+              <Show when={!selectedQuestion()}>
+                <div class="space-y-3">
+                  <For each={Object.keys((qaData as any)[selectedTakoIndex()!]?.questions || {})}>
+                    {(questionTitle: string) => (
+                      <div 
+                        class="text-sm text-gray-200 p-3 rounded-lg bg-purple-900/20 hover:bg-purple-500/20 transition-all duration-300 pointer-events-auto cursor-pointer border border-purple-500/20 hover:border-purple-400/40"
+                        onClick={() => {
+                          console.log(`ARHud: Clicked question "${questionTitle}" in category "${selectedTakoIndex()}"`);
+                          setSelectedQuestion(questionTitle);
+                        }}
+                      >
+                        <div class="flex items-center space-x-2">
+                          <span class="text-purple-400">•</span>
+                          <span>{questionTitle}</span>
+                        </div>
+                      </div>
+                    )}
+                  </For>
+                </div>
+              </Show>
+              
+              {/* 質問が選択されている場合：回答を表示 */}
+              <Show when={selectedQuestion()}>
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between">
+                    <h4 class="text-cyan-300 text-sm font-mono font-bold">{selectedQuestion()}</h4>
+                    <button 
+                      onClick={() => setSelectedQuestion(null)}
+                      class="pointer-events-auto text-gray-300 hover:text-cyan-400 text-sm transition-colors"
+                    >
+                      ← 戻る
+                    </button>
+                  </div>
+                  <div class="text-sm text-gray-200 leading-relaxed p-4 rounded-lg bg-cyan-900/20 border border-cyan-500/30">
+                    {(() => {
+                      const category = selectedTakoIndex();
+                      const question = selectedQuestion();
+                      if (!category || !question) return "カテゴリまたは質問が選択されていません";
+                      
+                      const categoryData = (qaData as any)[category];
+                      if (!categoryData) return `カテゴリ "${category}" が見つかりません`;
+                      
+                      const questionData = categoryData.questions?.[question];
+                      if (!questionData) return `質問 "${question}" が見つかりません`;
+                      
+                      return questionData.content || "回答内容が設定されていません";
+                    })()}
+                  </div>
+                </div>
+              </Show>
+            </div>
           </div>
         </div>
       </Show>
@@ -1274,7 +1280,7 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                   <p class="mt-4">休日はtakosの開発をしていますが、開発が終了したら土日も予備校に行きたいと考えています。</p>
                 </ExpandableText>              </div>
             </section>
-            </FadeIn>
+          </FadeIn>
           {/* Timeline - 新セクション */}
           <FadeIn>
             <section>
@@ -1307,6 +1313,7 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                   
                   <p class="mt-4">10年後には、自分がリードするチームを持ち、分散型システムやプライバシー保護技術の分野で世界的にも認められるサービスを世に送り出すことを目標としています。</p>
 
+                 
                   <p class="mt-4">そのために、オープンソースコミュニティへの貢献も続け、グローバルなネットワークを築きながら技術と経営の両面で実践的な経験を積んでいきたいです。</p>
 
                   <p class="mt-4">最終的には、自分の会社を通じて社会課題の解決に取り組み、テクノロジーの力で人々の生活をより豊かにすることが私のビジョンです。</p>
