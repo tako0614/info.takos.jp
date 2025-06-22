@@ -307,6 +307,23 @@ const App: Component = () => {
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
   }
 
+  // 相互リンクの配列
+  const mutualLinks = [
+    {
+      name: "371ちゃん",
+      url: "https://371tti.net",
+      banner: "https://371tti.net/banner.png",
+      description: "371ちゃんの公式サイトです"
+    },
+    {
+      name: "Yunai",
+      url: "https://ynai20.vercel.app",
+      banner: "https://ynai20.vercel.app/banner.png", 
+      description: "Yunaiの公式サイトです"
+    }
+    // 必要に応じてここに追加できます
+  ];
+
   return (
     <div class={`min-h-screen relative overflow-hidden transition-colors duration-500 ${darkMode() ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700' : 'bg-gradient-to-br from-blue-50 via-indigo-100 to-purple-200'}`}>
       {/* 新しいアニメーション要素 */}
@@ -653,6 +670,56 @@ const App: Component = () => {
             </section>
           </FadeIn>
 
+          {/* Mutual Links */}
+          <FadeIn>
+            <section>
+              <h2 class={`text-3xl font-semibold mb-8 pb-2 ${darkMode() ? 'border-cyan-500/50' : 'border-cyan-700/50'} border-b-2`}>
+                <span class={`${darkMode() ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-300' : 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-500'}`}>相互リンク</span>
+              </h2>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <For each={mutualLinks}>
+                  {(link) => (
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class={`${darkMode() ? 'bg-white/10 hover:bg-white/20' : 'bg-white/60 hover:bg-white/80'} backdrop-blur-md p-4 rounded-lg shadow-xl border ${darkMode() ? 'border-white/10' : 'border-gray-200'} transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 group`}
+                    >
+                      <div class="aspect-[2/1] mb-4 rounded-lg overflow-hidden bg-gray-200/50">
+                        <img
+                          src={link.banner}
+                          alt={`${link.name}のバナー`}
+                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          loading="lazy"
+                        />
+                      </div>
+                      <h3 class="font-medium text-lg mb-2 group-hover:text-blue-400 transition-colors">
+                        {link.name}
+                      </h3>
+                      <p class={`text-sm ${darkMode() ? 'text-gray-300' : 'text-gray-600'} line-clamp-2`}>
+                        {link.description}
+                      </p>
+                      <div class="mt-3 flex items-center text-sm text-blue-400">
+                        <span>サイトを見る</span>
+                        <span class="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+                      </div>
+                    </a>
+                  )}
+                </For>
+              </div>
+              
+              <div class="mt-8">
+                <ExpandableText title="相互リンクについて" darkMode={darkMode()}>
+                  <p>同じ志を持つ開発者やクリエイターとの繋がりを大切にしています。相互リンクを通じて、お互いのプロジェクトを支援し合い、コミュニティ全体の発展に貢献できればと思います。</p>
+                  
+                  <p class="mt-4">相互リンクをご希望の方は、Contactセクションからお気軽にご連絡ください。技術系サイト、個人ブログ、プロジェクトサイトなど幅広く受け付けています。</p>
+                  
+                  <p class="mt-4">リンクの条件：オリジナルコンテンツがある、定期的に更新されている、技術やクリエイティブな内容を扱っているサイトを優先的に掲載させていただいています。</p>
+                </ExpandableText>
+              </div>
+            </section>
+          </FadeIn>
 
           {/* Contact */}
           <FadeIn>
