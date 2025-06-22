@@ -1445,54 +1445,60 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                 </ExpandableText>
               </div>
             </section>
-          </FadeIn>
-
-          {/* Contact */}
+          </FadeIn>          {/* Contact */}
           <FadeIn>
             <section class="text-center">
-              <h2 class={`text-3xl font-semibold mb-8 pb-2 border-red-500/50 border-b-2`}>
+              <h2 class={`text-2xl md:text-3xl font-semibold mb-6 md:mb-8 pb-2 border-red-500/50 border-b-2`}>
                 <span class={`text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-300`}>Contact</span>
               </h2>
               
-              <p class={`max-w-lg mx-auto mb-8 text-gray-300`}>
+              <p class={`max-w-lg mx-auto mb-6 md:mb-8 text-sm md:text-base text-gray-300 px-4`}>
                 プロジェクトの共同開発や技術的な質問など、お気軽にご連絡ください。通常48時間以内に返信します。
-              </p>              <div class="flex flex-wrap justify-center gap-8">                <a
+              </p>
+              
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 max-w-4xl mx-auto px-4">
+                <a
                   href="https://line.me/ti/g2/Q0c8YJlkh5f_hkDuODxp39XF9A7BOCFqezaAHA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
-                  class={`group glass-card-dark px-8 py-6 rounded-2xl transition-all duration-500 flex items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
+                  class={`group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
                 >
-                  <div class="absolute inset-0 bg-gradient-to-r from-green-500/10 to-teal-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center mr-4 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
-                    <span class="text-2xl">💬</span>
+                  <div class="absolute inset-0 bg-gradient-to-r from-green-500/10 to-teal-500/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center mb-2 md:mb-0 md:mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
+                    <span class="text-lg md:text-2xl">💬</span>
                   </div>
-                  <span class="font-semibold relative z-10">OpenChat</span>
-                </a>                <a
-                  href="https://github.com/tako0614"
-                  class={`group glass-card-dark px-8 py-6 rounded-2xl transition-all duration-500 flex items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
-                >
-                  <div class="absolute inset-0 bg-gradient-to-r from-gray-500/10 to-gray-700/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mr-4 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
-                    <span class="text-2xl">📂</span>
-                  </div>
-                  <span class="font-semibold relative z-10">GitHub</span>
-                </a>                <a
-                  href="https://x.com/takoserver_com"
-                  class={`group glass-card-dark px-8 py-6 rounded-2xl transition-all duration-500 flex items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
-                >
-                  <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mr-4 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
-                    <span class="text-2xl">🐦</span>
-                  </div>
-                  <span class="font-semibold relative z-10">Twitter・X</span>
+                  <span class="font-semibold text-xs md:text-base relative z-10 text-center md:text-left">OpenChat</span>
                 </a>
+                
+                <a
+                  href="https://github.com/tako0614"
+                  class={`group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
+                >
+                  <div class="absolute inset-0 bg-gradient-to-r from-gray-500/10 to-gray-700/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mb-2 md:mb-0 md:mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
+                    <span class="text-lg md:text-2xl">📂</span>
+                  </div>
+                  <span class="font-semibold text-xs md:text-base relative z-10 text-center md:text-left">GitHub</span>
+                </a>
+                
+                <a
+                  href="https://x.com/takoserver_com"
+                  class={`group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
+                >
+                  <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-2 md:mb-0 md:mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
+                    <span class="text-lg md:text-2xl">🐦</span>
+                  </div>
+                  <span class="font-semibold text-xs md:text-base relative z-10 text-center md:text-left">Twitter・X</span>
+                </a>
+                
                 <a
                   href="mailto:contact@tako.example.com"
-                  class={`group glass-card-dark px-8 py-6 rounded-2xl transition-all duration-500 flex items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
+                  class={`group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
                 >
-                  <div class="absolute inset-0 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center mr-4 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
-                    <span class="text-2xl">✉️</span>
+                  <div class="absolute inset-0 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center mb-2 md:mb-0 md:mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
+                    <span class="text-lg md:text-2xl">✉️</span>
                   </div>
-                  <span class="font-semibold relative z-10">Email</span>
+                  <span class="font-semibold text-xs md:text-base relative z-10 text-center md:text-left">Email</span>
                 </a>
               </div>
             </section>
