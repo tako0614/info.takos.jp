@@ -481,7 +481,7 @@ const InteractiveQA: Component = () => {
           </div>          <div class={`glass-card-dark p-10 rounded-3xl relative overflow-hidden`}>
             <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5 rounded-3xl"></div>
             <div class="relative z-10">
-              <p class={`text-gray-700 leading-relaxed text-lg`}>
+              <p class={`text-gray-200 leading-relaxed text-lg`}>
                 {(qaData as any)[selectedCategory()!].questions[selectedQuestion()!].content}
               </p>
               <div class="mt-8 flex gap-4">
