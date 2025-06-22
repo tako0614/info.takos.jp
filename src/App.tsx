@@ -406,22 +406,6 @@ const App: Component = () => {
                 </ExpandableText>
               </div>
             </section>
-          {/* 今日の名言ミニ機能 */}
-          <FadeIn>
-          <h2 class={`text-3xl font-semibold mb-8 pb-2 ${darkMode() ? 'border-purple-500/50' : 'border-purple-700/50'} border-b-2`}>
-                <span class={`${darkMode() ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300' : 'text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-blue-600'}`}>たこ語録</span>
-              </h2>
-            <section class="text-center p-8 bg-white/10 backdrop-blur-md rounded-lg shadow-lg">
-              <h2 class="text-2xl font-semibold mb-4">たこ語録(ほぼ追加してない)</h2>
-              <p class="text-lg mb-4">{quote()}</p>
-              <button
-                onClick={nextQuote}
-                class="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-white transition"
-              >
-                もう一回
-              </button>
-            </section>
-          </FadeIn>
           {/* Status */}
           <FadeIn>
             <section>
