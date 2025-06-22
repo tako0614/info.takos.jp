@@ -1,3 +1,261 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* AR HUD スタイル */
+.ar-hud-panel {
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(0, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.ar-hud-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.05),
+    transparent
+  );
+  animation: hud-sweep 6s infinite;
+}
+
+.ar-hud-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(0, 255, 255, 0.03) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.ar-hud-section {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ar-hud-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.ar-hud-section:hover::before {
+  left: 100%;
+}
+
+.ar-hud-section:hover {
+  background: rgba(0, 255, 255, 0.05);
+  border-color: rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+  transform: translateX(3px);
+}
+
+.ar-hud-button {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ar-hud-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.ar-hud-button:hover::before {
+  width: 100%;
+  height: 100%;
+}
+
+.ar-hud-button:hover {
+  background: rgba(0, 255, 255, 0.1);
+  border-color: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+/* スキャンライン効果 */
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.6),
+    rgba(0, 255, 255, 0.8),
+    transparent
+  );
+  animation: scan-vertical 12s infinite linear;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* HUDグリッド効果 */
+.ar-hud-panel {
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* アニメーション */
+@keyframes hud-sweep {
+  0% { left: -100%; }
+  25% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+@keyframes scan-vertical {
+  0% { 
+    top: 0; 
+    opacity: 1;
+    transform: scaleX(0.5);
+  }
+  25% {
+    opacity: 0.8;
+    transform: scaleX(1);
+  }
+  50% { 
+    opacity: 0.3;
+    transform: scaleX(0.8);
+  }
+  75% {
+    opacity: 0.6;
+    transform: scaleX(1.2);
+  }
+  100% { 
+    top: 100vh; 
+    opacity: 1;
+    transform: scaleX(0.5);
+  }
+}
+
+/* パルス効果 */
+@keyframes hud-pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* データストリーム */
+@keyframes data-stream {
+  0% { opacity: 0.2; transform: translateY(0); }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.2; transform: translateY(20px); }
+}
+
+/* HUD テキスト効果 */
+.ar-hud-panel .font-mono {
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 5px currentColor;
+  letter-spacing: 0.5px;
+}
+
+/* グロー効果の改良 */
+.ar-hud-panel [class*="text-cyan"] {
+  text-shadow: 
+    0 0 5px rgba(6, 182, 212, 0.8),
+    0 0 10px rgba(6, 182, 212, 0.5),
+    0 0 15px rgba(6, 182, 212, 0.3);
+}
+
+.ar-hud-panel [class*="text-green"] {
+  text-shadow: 
+    0 0 5px rgba(34, 197, 94, 0.8),
+    0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+.ar-hud-panel [class*="text-purple"] {
+  text-shadow: 
+    0 0 5px rgba(168, 85, 247, 0.8),
+    0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+.ar-hud-panel [class*="text-orange"] {
+  text-shadow: 
+    0 0 5px rgba(251, 146, 60, 0.8),
+    0 0 10px rgba(251, 146, 60, 0.5);
+}
+
+.ar-hud-panel [class*="text-pink"] {
+  text-shadow: 
+    0 0 5px rgba(236, 72, 153, 0.8),
+    0 0 10px rgba(236, 72, 153, 0.5);
+}
+
+.ar-hud-panel [class*="text-yellow"] {
+  text-shadow: 
+    0 0 5px rgba(234, 179, 8, 0.8),
+    0 0 10px rgba(234, 179, 8, 0.5);
+}
+
+/* ホログラム効果 */
+.ar-hud-panel {
+  animation: hologram-flicker 8s infinite;
+}
+
+@keyframes hologram-flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96% { opacity: 0.95; }
+  97% { opacity: 1; }
+  98% { opacity: 0.98; }
+  99% { opacity: 1; }
+}
+
+/* レスポンシブ: タブレット以下では非表示 */
+@media (max-width: 1023px) {
+  .ar-hud-panel {
+    display: none !important;
+  }
+}
+
+/* 高解像度ディスプレイ対応 */
+@media (min-resolution: 2dppx) {
+  .ar-hud-panel {
+    backdrop-filter: blur(25px);
+  }
+}
