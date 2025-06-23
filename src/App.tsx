@@ -36,7 +36,7 @@ const FadeIn: Component<{ children: any; class?: string }> = (props) => {
  * CSS-in-JSとより美しいグラデーション効果を使った現代的な粒子システム
  */
 const ModernParticles: Component<{ darkMode: boolean }> = (props) => {
-  const particleCount = 20;
+  const particleCount = 30; // 粒子数を増加
   let containerRef!: HTMLDivElement;
 
   onMount(() => {
@@ -63,39 +63,44 @@ const ModernParticles: Component<{ darkMode: boolean }> = (props) => {
 
   function createModernParticle(container: HTMLDivElement, width: number, height: number, isDark: boolean) {
     const particle = document.createElement('div');
-    const size = Math.random() * 8 + 3;
+    const size = Math.random() * 12 + 4; // サイズを大きく
     
-    // モダンなグラデーション配色
+    // より鮮やかで多様なグラデーション配色
     const gradients = isDark 
       ? [
-          'linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(59, 130, 246, 0.3))',
-          'linear-gradient(135deg, rgba(236, 72, 153, 0.3), rgba(168, 85, 247, 0.3))',
-          'linear-gradient(135deg, rgba(6, 182, 212, 0.3), rgba(34, 197, 94, 0.3))',
-          'linear-gradient(135deg, rgba(251, 146, 60, 0.3), rgba(239, 68, 68, 0.3))'
+          'linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(59, 130, 246, 0.4))',
+          'linear-gradient(135deg, rgba(236, 72, 153, 0.4), rgba(168, 85, 247, 0.4))',
+          'linear-gradient(135deg, rgba(6, 182, 212, 0.4), rgba(34, 197, 94, 0.4))',
+          'linear-gradient(135deg, rgba(251, 146, 60, 0.4), rgba(239, 68, 68, 0.4))',
+          'linear-gradient(135deg, rgba(147, 51, 234, 0.4), rgba(79, 70, 229, 0.4))',
+          'linear-gradient(135deg, rgba(244, 63, 94, 0.4), rgba(251, 113, 133, 0.4))'
         ]
       : [
-          'linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(59, 130, 246, 0.15))',
-          'linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(168, 85, 247, 0.15))',
-          'linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(34, 197, 94, 0.15))',
-          'linear-gradient(135deg, rgba(251, 146, 60, 0.15), rgba(239, 68, 68, 0.15))'
+          'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(59, 130, 246, 0.2))',
+          'linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(168, 85, 247, 0.2))',
+          'linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(34, 197, 94, 0.2))',
+          'linear-gradient(135deg, rgba(251, 146, 60, 0.2), rgba(239, 68, 68, 0.2))',
+          'linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(79, 70, 229, 0.2))',
+          'linear-gradient(135deg, rgba(244, 63, 94, 0.2), rgba(251, 113, 133, 0.2))'
         ];
     
-    particle.className = `absolute rounded-full backdrop-blur-sm border border-white/10`;
+    particle.className = `absolute rounded-full backdrop-blur-sm border border-white/20`;
     particle.style.width = `${size}px`;
     particle.style.height = `${size}px`;
     particle.style.left = `${Math.random() * width}px`;
     particle.style.top = `${Math.random() * height}px`;
     particle.style.background = gradients[Math.floor(Math.random() * gradients.length)];
     particle.style.boxShadow = isDark 
-      ? '0 0 20px rgba(168, 85, 247, 0.2)' 
-      : '0 0 15px rgba(168, 85, 247, 0.1)';
+      ? `0 0 30px rgba(168, 85, 247, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.1)` 
+      : `0 0 20px rgba(168, 85, 247, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.2)`;
     
-    const duration = Math.random() * 40 + 25;
+    const duration = Math.random() * 50 + 30; // より長いアニメーション
     particle.style.animation = `
       modernFloat ${duration}s infinite ease-in-out,
-      modernPulse ${(Math.random() * 4) + 3}s infinite ease-in-out ${Math.random() * 3}s
+      modernPulse ${(Math.random() * 6) + 4}s infinite ease-in-out ${Math.random() * 4}s,
+      modernRotate ${(Math.random() * 20) + 15}s infinite linear
     `;
-    particle.style.animationDelay = `${Math.random() * 8}s`;
+    particle.style.animationDelay = `${Math.random() * 10}s`;
     
     container.appendChild(particle);
   }
@@ -737,49 +742,47 @@ const ARHudOverlay: Component = () => {
             </div>
             <div class="text-xs text-purple-400 font-mono mt-1">
               JST+09:00 | TAKO_TIME
-            </div>          </div>
-
-          {/* たこ索引セクション - 常に展開 */}
-          <div class="space-y-3">
-            <For each={Object.entries(mainHudSection)}>
-              {([sectionName, section]) => (
-                <div class="ar-hud-section pointer-events-auto">
-                  <div class="flex items-center justify-between p-3 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent rounded-lg">
-                    <div class="flex items-center space-x-3">
-                      <span class="text-xl drop-shadow-lg">{section.icon}</span>
-                      <span class="text-cyan-200 text-base font-bold tracking-wide drop-shadow-lg">{sectionName}</span>
+            </div>          </div>            {/* たこ索引セクション - 常に展開 */}
+            <div class="space-y-3">
+              <For each={Object.entries(mainHudSection)}>
+                {([sectionName, section]) => (
+                  <div class="ar-hud-section pointer-events-auto hologram-effect energy-field">
+                    <div class="flex items-center justify-between p-3 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent rounded-lg sound-wave-effect">
+                      <div class="flex items-center space-x-3">
+                        <span class="text-xl drop-shadow-lg pulse-wave">{section.icon}</span>
+                        <span class="text-cyan-200 text-base font-bold tracking-wide drop-shadow-lg neon-glow">{sectionName}</span>
+                      </div>
+                      <div class="w-3 h-3 rounded-full bg-cyan-400 animate-pulse shadow-lg shadow-cyan-400/50"></div>
                     </div>
-                    <div class="w-3 h-3 rounded-full bg-cyan-400 animate-pulse shadow-lg shadow-cyan-400/50"></div>
+                    
+                    <div class="mt-3 pl-6 space-y-3 border-l-2 border-cyan-400/50">
+                      <For each={section.data}>
+                        {(item: any) => (
+                          <div 
+                            class={`flex justify-between items-center text-sm hud-control ${
+                              item.category ? 'cursor-pointer hover:bg-cyan-500/20 p-2 rounded-lg transition-all duration-300 border border-transparent hover:border-cyan-400/30 sound-wave-effect card-3d' : 'p-2'
+                            }`}
+                            onClick={() => item.category && setSelectedTakoIndex(
+                              selectedTakoIndex() === item.category ? null : item.category
+                            )}
+                          >
+                            <span class="text-gray-200 font-medium">{item.label}</span>
+                            <span class={`${item.color} font-mono font-bold drop-shadow-sm neon-glow`}>{item.value}</span>
+                          </div>
+                        )}
+                      </For>
+                    </div>
                   </div>
-                  
-                  <div class="mt-3 pl-6 space-y-3 border-l-2 border-cyan-400/50">
-                    <For each={section.data}>
-                      {(item: any) => (
-                        <div 
-                          class={`flex justify-between items-center text-sm ${
-                            item.category ? 'cursor-pointer hover:bg-cyan-500/20 p-2 rounded-lg transition-all duration-300 border border-transparent hover:border-cyan-400/30' : 'p-2'
-                          }`}
-                          onClick={() => item.category && setSelectedTakoIndex(
-                            selectedTakoIndex() === item.category ? null : item.category
-                          )}
-                        >
-                          <span class="text-gray-200 font-medium">{item.label}</span>
-                          <span class={`${item.color} font-mono font-bold drop-shadow-sm`}>{item.value}</span>
-                        </div>
-                      )}
-                    </For>
-                  </div>
-                </div>
-              )}
-            </For>
-          </div>
+                )}
+              </For>
+            </div>
           </div>
         </div>
       </div>      {/* たこ索引詳細パネル */}
       <Show when={selectedTakoIndex()}>
         <div class="absolute top-4 right-96 w-80">
           <div 
-            class="ar-hud-panel p-5"
+            class="ar-hud-panel hologram-effect quantum-effect p-5"
             style={{
               background: 'rgba(10, 25, 50, 0.3)',
               'backdrop-filter': 'blur(25px)',
@@ -793,13 +796,13 @@ const ARHudOverlay: Component = () => {
             
             <div class="relative z-10">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-purple-300 text-base font-mono font-bold tracking-wide drop-shadow-lg">{selectedTakoIndex()}</h3>
+                <h3 class="text-purple-300 text-base font-mono font-bold tracking-wide drop-shadow-lg neon-glow">{selectedTakoIndex()}</h3>
                 <button 
                   onClick={() => {
                     setSelectedTakoIndex(null);
                     setSelectedQuestion(null);
                   }}
-                  class="pointer-events-auto text-gray-300 hover:text-purple-400 text-sm transition-colors"
+                  class="pointer-events-auto text-gray-300 hover:text-purple-400 text-sm transition-colors sound-wave-effect hud-control px-2 py-1"
                 >
                   ✕
                 </button>
@@ -811,15 +814,15 @@ const ARHudOverlay: Component = () => {
                   <For each={Object.keys((qaData as any)[selectedTakoIndex()!]?.questions || {})}>
                     {(questionTitle: string) => (
                       <div 
-                        class="text-sm text-gray-200 p-3 rounded-lg bg-purple-900/20 hover:bg-purple-500/20 transition-all duration-300 pointer-events-auto cursor-pointer border border-purple-500/20 hover:border-purple-400/40"
+                        class="text-sm text-gray-200 p-3 rounded-lg bg-purple-900/20 hover:bg-purple-500/20 transition-all duration-300 pointer-events-auto cursor-pointer border border-purple-500/20 hover:border-purple-400/40 card-3d sound-wave-effect energy-field"
                         onClick={() => {
                           console.log(`ARHud: Clicked question "${questionTitle}" in category "${selectedTakoIndex()}"`);
                           setSelectedQuestion(questionTitle);
                         }}
                       >
                         <div class="flex items-center space-x-2">
-                          <span class="text-purple-400">•</span>
-                          <span>{questionTitle}</span>
+                          <span class="text-purple-400 pulse-wave">•</span>
+                          <span class="neon-glow">{questionTitle}</span>
                         </div>
                       </div>
                     )}
@@ -831,15 +834,15 @@ const ARHudOverlay: Component = () => {
               <Show when={selectedQuestion()}>
                 <div class="space-y-4">
                   <div class="flex items-center justify-between">
-                    <h4 class="text-cyan-300 text-sm font-mono font-bold">{selectedQuestion()}</h4>
+                    <h4 class="text-cyan-300 text-sm font-mono font-bold neon-glow">{selectedQuestion()}</h4>
                     <button 
                       onClick={() => setSelectedQuestion(null)}
-                      class="pointer-events-auto text-gray-300 hover:text-cyan-400 text-sm transition-colors"
+                      class="pointer-events-auto text-gray-300 hover:text-cyan-400 text-sm transition-colors sound-wave-effect hud-control px-2 py-1"
                     >
                       ← 戻る
                     </button>
                   </div>
-                  <div class="text-sm text-gray-200 leading-relaxed p-4 rounded-lg bg-cyan-900/20 border border-cyan-500/30">
+                  <div class="text-sm text-gray-200 leading-relaxed p-4 rounded-lg bg-cyan-900/20 border border-cyan-500/30 hologram-effect matrix-stream">
                     {(() => {
                       const category = selectedTakoIndex();
                       const question = selectedQuestion();
@@ -860,42 +863,37 @@ const ARHudOverlay: Component = () => {
           </div>
         </div>
       </Show>
-
-
-
       {/* システム情報オーバーレイ - 左上 */}
       <div class="absolute top-20 left-4">
-        <div class="ar-hud-panel p-4 w-64">
+        <div class="ar-hud-panel hologram-effect matrix-stream p-4 w-64">
           <div class="flex items-center mb-3">
-            <span class="text-lg mr-2">{systemInfoSection.icon}</span>
-            <span class="text-cyan-400 text-sm font-mono">SYSTEM_INFO</span>
+            <span class="text-lg mr-2 pulse-wave">{systemInfoSection.icon}</span>
+            <span class="text-cyan-400 text-sm font-mono neon-glow typing-effect">SYSTEM_INFO</span>
           </div>
           <div class="space-y-2">
             <For each={systemInfoSection.data}>
               {(item) => (
-                <div class="flex justify-between items-center text-xs">
+                <div class="flex justify-between items-center text-xs hud-control px-2 py-1 sound-wave-effect">
                   <span class="text-gray-300">{item.label}</span>
-                  <span class={`${item.color} font-mono`}>{item.value}</span>
+                  <span class={`${item.color} font-mono neon-glow`}>{item.value}</span>
                 </div>
               )}
             </For>
           </div>
         </div>
-      </div>
-
-      {/* ネットワーク情報オーバーレイ - 左中央 */}
+      </div>      {/* ネットワーク情報オーバーレイ - 左中央 */}
       <div class="absolute top-80 left-4">
-        <div class="ar-hud-panel p-4 w-64">
+        <div class="ar-hud-panel radar-effect energy-field p-4 w-64">
           <div class="flex items-center mb-3">
-            <span class="text-lg mr-2">{networkInfoSection.icon}</span>
-            <span class="text-cyan-400 text-sm font-mono">NETWORK_INFO</span>
+            <span class="text-lg mr-2 pulse-wave">{networkInfoSection.icon}</span>
+            <span class="text-cyan-400 text-sm font-mono neon-glow">NETWORK_INFO</span>
           </div>
           <div class="space-y-2">
             <For each={networkInfoSection.data}>
               {(item) => (
-                <div class="flex justify-between items-center text-xs">
+                <div class="flex justify-between items-center text-xs hud-control px-2 py-1 sound-wave-effect">
                   <span class="text-gray-300">{item.label}</span>
-                  <span class={`${item.color} font-mono`}>{item.value}</span>
+                  <span class={`${item.color} font-mono neon-glow`}>{item.value}</span>
                 </div>
               )}
             </For>
@@ -903,17 +901,17 @@ const ARHudOverlay: Component = () => {
         </div>
       </div>      {/* パフォーマンス情報オーバーレイ - 右下（スクロールプログレスの上） */}
       <div class="absolute bottom-32 right-4">
-        <div class="ar-hud-panel p-4 w-48">
+        <div class="ar-hud-panel quantum-effect magnetic-field p-4 w-48">
           <div class="flex items-center mb-3">
-            <span class="text-lg mr-2">{performanceSection.icon}</span>
-            <span class="text-cyan-400 text-xs font-mono">PERFORMANCE</span>
+            <span class="text-lg mr-2 pulse-wave">{performanceSection.icon}</span>
+            <span class="text-cyan-400 text-xs font-mono neon-glow">PERFORMANCE</span>
           </div>
           <div class="space-y-2">
             <For each={performanceSection.data}>
               {(item) => (
-                <div class="flex justify-between items-center text-xs">
+                <div class="flex justify-between items-center text-xs hud-control px-2 py-1 sound-wave-effect">
                   <span class="text-gray-300">{item.label}</span>
-                  <span class={`${item.color} font-mono`}>{item.value}</span>
+                  <span class={`${item.color} font-mono neon-glow`}>{item.value}</span>
                 </div>
               )}
             </For>
@@ -921,24 +919,22 @@ const ARHudOverlay: Component = () => {
         </div>
       </div>
 
-      {/* サイドパネル - 左端 */}
- 
-      {/* ボトムバー */}
+      {/* サイドパネル - 左端 */}      {/* ボトムバー */}
       <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-        <div class="ar-hud-panel px-8 py-3">
+        <div class="ar-hud-panel hologram-effect energy-field px-8 py-3">
           <div class="flex items-center space-x-6 text-sm">
             <div class="flex items-center space-x-2">
-              <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-              <span class="text-green-400 font-mono">CONNECTED</span>
+              <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse pulse-wave"></div>
+              <span class="text-green-400 font-mono neon-glow">CONNECTED</span>
             </div>
-            <div class="text-gray-400 font-mono">
+            <div class="text-gray-400 font-mono typing-effect">
               protocol://info.takos.jp
             </div>
             <div class="flex items-center space-x-2">
-              <span class="text-purple-400">🐙</span>
-              <span class="text-purple-400 font-mono">AR_MODE_ACTIVE</span>
+              <span class="text-purple-400 pulse-wave">🐙</span>
+              <span class="text-purple-400 font-mono neon-glow">AR_MODE_ACTIVE</span>
             </div>
-            <div class="text-cyan-400 font-mono">
+            <div class="text-cyan-400 font-mono neon-glow">
               BUILD: {new Date().getFullYear()}.{(new Date().getMonth() + 1).toString().padStart(2, '0')}.{new Date().getDate().toString().padStart(2, '0')}
             </div>
           </div>
@@ -947,20 +943,20 @@ const ARHudOverlay: Component = () => {
 
       {/* ミニマップ/プログレス - 右下 */}
       <div class="absolute bottom-4 right-4">
-        <div class="ar-hud-panel p-4 w-48">
+        <div class="ar-hud-panel quantum-effect magnetic-field p-4 w-48">
           <div class="text-center mb-3">
-            <span class="text-cyan-400 text-xs font-mono">SCROLL_MATRIX</span>
+            <span class="text-cyan-400 text-xs font-mono neon-glow typing-effect">SCROLL_MATRIX</span>
           </div>
-          <div class="w-full bg-gray-700/50 rounded-full h-2 mb-3">
+          <div class="w-full bg-gray-700/50 rounded-full h-2 mb-3 hud-progress">
             <div class="bg-gradient-to-r from-cyan-400 to-purple-400 h-2 rounded-full transition-all duration-300" 
                  style={{ width: `${scrollProgress()}%` }}></div>
           </div>
           <div class="grid grid-cols-3 gap-1 text-xs text-gray-400 font-mono">
-            <div class={`text-center ${scrollProgress() < 33 ? 'text-cyan-400' : ''}`}>TOP</div>
-            <div class={`text-center ${scrollProgress() >= 33 && scrollProgress() < 66 ? 'text-cyan-400' : ''}`}>MID</div>
-            <div class={`text-center ${scrollProgress() >= 66 ? 'text-cyan-400' : ''}`}>END</div>
+            <div class={`text-center sound-wave-effect ${scrollProgress() < 33 ? 'text-cyan-400 neon-glow' : ''}`}>TOP</div>
+            <div class={`text-center sound-wave-effect ${scrollProgress() >= 33 && scrollProgress() < 66 ? 'text-cyan-400 neon-glow' : ''}`}>MID</div>
+            <div class={`text-center sound-wave-effect ${scrollProgress() >= 66 ? 'text-cyan-400 neon-glow' : ''}`}>END</div>
           </div>
-          <div class="text-center mt-2 text-xs text-purple-400 font-mono">
+          <div class="text-center mt-2 text-xs text-purple-400 font-mono neon-glow">
             {Math.round(scrollProgress())}% COMPLETE
           </div>
         </div>
@@ -1041,11 +1037,11 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
       <ARHudOverlay />      {/* 美しいガラスエフェクトのたこ追加ボタン */}
       <button
         onClick={addTako}
-        class="fixed bottom-4 left-4 z-50 glass-card-dark p-4 rounded-3xl transition-all duration-500 hover:scale-110 hover:rotate-12 text-white overflow-hidden group shadow-2xl"
+        class="fixed bottom-4 left-4 z-50 glass-card-dark p-4 rounded-3xl transition-all duration-500 hover:scale-110 hover:rotate-12 text-white overflow-hidden group shadow-2xl hologram-effect card-3d sound-wave-effect"
         title="たこを増やす"
       >
-        <div class="absolute inset-0 bg-gradient-to-br from-pink-500/40 to-purple-500/40 rounded-3xl group-hover:from-pink-400/50 group-hover:to-purple-400/50 transition-all duration-300"></div>        <div class="absolute inset-0 bg-gradient-to-tr from-cyan-400/20 to-blue-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <span class="text-2xl relative z-10 filter drop-shadow-lg group-hover:scale-110 transition-transform duration-300">🐙+</span>
+        <div class="absolute inset-0 bg-gradient-to-br from-pink-500/40 to-purple-500/40 rounded-3xl group-hover:from-pink-400/50 group-hover:to-purple-400/50 transition-all duration-300 energy-field"></div>        <div class="absolute inset-0 bg-gradient-to-tr from-cyan-400/20 to-blue-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 quantum-effect"></div>
+        <span class="text-2xl relative z-10 filter drop-shadow-lg group-hover:scale-110 transition-transform duration-300 neon-glow pulse-wave">🐙+</span>
         <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:translate-x-full transition-all duration-700 transform -translate-x-full"></div>
       </button>
 
@@ -1067,56 +1063,124 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
       </div>
 
       <div class="relative z-10 text-white min-h-screen p-8 backdrop-blur-sm">
-        {/* ヘッダーセクション */}
-        <FadeIn class="text-center py-16">          <div
-            class={`w-36 h-36 mx-auto mb-6 border-4 border-white rounded-full overflow-hidden shadow-xl transform transition-all duration-500 hover:scale-110 hover:rotate-3 cursor-pointer ${
-              rotate() ? "animate-spinOnce" : ""
-            }`}
-            onClick={() => setRotate(true)}
-            onAnimationEnd={() => setRotate(false)}
-            style="box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);"
-          >
-            <img
-              src="./icon.png"
-              alt="プロフィールアイコン"
-              class="w-full h-full object-cover"
-            />
+        {/* ヘッダーセクション */}        <FadeIn class="text-center py-16">
+          {/* より高度なプロフィール画像 */}
+          <div class="relative w-48 h-48 md:w-56 md:h-56 mx-auto mb-8">
+            {/* 外側のエネルギーリング */}
+            <div class="absolute -inset-8 rounded-full border-2 border-purple-500/20 animate-spin-slow"></div>
+            <div class="absolute -inset-6 rounded-full border border-cyan-500/30 animate-reverse-spin"></div>
+            <div class="absolute -inset-4 rounded-full border border-pink-500/25"></div>
+            
+            {/* メインプロフィール */}
+            <div
+              class={`w-full h-full rounded-full overflow-hidden shadow-2xl transform transition-all duration-700 hover:scale-110 hover:rotate-3 cursor-pointer relative card-3d hologram-effect magnetic-field ${
+                rotate() ? "animate-spinOnce" : ""
+              }`}
+              onClick={() => {
+                setRotate(true);
+                addTako();
+              }}
+              onAnimationEnd={() => setRotate(false)}
+              style={{
+                background: 'conic-gradient(from 0deg, rgba(168, 85, 247, 0.8), rgba(59, 130, 246, 0.8), rgba(236, 72, 153, 0.8), rgba(34, 197, 94, 0.8), rgba(168, 85, 247, 0.8))',
+                'box-shadow': '0 0 60px rgba(168, 85, 247, 0.8), 0 0 120px rgba(168, 85, 247, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.2)',
+                animation: 'profileGlow 4s ease-in-out infinite alternate, energyPulse 6s ease-in-out infinite'
+              }}
+            >
+              {/* 内側のコンテナ */}
+              <div class="absolute inset-2 rounded-full overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 quantum-effect">
+                <img
+                  src="./icon.png"
+                  alt="プロフィールアイコン"
+                  class="w-full h-full object-cover filter brightness-110 contrast-110 saturate-110"
+                />
+                {/* ホログラム効果オーバーレイ */}
+                <div class="absolute inset-0 bg-gradient-to-br from-transparent via-cyan-400/10 to-transparent animate-pulse"></div>
+              </div>
+              
+              {/* 回転するライトリング */}
+              <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/20 to-transparent animate-spin pulse-wave"></div>
+              <div class="absolute inset-1 rounded-full bg-gradient-to-bl from-transparent via-purple-400/20 to-transparent animate-reverse-spin"></div>
+              
+              {/* 上部インジケーター */}
+              <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-8 h-2 bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 rounded-full opacity-80 animate-pulse"></div>
+              
+              {/* エネルギー球 */}
+              <div class="absolute top-4 right-4 w-4 h-4 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-bounce shadow-lg shadow-cyan-400/50"></div>
+              <div class="absolute bottom-4 left-4 w-3 h-3 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full animate-pulse shadow-lg shadow-pink-400/50"></div>
+            </div>
+            
+            {/* 浮遊パーティクル */}
+            <div class="absolute top-0 left-8 w-2 h-2 bg-purple-400 rounded-full animate-float opacity-60"></div>
+            <div class="absolute top-8 right-0 w-1.5 h-1.5 bg-cyan-400 rounded-full animate-float opacity-70" style="animation-delay: 1s"></div>
+            <div class="absolute bottom-8 left-0 w-1 h-1 bg-pink-400 rounded-full animate-float opacity-50" style="animation-delay: 2s"></div>
+            <div class="absolute bottom-0 right-8 w-1.5 h-1.5 bg-green-400 rounded-full animate-float opacity-60" style="animation-delay: 0.5s"></div>
           </div>
-          <h1 class="text-6xl font-extrabold mb-4 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300">たこ</h1>
-          <p class="text-xl text-gray-300">real name: Tomiyama Shota</p>
-            {/* リアルなガラスエフェクトのクォートセクション */}          <div 
-            class="mt-6 p-6 rounded-3xl glass-effect-dark cursor-pointer transition-all duration-500 hover:scale-105 max-w-md mx-auto relative overflow-hidden"
+            <div class="relative">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 relative neon-glow"
+                style="animation: titleShimmer 3s ease-in-out infinite">
+              たこ
+            </h1>
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-60 pulse-wave"></div>
+          </div>
+            <div class="luxury-paragraph-lead text-center mb-8">
+            <span class="luxury-mono text-cyan-400">IDENTITY:</span> 
+            <span class="gradient-text-luxury luxury-text-title">Tomiyama Shota</span>
+          </div>
+          
+          <div class="text-center mb-6">
+            <p class="luxury-paragraph text-lg">
+              <span class="text-purple-400 font-medium">次世代デジタル・アーキテクト</span> × <span class="text-cyan-400 font-medium">革新的テクノロジスト</span>
+            </p>
+            <p class="luxury-caption mt-2">
+              DEVELOPING THE FUTURE • CREATING TOMORROW
+            </p>
+          </div>{/* 強化されたクォートセクション */}
+          <div 
+            class="mt-8 p-8 rounded-3xl glass-effect-dark cursor-pointer transition-all duration-700 hover:scale-105 hover:-translate-y-2 max-w-lg mx-auto relative overflow-hidden group hologram-effect card-3d sound-wave-effect"
             onClick={nextQuote}
           >
-            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-3xl"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-pink-500/10 to-cyan-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
+            <div class="absolute inset-0 animate-pulse quantum-effect">
+              <div class="h-full w-full bg-gradient-to-r from-transparent via-white/5 to-transparent rounded-3xl"></div>
+            </div>
             <div class="relative z-10">
-              <p class="text-sm italic text-gray-200 font-medium">
-                "{quote()}"
+              <div class="text-4xl text-purple-400 mb-3 text-center neon-glow pulse-wave">"</div>
+              <p class="text-lg font-medium text-gray-200 text-center leading-relaxed mb-4 typing-effect">
+                {quote()}
               </p>
-              <p class="text-xs mt-3 text-gray-400 flex items-center justify-center">
-                <span class="mr-1">✨</span>
-                クリックで名言を変更
-              </p>
+              <div class="text-4xl text-purple-400 text-center rotate-180 neon-glow pulse-wave">"</div>
+              <div class="flex items-center justify-center mt-4 space-x-2">
+                <div class="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse energy-field"></div>
+                <p class="text-sm text-gray-400 font-light neon-glow">
+                  クリックで名言を変更
+                </p>
+                <div class="w-2 h-2 bg-gradient-to-r from-pink-400 to-cyan-400 rounded-full animate-pulse energy-field" style="animation-delay: 0.5s"></div>
+              </div>
             </div>
           </div>
           
-          <div class="flex justify-center mt-6 space-x-4">
-            <a href="https://github.com/tako0614" class="transform transition hover:scale-110">
-              <div class="w-10 h-10 rounded-full flex items-center justify-center bg-white/20 backdrop-blur-md">
-                <span class="text-xl">📂</span>
+          {/* 強化されたソーシャルリンク */}
+          <div class="flex justify-center mt-10 space-x-6">
+            <a href="https://github.com/tako0614" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
+              <div class="absolute -inset-2 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
+              <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
+                <span class="text-2xl filter drop-shadow-lg neon-glow">📂</span>
               </div>
             </a>
-            <a href="https://x.com/takoserver_com" class="transform transition hover:scale-110">
-              <div class="w-10 h-10 rounded-full flex items-center justify-center bg-white/20 backdrop-blur-md">
-                <span class="text-xl">🐦</span>
+            <a href="https://x.com/takoserver_com" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
+              <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
+              <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-cyan-500 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
+                <span class="text-2xl filter drop-shadow-lg neon-glow">🐦</span>
               </div>
             </a>
-            <a href="mailto:contact@tako.example.com" class="transform transition hover:scale-110">
-              <div class="w-10 h-10 rounded-full flex items-center justify-center bg-white/20 backdrop-blur-md">
-                <span class="text-xl">✉️</span>
+            <a href="mailto:contact@tako.example.com" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
+              <div class="absolute -inset-2 bg-gradient-to-r from-red-600 to-pink-600 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
+              <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-red-500 to-pink-500 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
+                <span class="text-2xl filter drop-shadow-lg neon-glow">✉️</span>
               </div>
             </a>
-          </div>        </FadeIn>        {/* インタラクティブな質問選択機能 - モバイル専用セクション */}
+          </div></FadeIn>        {/* インタラクティブな質問選択機能 - モバイル専用セクション */}
         <FadeIn>
           <section class="max-w-6xl mx-auto mb-16 lg:hidden px-4">
             <div class="glass-card-dark p-4 md:p-6 rounded-2xl md:rounded-3xl relative overflow-hidden">
@@ -1133,156 +1197,200 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
         </FadeIn>
 
         <main class="max-w-4xl mx-auto space-y-20">
-          {/* About Me - 拡張セクション */}
-            <section>
-              <h2 class={`text-3xl font-semibold mb-8 pb-2 border-purple-500/50 border-b-2`}>
-                <span class={`text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300`}>About Me</span>
-              </h2>
-              
-              <div class="space-y-6">
-                <p class={`text-gray-200 leading-relaxed text-lg`}>
-                  はじめまして、たこです。プログラミングばっかしている高校生です。プログラミングが好きで、主にWeb開発をしています。最近はtakosという次世代のLINEを目指したプロジェクトを進めています。
+          {/* About Me - 拡張セクション */}            <section>
+              <div class="relative mb-12">
+                <div class="flex items-center space-x-4">
+                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-2xl shadow-purple-500/30 hologram-effect">
+                    <span class="text-3xl">👤</span>
+                  </div>
+                  <div>
+                    <h2 class="text-4xl font-bold neon-glow">
+                      <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-300">About Me</span>
+                    </h2>
+                    <div class="text-sm text-gray-400 font-mono mt-2">自己紹介 | PROFILE.exe</div>
+                  </div>
+                </div>
+                <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-purple-500/30 rounded-2xl animate-pulse"></div>
+                <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-pink-500/20 rounded-xl"></div>
+              </div>
+                <div class="space-y-6">
+                <p class="luxury-paragraph-lead text-center px-4 py-6 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 luxury-text-hover">
+                  はじめまして、<span class="gradient-text-luxury font-semibold">たこ</span>です。プログラミングに情熱を注ぐ高校生として、次世代のデジタル体験を創造することに専念しています。現在、<span class="text-cyan-400 font-medium">takos</span>という革新的なコミュニケーションプラットフォームの開発に取り組んでおります。
                 </p>
                 
 
                   <ExpandableText title="私のビジョン" initiallyExpanded={true}>
-                    趣味はプログラミング以外にも、アニメや漫画を見ることです。将来の夢は、プログラマーではなく起業家や実業家になることです。AIの進歩により近い将来不老不死が実現されると考え、上級国民になることでいち早くその恩恵を受けようと目論んでいます。
-                    
-                    <p class="mt-4">
-                      テクノロジーの力で世界を変えていきたいと考えており、特に分散型システムやプライバシー保護技術に興味があります。現在の既得権益を破壊します
-                    </p>
-                    <p class="mt-4">
-                      プログラミングはただの手段でしかなく、私の最終目標を達成するための一つの道だとしか考えていません。技術そのものに執着することはありません。私の目指す未来を実現するために、必要な技術を学び、使いこなしていくつもりです。
-                    </p>
-                    <p class="mt-4">
+                    <div class="luxury-paragraph space-y-4">
+                      <p>プログラミングを超えた多彩な興味として、アニメーションと文学的表現への深い愛情を抱いております。私の将来への展望は、単なる技術者ではなく、<span class="gradient-text-luxury font-medium">起業家・実業家</span>として社会に変革をもたらすことにあります。</p>
                       
-                    </p>
+                      <p>人工知能の飛躍的進歩により、近い将来における生命科学の革命を確信しており、この歴史的転換点において先駆的な立場を確保することを目標としています。</p>
+                      
+                      <p>テクノロジーの力を通じて世界に新たな価値を創出したいと考えており、特に<span class="text-purple-400 font-medium">分散型システム</span>と<span class="text-cyan-400 font-medium">プライバシー保護技術</span>の分野において、既存の権力構造に挑戦する革新的なソリューションの開発に興味を持っています。</p>
+                      
+                      <p class="text-gray-300 italic border-l-4 border-purple-500/50 pl-4">プログラミングは私にとって手段であり、目的ではありません。理想とする未来を実現するために必要な技術を習得し、それを戦略的に活用していく所存です。</p>
+                    </div>
                   </ExpandableText>
 
                   <ExpandableText title="私の哲学と価値観" initiallyExpanded={true}>
-                  <p>私は中学生の頃、哲学者の考えを調べて自分に反映することにハマって今の正確の形成に大きく関与したと思っています。</p>
-                  <p class="mt-4">特に影響を受けたのは、ニーチェの考え方です。彼の思想である、「人間が自らの力で新しい価値を創造し、より高い段階の存在へと進化しようとする超人思想」はとても共感しています。</p>
-                  <p class="mt-4">また、実存主義にも関心があり、サルトルやカミュの思想から「実存は本質に先立つ」という教えに影響を受けています。これは、自分を定義するのは他者でも社会でもなく、自分自身の行動と選択であるという強い信念につながっています。</p>
-                  <p class="mt-4">テクノロジーの発展は、まさにこの創造と自由の精神を具現化する手段だと捉えており、コードを書くことは私にとって新しい価値を生み出す行為そのものです。開発という行為自体が自己表現の一種だと考えています。</p>                  <p class="mt-4">私は常に自らの思想を持ち、自らの野心に正直に生きていきたいです</p>
+                    <div class="luxury-paragraph space-y-4">
+                      <p>中学時代における哲学的探求が、現在の思想的基盤を形成する重要な転換点となりました。この知的な冒険は、私の人格形成に計り知れない影響を与えています。</p>
+                      
+                      <p>特に<span class="text-orange-400 font-medium">フリードリヒ・ニーチェ</span>の超人思想に深く共鳴しており、「人間が自らの力で新しい価値を創造し、より高次の存在へと進化する」という理念に強い共感を抱いています。</p>
+                      
+                      <p><span class="text-blue-400 font-medium">実存主義</span>の巨匠であるサルトルとカミュの思想、特に「<span class="italic text-purple-300">実存は本質に先立つ</span>」という核心的概念から深い影響を受けています。自己の定義は他者や社会の規範によってではなく、自身の行動と選択によってのみ決定されるという確固たる信念を持っています。</p>
+                      
+                      <p>テクノロジーの発展は、創造性と自由という人間の本質的精神を具現化する究極の手段であると認識しています。<span class="gradient-text-luxury">コードを書く行為</span>は私にとって新たな価値創造そのものであり、開発プロセス自体が芸術的自己表現の一形態なのです。</p>
+                      
+                      <p class="luxury-quote text-center my-8">私は常に独自の思想を保持し、自らの野心に対して誠実であり続けたいと考えています</p>
+                    </div>
                 </ExpandableText>
               </div>
             </section>
-          {/* Status */}
-          <FadeIn>
+          {/* Status */}          <FadeIn>
             <section>
-              <h2 class={`text-3xl font-semibold mb-8 pb-2 border-blue-500/50 border-b-2`}>
-                <span class={`text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300`}>Status</span>
-              </h2>              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class={`group glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden`}>
-                  <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div class="relative mb-12">
+                <div class="flex items-center space-x-4">
+                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-2xl shadow-blue-500/30 hologram-effect">
+                    <span class="text-3xl">📊</span>
+                  </div>
+                  <div>
+                    <h2 class="text-4xl font-bold neon-glow">
+                      <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-300">Status</span>
+                    </h2>
+                    <div class="text-sm text-gray-400 font-mono mt-2">現在の状況 | STATUS.dat</div>
+                  </div>
+                </div>
+                <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-blue-500/30 rounded-2xl animate-pulse"></div>
+                <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-cyan-500/20 rounded-xl"></div>
+              </div><div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class={`group glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden hologram-effect card-3d sound-wave-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10 space-y-6">
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
+                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
                         <span class="text-2xl">👤</span>
-                      </div>
-                      <div>
-                        <h3 class="font-semibold text-lg">Name</h3>
-                        <p class={`text-gray-300`}>
-                          冨山 翔太 (Tomiyama Shota)
+                      </div>                      <div>
+                        <h3 class="luxury-text-subtitle neon-glow">お名前</h3>
+                        <p class="luxury-paragraph text-base">
+                          <span class="gradient-text-luxury">冨山 翔太</span> <span class="luxury-mono text-sm">(Tomiyama Shota)</span>
                         </p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg">
+                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
                         <span class="text-2xl">🎂</span>
                       </div>
                       <div>
-                        <h3 class="font-semibold text-lg">Age</h3>
-                        <p class={`text-gray-300`}>16歳</p>
+                        <h3 class="luxury-text-subtitle neon-glow">年齢</h3>
+                        <p class="luxury-paragraph text-base"><span class="text-cyan-400 font-medium">16</span>歳 <span class="luxury-caption">高校生世代</span></p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center shadow-lg">
+                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
                         <span class="text-2xl">📍</span>
                       </div>
                       <div>
-                        <h3 class="font-semibold text-lg">Location</h3>
-                        <p class={`text-gray-300`}>大阪市生野区</p>
+                        <h3 class="luxury-text-subtitle neon-glow">拠点</h3>
+                        <p class="luxury-paragraph text-base">
+                          <span class="text-green-400 font-medium">大阪市</span>生野区 <span class="luxury-caption">関西圏</span>
+                        </p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg">
+                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
                         <span class="text-2xl">🎓</span>
                       </div>
                       <div>
-                        <h3 class="font-semibold text-lg">School</h3>
-                        <p class={`text-gray-300`}>
-                          大阪府立清水谷高等学校
+                        <h3 class="luxury-text-subtitle neon-glow">教育機関</h3>
+                        <p class="luxury-paragraph text-base">
+                          <span class="text-orange-400 font-medium">大阪府立清水谷高等学校</span>
                         </p>
+                        <p class="luxury-caption">公立進学校</p>
                       </div>
-                    </div>                  </div>
+                    </div></div>
                 </div>
 
-                <div class={`group glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden`}>
-                  <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class={`group glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden hologram-effect card-3d sound-wave-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10 space-y-6">
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center shadow-lg">
+                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
                         <span class="text-2xl">🍣</span>
-                      </div>
-                      <div>
-                        <h3 class="font-semibold text-lg">Favorite Food</h3>
-                        <p class={`text-gray-300`}>寿司</p>
+                      </div>                      <div>
+                        <h3 class="luxury-text-subtitle neon-glow">料理の嗜好</h3>
+                        <p class="luxury-paragraph text-base">
+                          <span class="text-yellow-400 font-medium">寿司</span> <span class="luxury-caption">日本料理</span>
+                        </p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center shadow-lg">
+                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
                         <span class="text-2xl">📚</span>
                       </div>
                       <div>
-                        <h3 class="font-semibold text-lg">Favorite Manga</h3>
-                        <p class={`text-gray-300`}>
-                          お兄ちゃんはおしまい！
+                        <h3 class="luxury-text-subtitle neon-glow">愛読作品</h3>
+                        <p class="luxury-paragraph text-base">
+                          <span class="gradient-text-luxury">お兄ちゃんはおしまい！</span>
                         </p>
+                        <p class="luxury-caption">日常系コメディ漫画</p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg">
+                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
                         <span class="text-2xl">☕</span>
                       </div>
                       <div>
-                        <h3 class="font-semibold text-lg">Favorite Drink</h3>
-                        <p class={`text-gray-300`}>
-                          Cider, Cola, Coffee
+                        <h3 class="luxury-text-subtitle neon-glow">愛飲品</h3>
+                        <p class="luxury-paragraph text-base">
+                          <span class="text-cyan-400 font-medium">サイダー</span>, <span class="text-blue-400 font-medium">コーラ</span>, <span class="text-amber-400 font-medium">コーヒー</span>
                         </p>
+                        <p class="luxury-caption">カフェイン & 炭酸系</p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-lg">
+                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
                         <span class="text-2xl">🏛️</span>
                       </div>
                       <div>
-                        <h3 class="font-semibold text-lg">
-                          Political Affiliation
-                        </h3>
-                        <p class={`text-gray-300`}>
-                          日本維新の会、国民民主党、日本保守党
+                        <h3 class="luxury-text-subtitle neon-glow">政治的指向</h3>
+                        <p class="luxury-paragraph text-base">
+                          <span class="text-indigo-400 font-medium">日本維新の会</span>, <span class="text-purple-400 font-medium">国民民主党</span>, <span class="text-red-400 font-medium">日本保守党</span>
                         </p>
+                        <p class="luxury-caption">改革志向・中道保守</p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* 日常生活の節を追加 */}
+              </div>              {/* 日常生活の節を追加 */}
               <div class="mt-8">
                 <ExpandableText title="私の日常" initiallyExpanded={true}>
-                  <p>平日は学校が終わった後予備校に行き9時まで勉強して家に帰ってから2時までtakosの開発に励んでいます。</p>
-                  <p class="mt-4">休日はtakosの開発をしていますが、開発が終了したら土日も予備校に行きたいと考えています。</p>
+                  <div class="luxury-paragraph space-y-4">
+                    <p>平日における私の生活リズムは、学業と自己開発のバランスを重視した構成となっています。学校教育を終えた後、<span class="text-blue-400 font-medium">予備校での学習</span>に21時まで専念し、帰宅後は深夜2時まで<span class="gradient-text-luxury">takos プロジェクト</span>の開発に情熱を注いでいます。</p>
+                    
+                    <p>休日においては、主にtakosの開発作業に集中しており、技術的革新と創造的問題解決に没頭しています。プロジェクトが一定の段階に到達した際には、<span class="text-purple-400 font-medium">週末の予備校通学</span>も検討しており、学術的知識の更なる深化を目指しています。</p>
+                    
+                    <p class="text-gray-300 italic border-l-4 border-cyan-500/50 pl-4">この密度の高いスケジュールは、将来への投資として位置づけており、知識と技術、両方の領域での成長を追求しています。</p>
+                  </div>
                 </ExpandableText>              </div>
             </section>
           </FadeIn>
-          {/* Timeline - 新セクション */}
-          <FadeIn>
+          {/* Timeline - 新セクション */}          <FadeIn>
             <section>
-              <h2 class={`text-3xl font-semibold mb-8 pb-2 border-green-500/50 border-b-2`}>
-                <span class={`text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-300`}>Timeline</span>
-              </h2>
+              <div class="relative mb-12">
+                <div class="flex items-center space-x-4">
+                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center shadow-2xl shadow-green-500/30 hologram-effect">
+                    <span class="text-3xl">⏱️</span>
+                  </div>
+                  <div>
+                    <h2 class="text-4xl font-bold neon-glow">
+                      <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-teal-400 to-green-300">Timeline</span>
+                    </h2>
+                    <div class="text-sm text-gray-400 font-mono mt-2">人生の軌跡 | TIMELINE.log</div>
+                  </div>
+                </div>
+                <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-green-500/30 rounded-2xl animate-pulse"></div>
+                <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-teal-500/20 rounded-xl"></div>
+              </div>
               
               <div class="relative border-l-4 border-purple-400/30 ml-6 space-y-10 py-4">
                 {[
@@ -1300,30 +1408,41 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                   </div>
                 ))}
               </div>
-              
-              <div class="mt-8">
+                <div class="mt-8">
                 <ExpandableText title="将来の展望" initiallyExpanded={true}>
-                  <p>今後5年間は技術スキルを磨きながら、自分のプロジェクトの規模を拡大していきたいと考えています。高校卒業後は、大学で情報科学と経営学を学びつつ、スタートアップの立ち上げも視野に入れています。</p>
-                  
-                  <p class="mt-4">夢は、不老不死になることです。ついでに日本を再び強国にすることです。</p>
-                  
-                  <p class="mt-4">10年後には、自分がリードするチームを持ち、分散型システムやプライバシー保護技術の分野で世界的にも認められるサービスを世に送り出すことを目標としています。</p>
+                  <div class="luxury-paragraph space-y-4">
+                    <p>今後5年間においては、<span class="text-purple-400 font-medium">技術的専門性の深化</span>と並行して、プロジェクトの規模拡大に戦略的に取り組む計画です。高校卒業後は、<span class="text-blue-400 font-medium">情報科学</span>と<span class="text-green-400 font-medium">経営学</span>の両分野における学術的基盤を構築しながら、<span class="gradient-text-luxury">スタートアップ企業の創設</span>も視野に入れています。</p>
+                    
+                    <p class="luxury-quote text-center my-6">究極の目標は、生命科学の革命による不老不死の実現、そして日本の再興という壮大なビジョンです。</p>
+                    
+                    <p>10年後のビジョンとして、自らが率いる<span class="text-cyan-400 font-medium">技術革新チーム</span>を組織し、<span class="text-purple-400 font-medium">分散型システム</span>と<span class="text-pink-400 font-medium">プライバシー保護技術</span>の分野において、世界的に認知される革新的サービスの創出を目標としています。</p>
+                    
+                    <p>この目標実現のため、<span class="text-orange-400 font-medium">オープンソースコミュニティ</span>への継続的貢献を通じてグローバルなネットワークを構築し、技術的深度と経営戦略の両面において実践的経験を積み重ねていく所存です。</p>
 
-                 
-                  <p class="mt-4">そのために、オープンソースコミュニティへの貢献も続け、グローバルなネットワークを築きながら技術と経営の両面で実践的な経験を積んでいきたいです。</p>
-
-                  <p class="mt-4">最終的には、自分の会社を通じて社会課題の解決に取り組み、テクノロジーの力で人々の生活をより豊かにすることが私のビジョンです。</p>
+                    <p class="text-gray-300 italic border-l-4 border-purple-500/50 pl-4">最終的には、自社を通じた社会課題の根本的解決により、テクノロジーの力で人類の生活品質を革命的に向上させることが、私の存在意義なのです。</p>
+                  </div>
                 </ExpandableText>
               </div>
             </section>
           </FadeIn>
 
-          {/* Skills */}
-          <FadeIn>
+          {/* Skills */}          <FadeIn>
             <section>
-              <h2 class={`text-3xl font-semibold mb-8 pb-2 border-yellow-500/50 border-b-2`}>
-                <span class={`text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-300`}>Skills</span>
-              </h2>              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div class="relative mb-12">
+                <div class="flex items-center space-x-4">
+                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center shadow-2xl shadow-yellow-500/30 hologram-effect">
+                    <span class="text-3xl">🛠️</span>
+                  </div>
+                  <div>
+                    <h2 class="text-4xl font-bold neon-glow">
+                      <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-300">Skills</span>
+                    </h2>
+                    <div class="text-sm text-gray-400 font-mono mt-2">技術スタック | SKILLS.json</div>
+                  </div>
+                </div>
+                <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-yellow-500/30 rounded-2xl animate-pulse"></div>
+                <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-orange-500/20 rounded-xl"></div>
+              </div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[
                   { title: "Frontend", text: "Preact, SolidJS, Tailwind CSS", icon: "🎨", color: "from-blue-500 to-indigo-600" },
                   { title: "Backend", text: "Node.js, Deno, PHP, Laravel, Hono", icon: "⚙️", color: "from-green-500 to-teal-600" },
@@ -1331,13 +1450,13 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                   { title: "Infrastructure", text: "Proxmox, k8s, Linux", icon: "🏗️", color: "from-red-500 to-orange-600" },
                   { title: "Languages", text: "JavaScript, TypeScript, PHP, Rust (学習中)", icon: "📝", color: "from-yellow-500 to-amber-600" },
                   { title: "Other", text: "UI/UX Design, SEO基礎, グラフィックデザイン", icon: "✨", color: "from-cyan-500 to-blue-600" },
-                ].map((skill) => (                  <div class={`group glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-2 relative overflow-hidden`}>
-                    <div class={`absolute inset-0 bg-gradient-to-br ${skill.color.replace(/500/g, '500/5')} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                ].map((skill) => (                  <div class={`group glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-2 relative overflow-hidden hologram-effect card-3d sound-wave-effect`}>
+                    <div class={`absolute inset-0 bg-gradient-to-br ${skill.color.replace(/500/g, '500/5')} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field`}></div>
                     <div class="relative z-10">
-                      <div class={`w-16 h-16 mb-6 rounded-2xl flex items-center justify-center bg-gradient-to-br ${skill.color} shadow-xl group-hover:scale-110 transition-transform duration-300`}>
-                        <span class="text-3xl filter drop-shadow-sm">{skill.icon}</span>
+                      <div class={`w-16 h-16 mb-6 rounded-2xl flex items-center justify-center bg-gradient-to-br ${skill.color} shadow-xl group-hover:scale-110 transition-transform duration-300 pulse-wave`}>
+                        <span class="text-3xl filter drop-shadow-sm neon-glow">{skill.icon}</span>
                       </div>
-                      <h3 class="font-bold text-xl mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 transition-all duration-300">{skill.title}</h3>
+                      <h3 class="font-bold text-xl mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 transition-all duration-300 neon-glow">{skill.title}</h3>
                       <p class={`text-gray-300 leading-relaxed`}>{skill.text}</p>
                     </div>
                   </div>
@@ -1352,12 +1471,23 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
             </section>
           </FadeIn>
 
-          {/* Projects */}
-          <FadeIn>
+          {/* Projects */}          <FadeIn>
             <section>
-              <h2 class={`text-3xl font-semibold mb-8 pb-2 border-pink-500/50 border-b-2`}>
-                <span class={`text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-red-300`}>Projects</span>
-              </h2>              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="relative mb-12">
+                <div class="flex items-center space-x-4">
+                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-red-500 flex items-center justify-center shadow-2xl shadow-pink-500/30 hologram-effect">
+                    <span class="text-3xl">🚀</span>
+                  </div>
+                  <div>
+                    <h2 class="text-4xl font-bold neon-glow">
+                      <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-red-400 to-pink-300">Projects</span>
+                    </h2>
+                    <div class="text-sm text-gray-400 font-mono mt-2">開発プロジェクト | PROJECTS.md</div>
+                  </div>
+                </div>
+                <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-pink-500/30 rounded-2xl animate-pulse"></div>
+                <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-red-500/20 rounded-xl"></div>
+              </div><div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div class="relative z-10">
@@ -1394,12 +1524,23 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
             </section>
           </FadeIn>
 
-          {/* Mutual Links */}
-          <FadeIn>
+          {/* Mutual Links */}          <FadeIn>
             <section>
-              <h2 class={`text-3xl font-semibold mb-8 pb-2 border-cyan-500/50 border-b-2`}>
-                <span class={`text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-300`}>相互リンク</span>
-              </h2>
+              <div class="relative mb-12">
+                <div class="flex items-center space-x-4">
+                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center shadow-2xl shadow-cyan-500/30 hologram-effect">
+                    <span class="text-3xl">🔗</span>
+                  </div>
+                  <div>
+                    <h2 class="text-4xl font-bold neon-glow">
+                      <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300">相互リンク</span>
+                    </h2>
+                    <div class="text-sm text-gray-400 font-mono mt-2">友人・仲間 | LINKS.cfg</div>
+                  </div>
+                </div>
+                <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-cyan-500/30 rounded-2xl animate-pulse"></div>
+                <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-blue-500/20 rounded-xl"></div>
+              </div>
               
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <For each={mutualLinks}>
@@ -1445,12 +1586,23 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                 </ExpandableText>
               </div>
             </section>
-          </FadeIn>          {/* Contact */}
-          <FadeIn>
+          </FadeIn>          {/* Contact */}          <FadeIn>
             <section class="text-center">
-              <h2 class={`text-2xl md:text-3xl font-semibold mb-6 md:mb-8 pb-2 border-red-500/50 border-b-2`}>
-                <span class={`text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-300`}>Contact</span>
-              </h2>
+              <div class="relative mb-12 flex justify-center">
+                <div class="flex items-center space-x-4">
+                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center shadow-2xl shadow-red-500/30 hologram-effect">
+                    <span class="text-3xl">📞</span>
+                  </div>
+                  <div>
+                    <h2 class="text-4xl font-bold neon-glow">
+                      <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-300">Contact</span>
+                    </h2>
+                    <div class="text-sm text-gray-400 font-mono mt-2">連絡手段 | CONTACT.ini</div>
+                  </div>
+                </div>
+                <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-red-500/30 rounded-2xl animate-pulse"></div>
+                <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-orange-500/20 rounded-xl"></div>
+              </div>
               
               <p class={`max-w-lg mx-auto mb-6 md:mb-8 text-sm md:text-base text-gray-300 px-4`}>
                 プロジェクトの共同開発や技術的な質問など、お気軽にご連絡ください。通常48時間以内に返信します。
