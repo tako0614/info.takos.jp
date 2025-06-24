@@ -1116,12 +1116,10 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
             <div class="absolute bottom-8 left-0 w-1 h-1 bg-pink-400 rounded-full animate-float opacity-50" style="animation-delay: 2s"></div>
             <div class="absolute bottom-0 right-8 w-1.5 h-1.5 bg-green-400 rounded-full animate-float opacity-60" style="animation-delay: 0.5s"></div>
           </div>
-            <div class="relative">
-            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 relative neon-glow"
+            <div class="relative">            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 relative neon-glow"
                 style="animation: titleShimmer 3s ease-in-out infinite">
               たこ
             </h1>
-            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-60 pulse-wave"></div>
           </div>
             <div class="luxury-paragraph-lead text-center mb-8">
             <span class="luxury-mono text-cyan-400">IDENTITY:</span> 
@@ -1183,12 +1181,21 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
           </div></FadeIn>        {/* インタラクティブな質問選択機能 - モバイル専用セクション */}
         <FadeIn>
           <section class="max-w-6xl mx-auto mb-16 lg:hidden px-4">
-            <div class="glass-card-dark p-4 md:p-6 rounded-2xl md:rounded-3xl relative overflow-hidden">
+            <div class="glass-card-dark p-4 md:p-6 rounded-2xl md:rounded-3xl relative overflow-hidden neon-border terminal-display">
               <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-2xl md:rounded-3xl"></div>
               <div class="relative z-10">
                 <div class="text-center mb-4 md:mb-6">
-                  <h2 class="text-xl md:text-2xl font-bold text-cyan-400 mb-2">🐙 たこ索引</h2>
-                  <p class="text-xs md:text-sm text-gray-400">タップして詳しい情報を見る</p>
+                  <div class="status-indicator mb-3">
+                    <span class="text-green-400">ONLINE</span>
+                  </div>
+                  <h2 class="text-xl md:text-2xl font-bold text-cyan-400 mb-2 glitch-effect" data-text="🐙 TAKO INDEX">🐙 TAKO INDEX</h2>
+                  <div class="terminal-display text-xs mb-3">
+                    <span class="text-green-400">$ ./tako_index.exe --interactive</span>
+                    <div class="terminal-cursor"></div>
+                  </div>
+                  <p class="text-xs md:text-sm text-gray-400">
+                    <span class="luxury-mono">SELECT MODULE FOR DATA ACCESS</span>
+                  </p>
                 </div>
                 <InteractiveQA />
               </div>
@@ -1442,22 +1449,36 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                 </div>
                 <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-yellow-500/30 rounded-2xl animate-pulse"></div>
                 <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-orange-500/20 rounded-xl"></div>
-              </div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              </div>              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[
-                  { title: "Frontend", text: "Preact, SolidJS, Tailwind CSS", icon: "🎨", color: "from-blue-500 to-indigo-600" },
-                  { title: "Backend", text: "Node.js, Deno, PHP, Laravel, Hono", icon: "⚙️", color: "from-green-500 to-teal-600" },
-                  { title: "Tools", text: "Git, Docker, Deno Deploy", icon: "🔧", color: "from-purple-500 to-pink-600" },
-                  { title: "Infrastructure", text: "Proxmox, k8s, Linux", icon: "🏗️", color: "from-red-500 to-orange-600" },
-                  { title: "Languages", text: "JavaScript, TypeScript, PHP, Rust (学習中)", icon: "📝", color: "from-yellow-500 to-amber-600" },
-                  { title: "Other", text: "UI/UX Design, SEO基礎, グラフィックデザイン", icon: "✨", color: "from-cyan-500 to-blue-600" },
-                ].map((skill) => (                  <div class={`group glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-2 relative overflow-hidden hologram-effect card-3d sound-wave-effect`}>
+                  { title: "Frontend", text: "Preact, SolidJS, Tailwind CSS", icon: "🎨", color: "from-blue-500 to-indigo-600", level: 85 },
+                  { title: "Backend", text: "Node.js, Deno, PHP, Laravel, Hono", icon: "⚙️", color: "from-green-500 to-teal-600", level: 78 },
+                  { title: "Tools", text: "Git, Docker, Deno Deploy", icon: "🔧", color: "from-purple-500 to-pink-600", level: 82 },
+                  { title: "Infrastructure", text: "Proxmox, k8s, Linux", icon: "🏗️", color: "from-red-500 to-orange-600", level: 70 },
+                  { title: "Languages", text: "JavaScript, TypeScript, PHP, Rust (学習中)", icon: "📝", color: "from-yellow-500 to-amber-600", level: 88 },
+                  { title: "Other", text: "UI/UX Design, SEO基礎, グラフィックデザイン", icon: "✨", color: "from-cyan-500 to-blue-600", level: 75 },
+                ].map((skill) => (                  <div class={`group glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-2 relative overflow-hidden hologram-effect card-3d sound-wave-effect neon-border`}>
                     <div class={`absolute inset-0 bg-gradient-to-br ${skill.color.replace(/500/g, '500/5')} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field`}></div>
                     <div class="relative z-10">
                       <div class={`w-16 h-16 mb-6 rounded-2xl flex items-center justify-center bg-gradient-to-br ${skill.color} shadow-xl group-hover:scale-110 transition-transform duration-300 pulse-wave`}>
                         <span class="text-3xl filter drop-shadow-sm neon-glow">{skill.icon}</span>
                       </div>
                       <h3 class="font-bold text-xl mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 transition-all duration-300 neon-glow">{skill.title}</h3>
-                      <p class={`text-gray-300 leading-relaxed`}>{skill.text}</p>
+                      <p class={`text-gray-300 leading-relaxed mb-4`}>{skill.text}</p>
+                      
+                      {/* スキルレベルバー */}
+                      <div class="mb-3">
+                        <div class="flex justify-between items-center mb-2">
+                          <span class="text-sm font-mono text-cyan-400">習熟度</span>
+                          <span class="text-sm font-mono text-purple-400">{skill.level}%</span>
+                        </div>
+                        <div class="data-bar" style={`--progress: ${skill.level}%`}></div>
+                      </div>
+                      
+                      {/* ステータスインジケーター */}
+                      <div class="status-indicator text-xs">
+                        <span class="text-green-400">ACTIVE</span>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -1487,27 +1508,107 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                 </div>
                 <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-pink-500/30 rounded-2xl animate-pulse"></div>
                 <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-red-500/20 rounded-xl"></div>
-              </div><div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group`}>
-                  <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10">
                     <div class="flex items-center mb-6">
-                      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mr-4 shadow-xl group-hover:scale-110 transition-transform duration-300">
-                        <span class="text-3xl">💬</span>
+                      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mr-4 shadow-xl group-hover:scale-110 transition-transform duration-300 pulse-wave">
+                        <span class="text-3xl neon-glow">💬</span>
                       </div>
-                      <h3 class="text-2xl font-bold">takos</h3>
+                      <div>
+                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="takos">takos</h3>
+                        <div class="status-indicator mt-2">
+                          <span class="text-green-400">ACTIVE DEV</span>
+                        </div>
+                      </div>
                     </div>
-                    <p class={`text-gray-300 mb-6 leading-relaxed`}>
-                      分散型チャットSNS。Matrix のような分散型・暗号化機能と、LINE のような使いやすい UI/UX を目指しています。
+                    
+                    {/* ターミナル風プロジェクト情報 */}
+                    <div class="terminal-display mb-6 text-xs">
+                      <div class="text-green-400">$ git log --oneline --graph</div>
+                      <div class="text-gray-300 mt-1">
+                        * a7f2d3e feat: distributed chat protocol<br/>
+                        * 8c1a9f4 refactor: encryption layer<br/>
+                        * 2b5e7a1 init: project foundation
+                      </div>
+                      <div class="terminal-cursor"></div>
+                    </div>
+                    
+                    <p class={`text-gray-300 mb-6 leading-relaxed luxury-paragraph`}>
+                      <span class="text-purple-400 font-medium">分散型チャットSNS</span>。Matrixのような<span class="text-cyan-400">分散型・暗号化機能</span>と、LINEのような<span class="text-pink-400">直感的UI/UX</span>の融合を目指しています。
                     </p>
-                    <div class="flex flex-wrap gap-3 mb-6">
-                      <span class={`px-3 py-2 rounded-full text-sm glass-effect-dark border border-purple-500/30`}>Deno</span>
-                      <span class={`px-3 py-2 rounded-full text-sm glass-effect-dark border border-blue-500/30`}>SolidJS</span>
-                      <span class={`px-3 py-2 rounded-full text-sm glass-effect-dark border border-green-500/30`}>End-to-End暗号化</span>
+                    
+                    {/* 技術スタック */}
+                    <div class="mb-6">
+                      <h4 class="text-sm font-mono text-cyan-400 mb-3">TECH_STACK:</h4>
+                      <div class="flex flex-wrap gap-2">
+                        <span class={`px-3 py-1 rounded-full text-xs luxury-button border border-purple-500/30`}>Deno</span>
+                        <span class={`px-3 py-1 rounded-full text-xs luxury-button border border-blue-500/30`}>SolidJS</span>
+                        <span class={`px-3 py-1 rounded-full text-xs luxury-button border border-green-500/30`}>E2E暗号化</span>
+                      </div>
                     </div>
-                    <a href="https://github.com/tako0614/takos" class={`inline-flex items-center text-purple-300 hover:text-purple-200 transition-colors font-semibold`}>
-                      プロジェクトを見る <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-                    </a>
+                    
+                    {/* プログレスバー */}
+                    <div class="mb-6">
+                      <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-mono text-gray-400">開発進捗</span>
+                        <span class="text-sm font-mono text-purple-400">67%</span>
+                      </div>
+                      <div class="data-bar" style="--progress: 67%"></div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                      <a href="https://github.com/tako0614/takos" class={`luxury-button text-sm`}>
+                        リポジトリを見る →
+                      </a>
+                      <div class="text-xs text-gray-500 font-mono">
+                        Last commit: 2h ago
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* 将来のプロジェクト用のプレースホルダー */}
+                <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden group neon-border liquid-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center mr-4 shadow-xl group-hover:scale-110 transition-transform duration-300 pulse-wave">
+                        <span class="text-3xl neon-glow">🔮</span>
+                      </div>
+                      <div>
+                        <h3 class="text-2xl font-bold neon-glow">Next Project</h3>
+                        <div class="status-indicator mt-2">
+                          <span class="text-yellow-400">PLANNING</span>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="terminal-display mb-6 text-xs">
+                      <div class="text-green-400">$ ideate --next-innovation</div>
+                      <div class="text-gray-300 mt-1">
+                        &gt; Analyzing market gaps...<br/>
+                        &gt; Evaluating tech stack options...<br/>
+                        &gt; Defining target audience...
+                      </div>
+                      <div class="terminal-cursor"></div>
+                    </div>
+                    
+                    <p class={`text-gray-300 mb-6 leading-relaxed luxury-paragraph`}>
+                      次世代プロジェクトを構想中。<span class="text-cyan-400 font-medium">AI</span>、<span class="text-blue-400 font-medium">ブロックチェーン</span>、<span class="text-purple-400 font-medium">量子コンピューティング</span>を統合した革新的なソリューションを目指しています。
+                    </p>
+                    
+                    <div class="mb-6">
+                      <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-mono text-gray-400">企画進捗</span>
+                        <span class="text-sm font-mono text-cyan-400">23%</span>
+                      </div>
+                      <div class="data-bar" style="--progress: 23%"></div>
+                    </div>
+                    
+                    <div class="luxury-button text-sm cursor-not-allowed opacity-50">
+                      詳細は近日公開 🔒
+                    </div>
                   </div>
                 </div>
               </div>
