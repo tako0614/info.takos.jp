@@ -987,10 +987,9 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
     setTakoInstances([...takoInstances(), { id: Date.now() }]);
   };
   const quotes = [
-    "自分の努力不足を開発者に転嫁するな",
     "思想がない人に価値はない",
-    "手段はどうあれ勝ったやつが勝ち",
-    
+    "手段が目的化している人は、何も生み出せない",
+    "勝利こそ正義",
   ];
   const [quote, setQuote] = createSignal(quotes[Math.floor(Math.random() * quotes.length)]);
   
