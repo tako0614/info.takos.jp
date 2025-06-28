@@ -305,7 +305,7 @@ const ExpandableText: Component<{
 }> = (props) => {
   const [expanded, setExpanded] = createSignal(props.initiallyExpanded || false);
   return (
-    <div class={`glass-card-deep p-8 rounded-3xl relative overflow-hidden ${props.class}`}>
+    <div class={`glass-card-deep glass-refraction p-8 rounded-3xl relative overflow-hidden ${props.class}`}> 
       <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
       <div class="relative z-10">
         <div 
@@ -456,9 +456,9 @@ const InteractiveQA: Component = () => {
           <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
             <For each={Object.entries(qaData)}>
               {([category, data]) => (
-                <button
-                  onClick={() => setSelectedCategory(category)}
-                  class="group glass-card-dark p-3 md:p-6 rounded-2xl md:rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 text-left relative overflow-hidden"
+                  <button
+                    onClick={() => setSelectedCategory(category)}
+                    class="group glass-card-dark glass-refraction p-3 md:p-6 rounded-2xl md:rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 text-left relative overflow-hidden"
                 >
                   <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-2xl md:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div class="relative z-10">
@@ -533,7 +533,7 @@ const InteractiveQA: Component = () => {
               </p>
             </div>
           </div>
-          <div class={`glass-card-dark p-4 md:p-6 lg:p-10 rounded-2xl md:rounded-3xl relative overflow-hidden`}>
+            <div class={`glass-card-dark glass-refraction p-4 md:p-6 lg:p-10 rounded-2xl md:rounded-3xl relative overflow-hidden`}>
             <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5 rounded-2xl md:rounded-3xl"></div>
             <div class="relative z-10">
               <p class={`text-gray-200 leading-relaxed text-sm md:text-base lg:text-lg`}>
@@ -1081,9 +1081,9 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
 
       {/* AR HUDオーバーレイ */}
       <ARHudOverlay />      {/* 深海テーマのたこ追加ボタン */}
-      <button
-        onClick={addTako}
-        class="fixed bottom-4 left-4 z-50 glass-card-deep p-4 rounded-3xl transition-all duration-500 hover:scale-110 hover:rotate-12 text-white overflow-hidden group shadow-2xl hologram-effect card-3d sound-wave-effect"
+        <button
+          onClick={addTako}
+          class="fixed bottom-4 left-4 z-50 glass-card-deep glass-refraction p-4 rounded-3xl transition-all duration-500 hover:scale-110 hover:rotate-12 text-white overflow-hidden group shadow-2xl hologram-effect card-3d sound-wave-effect"
         title="たこを増やす"
       >
         <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/40 to-blue-500/40 rounded-3xl group-hover:from-cyan-400/50 group-hover:to-blue-400/50 transition-all duration-300 energy-field"></div>        <div class="absolute inset-0 bg-gradient-to-tr from-cyan-300/20 to-teal-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 quantum-effect"></div>
@@ -1227,7 +1227,7 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
           </div></FadeIn>        {/* インタラクティブな質問選択機能 - モバイル専用セクション */}
         <FadeIn>
           <section class="max-w-6xl mx-auto mb-16 lg:hidden px-4">
-            <div class="glass-card-dark p-4 md:p-6 rounded-2xl md:rounded-3xl relative overflow-hidden neon-border terminal-display">
+              <div class="glass-card-dark glass-refraction p-4 md:p-6 rounded-2xl md:rounded-3xl relative overflow-hidden neon-border terminal-display">
               <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-2xl md:rounded-3xl"></div>
               <div class="relative z-10">
                 <div class="text-center mb-4 md:mb-6">
@@ -1316,7 +1316,7 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                 <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-blue-500/30 rounded-2xl animate-pulse"></div>
                 <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-cyan-500/20 rounded-xl"></div>
               </div><div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class={`group glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden hologram-effect card-3d sound-wave-effect`}>
+                  <div class={`group glass-card-dark glass-refraction p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden hologram-effect card-3d sound-wave-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10 space-y-6">
                     <div class="flex items-center space-x-4">
@@ -1363,7 +1363,7 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                     </div></div>
                 </div>
 
-                <div class={`group glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden hologram-effect card-3d sound-wave-effect`}>
+                  <div class={`group glass-card-dark glass-refraction p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden hologram-effect card-3d sound-wave-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10 space-y-6">
                     <div class="flex items-center space-x-4">
@@ -1451,7 +1451,7 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                   { year: "2024", title: "高校入学", text: "清水谷高校に入学" },
                 ].map((item) => (                  <div class="relative">
                     <div class={`absolute -left-10 mt-1.5 h-6 w-6 rounded-full border-4 border-purple-500 bg-gray-900 shadow-lg`}></div>
-                    <div class={`glass-card-dark p-6 rounded-2xl ml-2 relative overflow-hidden group`}>
+                      <div class={`glass-card-dark glass-refraction p-6 rounded-2xl ml-2 relative overflow-hidden group`}>
                       <div class="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       <div class="relative z-10">
                         <h3 class={`text-lg font-semibold mb-2 text-purple-300`}>{item.year} - {item.title}</h3>
@@ -1503,7 +1503,7 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                   { title: "Infrastructure", text: "Proxmox, k8s, Linux", icon: "🏗️", color: "from-red-500 to-orange-600", level: 70 },
                   { title: "Languages", text: "JavaScript, TypeScript, PHP, Rust (学習中)", icon: "📝", color: "from-yellow-500 to-amber-600", level: 88 },
                   { title: "Other", text: "UI/UX Design, SEO基礎, グラフィックデザイン", icon: "✨", color: "from-cyan-500 to-blue-600", level: 75 },
-                ].map((skill) => (                  <div class={`group glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-2 relative overflow-hidden hologram-effect card-3d sound-wave-effect neon-border`}>
+                  ].map((skill) => (                  <div class={`group glass-card-dark glass-refraction p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-2 relative overflow-hidden hologram-effect card-3d sound-wave-effect neon-border`}>
                     <div class={`absolute inset-0 bg-gradient-to-br ${skill.color.replace(/500/g, '500/5')} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field`}></div>
                     <div class="relative z-10">
                       <div class={`w-16 h-16 mb-6 rounded-2xl flex items-center justify-center bg-gradient-to-br ${skill.color} shadow-xl group-hover:scale-110 transition-transform duration-300 pulse-wave`}>
@@ -1555,7 +1555,7 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                 <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-pink-500/30 rounded-2xl animate-pulse"></div>
                 <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-red-500/20 rounded-xl"></div>
               </div>              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
+                  <div class={`glass-card-dark glass-refraction p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10">
                     <div class="flex items-center mb-6">
@@ -1616,7 +1616,7 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                 </div>
                 
                 {/* 将来のプロジェクト用のプレースホルダー */}
-                <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden group neon-border liquid-effect`}>
+                  <div class={`glass-card-dark glass-refraction p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden group neon-border liquid-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div class="relative z-10">
                     <div class="flex items-center mb-6">
@@ -1695,7 +1695,7 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class={`glass-card-dark p-6 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 group relative overflow-hidden`}
+                        class={`glass-card-dark glass-refraction p-6 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 group relative overflow-hidden`}
                     >
                       <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       <div class="relative z-10">
