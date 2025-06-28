@@ -740,7 +740,7 @@ const ARHudOverlay: Component = () => {
       </div>
       
       {/* メインHUDパネル - 右上 */}      <div class={`absolute top-4 right-4 transition-all duration-700 ${isMinimized() ? 'transform translate-x-80' : ''}`}>        <div 
-          class="ar-hud-panel card-3d p-6 w-80"
+          class="ar-hud-panel glass-refraction card-3d p-6 w-80"
           style={{
             background: 'rgba(0, 20, 40, 0.25)',
             'backdrop-filter': 'blur(25px)',
@@ -825,7 +825,7 @@ const ARHudOverlay: Component = () => {
       <Show when={selectedTakoIndex()}>
         <div class="absolute top-4 right-96 w-80">
           <div 
-            class="ar-hud-panel card-3d hologram-effect quantum-effect p-5"
+            class="ar-hud-panel glass-refraction card-3d hologram-effect quantum-effect p-5"
             style={{
               background: 'rgba(10, 25, 50, 0.3)',
               'backdrop-filter': 'blur(25px)',
@@ -908,7 +908,7 @@ const ARHudOverlay: Component = () => {
       </Show>
       {/* システム情報オーバーレイ - 左上 */}
       <div class="absolute top-20 left-4">
-        <div class="ar-hud-panel card-3d hologram-effect matrix-stream p-4 w-64">
+        <div class="ar-hud-panel glass-refraction card-3d hologram-effect matrix-stream p-4 w-64">
           <div class="flex items-center mb-3">
             <span class="text-lg mr-2 pulse-wave">{systemInfoSection.icon}</span>
             <span class="text-cyan-400 text-sm font-mono neon-glow typing-effect">SYSTEM_INFO</span>
@@ -926,7 +926,7 @@ const ARHudOverlay: Component = () => {
         </div>
       </div>      {/* ネットワーク情報オーバーレイ - 左中央 */}
       <div class="absolute top-80 left-4">
-        <div class="ar-hud-panel card-3d radar-effect energy-field p-4 w-64">
+        <div class="ar-hud-panel glass-refraction card-3d radar-effect energy-field p-4 w-64">
           <div class="flex items-center mb-3">
             <span class="text-lg mr-2 pulse-wave">{networkInfoSection.icon}</span>
             <span class="text-cyan-400 text-sm font-mono neon-glow">NETWORK_INFO</span>
@@ -944,7 +944,7 @@ const ARHudOverlay: Component = () => {
         </div>
       </div>      {/* パフォーマンス情報オーバーレイ - 右下（スクロールプログレスの上） */}
       <div class="absolute bottom-32 right-4">
-        <div class="ar-hud-panel card-3d quantum-effect magnetic-field p-4 w-48">
+        <div class="ar-hud-panel glass-refraction card-3d quantum-effect magnetic-field p-4 w-48">
           <div class="flex items-center mb-3">
             <span class="text-lg mr-2 pulse-wave">{performanceSection.icon}</span>
             <span class="text-cyan-400 text-xs font-mono neon-glow">PERFORMANCE</span>
@@ -964,7 +964,7 @@ const ARHudOverlay: Component = () => {
 
       {/* サイドパネル - 左端 */}      {/* ボトムバー */}
       <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-        <div class="ar-hud-panel card-3d hologram-effect energy-field px-8 py-3">
+        <div class="ar-hud-panel glass-refraction card-3d hologram-effect energy-field px-8 py-3">
           <div class="flex items-center space-x-6 text-sm">
             <div class="flex items-center space-x-2">
               <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse pulse-wave"></div>
@@ -986,7 +986,7 @@ const ARHudOverlay: Component = () => {
 
       {/* ミニマップ/プログレス - 右下 */}
       <div class="absolute bottom-4 right-4">
-        <div class="ar-hud-panel card-3d quantum-effect magnetic-field p-4 w-48">
+        <div class="ar-hud-panel glass-refraction card-3d quantum-effect magnetic-field p-4 w-48">
           <div class="text-center mb-3">
             <span class="text-cyan-400 text-xs font-mono neon-glow typing-effect">SCROLL_MATRIX</span>
           </div>

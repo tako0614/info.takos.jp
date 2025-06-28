@@ -216,10 +216,31 @@
     backdrop-filter: blur(35px) saturate(150%);
     -webkit-backdrop-filter: blur(35px) saturate(150%);
     border: 1px solid rgba(100, 200, 255, 0.15);
-    box-shadow: 
+    box-shadow:
       0 20px 50px 0 rgba(0, 0, 0, 0.5),
       inset 0 2px 1px 0 rgba(100, 200, 255, 0.1),
       inset 0 -2px 1px 0 rgba(0, 255, 255, 0.05);
+  }
+
+  /* 透過背景を屈折させるガラス効果 */
+  .glass-refraction {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    overflow: hidden;
+  }
+
+  .glass-refraction::after {
+    content: '';
+    position: absolute;
+    inset: -10%;
+    pointer-events: none;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    transform: scale(1.05);
+    opacity: 0.6;
   }
 }
 
