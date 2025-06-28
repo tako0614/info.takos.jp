@@ -225,10 +225,10 @@
   /* 背景を屈折させるガラス表現 */
   .glass-refract {
     position: relative;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(8px) brightness(1.1);
-    -webkit-backdrop-filter: blur(8px) brightness(1.1);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px) saturate(160%) brightness(1.2);
+    -webkit-backdrop-filter: blur(12px) saturate(160%) brightness(1.2);
     overflow: hidden;
   }
 
@@ -236,9 +236,9 @@
     content: "";
     position: absolute;
     inset: 0;
-    backdrop-filter: blur(18px) brightness(1.3);
-    -webkit-backdrop-filter: blur(18px) brightness(1.3);
-    transform: scale(1.05);
+    backdrop-filter: blur(24px) saturate(180%) brightness(1.35);
+    -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.35);
+    transform: scale(1.1);
     pointer-events: none;
     mix-blend-mode: screen;
   }
