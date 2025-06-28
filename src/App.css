@@ -5,7 +5,7 @@
 /* AR HUD スタイル */
 .ar-hud-panel {
   background: rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(22px) saturate(120%);
   border: 1px solid rgba(0, 255, 255, 0.2);
   border-radius: 12px;
   box-shadow: 
@@ -256,7 +256,7 @@
 /* 高解像度ディスプレイ対応 */
 @media (min-resolution: 2dppx) {
   .ar-hud-panel {
-    backdrop-filter: blur(25px);
+    backdrop-filter: blur(30px) saturate(130%);
   }
 }
 

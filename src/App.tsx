@@ -32,11 +32,12 @@ const FadeIn: Component<{ children: any; class?: string }> = (props) => {
 };
 
 /**
- * ModernParticles コンポーネント
- * CSS-in-JSとより美しいグラデーション効果を使った現代的な粒子システム
+ * DeepSeaParticles コンポーネント
+ * 深海をイメージしたプランクトンと気泡のパーティクルシステム
  */
-const ModernParticles: Component<{ darkMode: boolean }> = (props) => {
-  const particleCount = 30; // 粒子数を増加
+const DeepSeaParticles: Component<{ darkMode: boolean }> = (props) => {
+  const planktonCount = 25; // プランクトン数
+  const bubbleCount = 15; // 気泡数
   let containerRef!: HTMLDivElement;
 
   onMount(() => {
@@ -44,8 +45,14 @@ const ModernParticles: Component<{ darkMode: boolean }> = (props) => {
     const width = container.offsetWidth;
     const height = container.offsetHeight;
 
-    for (let i = 0; i < particleCount; i++) {
-      createModernParticle(container, width, height, props.darkMode);
+    // プランクトンを生成
+    for (let i = 0; i < planktonCount; i++) {
+      createPlankton(container, width, height, props.darkMode);
+    }
+
+    // 気泡を生成
+    for (let i = 0; i < bubbleCount; i++) {
+      createBubble(container, width, height, props.darkMode);
     }
   });
 
@@ -55,106 +62,142 @@ const ModernParticles: Component<{ darkMode: boolean }> = (props) => {
       const width = containerRef.offsetWidth;
       const height = containerRef.offsetHeight;
       
-      for (let i = 0; i < particleCount; i++) {
-        createModernParticle(containerRef, width, height, props.darkMode);
+      for (let i = 0; i < planktonCount; i++) {
+        createPlankton(containerRef, width, height, props.darkMode);
+      }
+      
+      for (let i = 0; i < bubbleCount; i++) {
+        createBubble(containerRef, width, height, props.darkMode);
       }
     }
   });
 
-  function createModernParticle(container: HTMLDivElement, width: number, height: number, isDark: boolean) {
-    const particle = document.createElement('div');
-    const size = Math.random() * 12 + 4; // サイズを大きく
+  function createPlankton(container: HTMLDivElement, width: number, height: number, isDark: boolean) {
+    const plankton = document.createElement('div');
+    const size = Math.random() * 12 + 6; // サイズを大きく
     
-    // より鮮やかで多様なグラデーション配色
-    const gradients = isDark 
-      ? [
-          'linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(59, 130, 246, 0.4))',
-          'linear-gradient(135deg, rgba(236, 72, 153, 0.4), rgba(168, 85, 247, 0.4))',
-          'linear-gradient(135deg, rgba(6, 182, 212, 0.4), rgba(34, 197, 94, 0.4))',
-          'linear-gradient(135deg, rgba(251, 146, 60, 0.4), rgba(239, 68, 68, 0.4))',
-          'linear-gradient(135deg, rgba(147, 51, 234, 0.4), rgba(79, 70, 229, 0.4))',
-          'linear-gradient(135deg, rgba(244, 63, 94, 0.4), rgba(251, 113, 133, 0.4))'
-        ]
-      : [
-          'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(59, 130, 246, 0.2))',
-          'linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(168, 85, 247, 0.2))',
-          'linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(34, 197, 94, 0.2))',
-          'linear-gradient(135deg, rgba(251, 146, 60, 0.2), rgba(239, 68, 68, 0.2))',
-          'linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(79, 70, 229, 0.2))',
-          'linear-gradient(135deg, rgba(244, 63, 94, 0.2), rgba(251, 113, 133, 0.2))'
-        ];
+    // プランクトンらしい色（青緑系の生物発光）
+    const planktonColors = isDark ? [
+      'radial-gradient(circle, rgba(0, 255, 255, 0.8), rgba(0, 150, 200, 0.4))',
+      'radial-gradient(circle, rgba(100, 255, 200, 0.7), rgba(0, 200, 150, 0.3))',
+      'radial-gradient(circle, rgba(150, 200, 255, 0.6), rgba(50, 100, 200, 0.3))',
+      'radial-gradient(circle, rgba(200, 255, 100, 0.5), rgba(100, 200, 50, 0.2))',
+    ] : [
+      'radial-gradient(circle, rgba(0, 255, 255, 0.3), rgba(0, 150, 200, 0.1))',
+      'radial-gradient(circle, rgba(100, 255, 200, 0.2), rgba(0, 200, 150, 0.1))',
+      'radial-gradient(circle, rgba(150, 200, 255, 0.2), rgba(50, 100, 200, 0.1))',
+      'radial-gradient(circle, rgba(200, 255, 100, 0.2), rgba(100, 200, 50, 0.1))',
+    ];
     
-    particle.className = `absolute rounded-full backdrop-blur-sm border border-white/20`;
-    particle.style.width = `${size}px`;
-    particle.style.height = `${size}px`;
-    particle.style.left = `${Math.random() * width}px`;
-    particle.style.top = `${Math.random() * height}px`;
-    particle.style.background = gradients[Math.floor(Math.random() * gradients.length)];
-    particle.style.boxShadow = isDark 
-      ? `0 0 30px rgba(168, 85, 247, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.1)` 
-      : `0 0 20px rgba(168, 85, 247, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.2)`;
+    plankton.className = `absolute rounded-full`;
+    plankton.style.width = `${size}px`;
+    plankton.style.height = `${size}px`;
+    plankton.style.left = `${Math.random() * width}px`;
+    plankton.style.top = `${Math.random() * height}px`;
+    plankton.style.background = planktonColors[Math.floor(Math.random() * planktonColors.length)];
+    plankton.style.boxShadow = isDark 
+      ? `0 0 ${size * 3}px rgba(0, 255, 255, 0.6), 0 0 ${size * 6}px rgba(0, 255, 255, 0.3)`
+      : `0 0 ${size * 2}px rgba(0, 255, 255, 0.3)`;
+    plankton.style.filter = 'blur(0.3px)';
+    plankton.style.zIndex = '5';
     
-    const duration = Math.random() * 50 + 30; // より長いアニメーション
-    particle.style.animation = `
-      modernFloat ${duration}s infinite ease-in-out,
-      modernPulse ${(Math.random() * 6) + 4}s infinite ease-in-out ${Math.random() * 4}s,
-      modernRotate ${(Math.random() * 20) + 15}s infinite linear
+    const duration = Math.random() * 40 + 20;
+    plankton.style.animation = `
+      planktonFloat ${duration}s infinite ease-in-out,
+      gentleGlow ${(Math.random() * 4) + 3}s infinite ease-in-out ${Math.random() * 2}s,
+      deepSeaSway ${(Math.random() * 8) + 6}s infinite ease-in-out
     `;
-    particle.style.animationDelay = `${Math.random() * 10}s`;
+    plankton.style.animationDelay = `${Math.random() * 15}s`;
     
-    container.appendChild(particle);
+    container.appendChild(plankton);
+  }
+
+  function createBubble(container: HTMLDivElement, width: number, height: number, isDark: boolean) {
+    const bubble = document.createElement('div');
+    const size = Math.random() * 20 + 8; // サイズを大きく
+    
+    bubble.className = `absolute rounded-full border`;
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.left = `${Math.random() * width}px`;
+    bubble.style.top = `${height + 50}px`; // 画面下から開始
+    bubble.style.background = isDark 
+      ? 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(100, 200, 255, 0.15))'
+      : 'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(100, 200, 255, 0.2))';
+    bubble.style.borderColor = isDark 
+      ? 'rgba(100, 200, 255, 0.3)' 
+      : 'rgba(100, 200, 255, 0.2)';
+    bubble.style.backdropFilter = 'blur(1px)';
+    bubble.style.boxShadow = isDark 
+      ? `0 0 ${size * 2}px rgba(100, 200, 255, 0.5), inset 0 0 ${size/2}px rgba(255, 255, 255, 0.3)`
+      : `0 0 ${size}px rgba(100, 200, 255, 0.3), inset 0 0 ${size/2}px rgba(255, 255, 255, 0.2)`;
+    bubble.style.zIndex = '5';
+    
+    const duration = Math.random() * 15 + 10; // 上昇時間
+    bubble.style.animation = `bubbleRise ${duration}s linear infinite`;
+    bubble.style.animationDelay = `${Math.random() * 20}s`;
+    
+    container.appendChild(bubble);
   }
   
   return (
     <div 
       ref={containerRef} 
-      class="fixed inset-0 pointer-events-none z-0 overflow-hidden"
+      class="fixed inset-0 pointer-events-none z-10 overflow-hidden"
     />
   );
 };
 
 /**
- * ModernBackgroundEffect コンポーネント
- * より洗練されたモダンな背景エフェクト
+ * DeepSeaBackgroundEffect コンポーネント
+ * 深海をイメージした背景エフェクト
  */
-const ModernBackgroundEffect: Component<{ darkMode: boolean }> = (props) => {
+const DeepSeaBackgroundEffect: Component<{ darkMode: boolean }> = (props) => {
   return (
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {/* メインのグラデーション背景 */}
+      {/* 深海グラデーション背景 */}
       <div 
         class={`absolute w-full h-full ${
           props.darkMode 
-            ? 'bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-800' 
-            : 'bg-gradient-to-br from-blue-50 via-indigo-50/80 to-purple-100'
+            ? 'deep-sea-gradient' 
+            : 'bg-gradient-to-b from-gray-100 via-blue-50 to-indigo-100'
         }`}
       ></div>
       
+      {/* 深海のパーティクル効果 */}
+      {props.darkMode && (
+        <div 
+          class="absolute w-full h-full deep-sea-particles opacity-60"
+        ></div>
+      )}
+      
       {/* 動的なグラデーションオーバーレイ */}
       <div 
-        class={`absolute w-full h-full opacity-30 ${
+        class={`absolute w-full h-full opacity-20 ${
           props.darkMode 
-            ? 'bg-gradient-to-r from-purple-600/10 via-transparent to-blue-600/10' 
-            : 'bg-gradient-to-r from-purple-300/20 via-transparent to-blue-300/20'
+            ? 'bg-gradient-to-b from-cyan-900/20 via-transparent to-blue-900/30' 
+            : 'bg-gradient-to-b from-blue-300/20 via-transparent to-purple-300/20'
         }`}
         style={{
-          animation: 'gradientShift 20s ease-in-out infinite alternate'
+          animation: 'gradientShift 25s ease-in-out infinite alternate'
         }}
       ></div>
-        {/* メッシュグラデーション効果 */}
-      <div 
-        class="absolute inset-0 opacity-20"
-        style={{
-          "background-image": props.darkMode 
-            ? `radial-gradient(circle at 25% 25%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
-               radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-               radial-gradient(circle at 75% 25%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
-               radial-gradient(circle at 25% 75%, rgba(34, 197, 94, 0.1) 0%, transparent 50%)`
-            : `radial-gradient(circle at 25% 25%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
-               radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-               radial-gradient(circle at 75% 25%, rgba(236, 72, 153, 0.05) 0%, transparent 50%),
-               radial-gradient(circle at 25% 75%, rgba(34, 197, 94, 0.05) 0%, transparent 50%)`
-        }}
-      ></div>
+      
+      {/* 深海の光の屈折効果 */}
+      {props.darkMode && (
+        <div 
+          class="absolute inset-0 opacity-10"
+          style={{
+            "background-image": `
+              radial-gradient(circle at 20% 10%, rgba(0, 255, 255, 0.3) 0%, transparent 40%),
+              radial-gradient(circle at 80% 30%, rgba(100, 200, 255, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 40% 60%, rgba(0, 150, 255, 0.15) 0%, transparent 45%),
+              radial-gradient(circle at 70% 90%, rgba(50, 100, 200, 0.1) 0%, transparent 35%)
+            `,
+            animation: 'deepSeaSway 30s infinite ease-in-out'
+          }}
+        ></div>
+      )}
     </div>
   );
 };
@@ -262,14 +305,14 @@ const ExpandableText: Component<{
 }> = (props) => {
   const [expanded, setExpanded] = createSignal(props.initiallyExpanded || false);
   return (
-    <div class={`glass-card-dark p-8 rounded-3xl relative overflow-hidden ${props.class}`}>
-      <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+    <div class={`glass-card-deep p-8 rounded-3xl relative overflow-hidden ${props.class}`}>
+      <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
       <div class="relative z-10">
         <div 
           class="flex justify-between items-center cursor-pointer group" 
           onClick={() => setExpanded(!expanded())}
         >
-          <h3 class="text-xl font-semibold group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 transition-all duration-300">{props.title}</h3>
+          <h3 class="text-xl font-semibold group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-400 transition-all duration-300">{props.title}</h3>
           <span class="text-2xl transition-transform duration-500" 
             style={{ transform: expanded() ? "rotate(180deg)" : "rotate(0deg)" }}>
             ▼
@@ -697,7 +740,7 @@ const ARHudOverlay: Component = () => {
       </div>
       
       {/* メインHUDパネル - 右上 */}      <div class={`absolute top-4 right-4 transition-all duration-700 ${isMinimized() ? 'transform translate-x-80' : ''}`}>        <div 
-          class="ar-hud-panel p-6 w-80"
+          class="ar-hud-panel card-3d p-6 w-80"
           style={{
             background: 'rgba(0, 20, 40, 0.25)',
             'backdrop-filter': 'blur(25px)',
@@ -782,7 +825,7 @@ const ARHudOverlay: Component = () => {
       <Show when={selectedTakoIndex()}>
         <div class="absolute top-4 right-96 w-80">
           <div 
-            class="ar-hud-panel hologram-effect quantum-effect p-5"
+            class="ar-hud-panel card-3d hologram-effect quantum-effect p-5"
             style={{
               background: 'rgba(10, 25, 50, 0.3)',
               'backdrop-filter': 'blur(25px)',
@@ -865,7 +908,7 @@ const ARHudOverlay: Component = () => {
       </Show>
       {/* システム情報オーバーレイ - 左上 */}
       <div class="absolute top-20 left-4">
-        <div class="ar-hud-panel hologram-effect matrix-stream p-4 w-64">
+        <div class="ar-hud-panel card-3d hologram-effect matrix-stream p-4 w-64">
           <div class="flex items-center mb-3">
             <span class="text-lg mr-2 pulse-wave">{systemInfoSection.icon}</span>
             <span class="text-cyan-400 text-sm font-mono neon-glow typing-effect">SYSTEM_INFO</span>
@@ -883,7 +926,7 @@ const ARHudOverlay: Component = () => {
         </div>
       </div>      {/* ネットワーク情報オーバーレイ - 左中央 */}
       <div class="absolute top-80 left-4">
-        <div class="ar-hud-panel radar-effect energy-field p-4 w-64">
+        <div class="ar-hud-panel card-3d radar-effect energy-field p-4 w-64">
           <div class="flex items-center mb-3">
             <span class="text-lg mr-2 pulse-wave">{networkInfoSection.icon}</span>
             <span class="text-cyan-400 text-sm font-mono neon-glow">NETWORK_INFO</span>
@@ -901,7 +944,7 @@ const ARHudOverlay: Component = () => {
         </div>
       </div>      {/* パフォーマンス情報オーバーレイ - 右下（スクロールプログレスの上） */}
       <div class="absolute bottom-32 right-4">
-        <div class="ar-hud-panel quantum-effect magnetic-field p-4 w-48">
+        <div class="ar-hud-panel card-3d quantum-effect magnetic-field p-4 w-48">
           <div class="flex items-center mb-3">
             <span class="text-lg mr-2 pulse-wave">{performanceSection.icon}</span>
             <span class="text-cyan-400 text-xs font-mono neon-glow">PERFORMANCE</span>
@@ -921,7 +964,7 @@ const ARHudOverlay: Component = () => {
 
       {/* サイドパネル - 左端 */}      {/* ボトムバー */}
       <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-        <div class="ar-hud-panel hologram-effect energy-field px-8 py-3">
+        <div class="ar-hud-panel card-3d hologram-effect energy-field px-8 py-3">
           <div class="flex items-center space-x-6 text-sm">
             <div class="flex items-center space-x-2">
               <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse pulse-wave"></div>
@@ -943,7 +986,7 @@ const ARHudOverlay: Component = () => {
 
       {/* ミニマップ/プログレス - 右下 */}
       <div class="absolute bottom-4 right-4">
-        <div class="ar-hud-panel quantum-effect magnetic-field p-4 w-48">
+        <div class="ar-hud-panel card-3d quantum-effect magnetic-field p-4 w-48">
           <div class="text-center mb-3">
             <span class="text-cyan-400 text-xs font-mono neon-glow typing-effect">SCROLL_MATRIX</span>
           </div>
@@ -1025,23 +1068,27 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
     // 必要に応じてここに追加できます
   ];
 
-  return (    <div class="min-h-screen relative overflow-hidden transition-all duration-700 bg-gradient-to-br from-slate-900 via-gray-900 to-black">      {/* モダンなアニメーション要素 */}
-      <ModernParticles darkMode={true} />
-      <ModernBackgroundEffect darkMode={true} />      {/* TakoAnimationコンポーネントを<For>でレンダリング */}
+  return (    <div class="min-h-screen relative overflow-hidden transition-all duration-700 deep-sea-gradient">      {/* 深海パーティクルエフェクト */}
+      <DeepSeaParticles darkMode={true} />
+      <DeepSeaBackgroundEffect darkMode={true} />
+      {/* 動くパーティクル */}
+      <AnimatedDeepSeaParticles />
+      
+      {/* TakoAnimationコンポーネントを<For>でレンダリング */}
       <For each={takoInstances()}>
         {(tako) => <TakoAnimation id={tako.id} onClick={addTako} />}
       </For>
 
       {/* AR HUDオーバーレイ */}
-      <ARHudOverlay />      {/* 美しいガラスエフェクトのたこ追加ボタン */}
+      <ARHudOverlay />      {/* 深海テーマのたこ追加ボタン */}
       <button
         onClick={addTako}
-        class="fixed bottom-4 left-4 z-50 glass-card-dark p-4 rounded-3xl transition-all duration-500 hover:scale-110 hover:rotate-12 text-white overflow-hidden group shadow-2xl hologram-effect card-3d sound-wave-effect"
+        class="fixed bottom-4 left-4 z-50 glass-card-deep p-4 rounded-3xl transition-all duration-500 hover:scale-110 hover:rotate-12 text-white overflow-hidden group shadow-2xl hologram-effect card-3d sound-wave-effect"
         title="たこを増やす"
       >
-        <div class="absolute inset-0 bg-gradient-to-br from-pink-500/40 to-purple-500/40 rounded-3xl group-hover:from-pink-400/50 group-hover:to-purple-400/50 transition-all duration-300 energy-field"></div>        <div class="absolute inset-0 bg-gradient-to-tr from-cyan-400/20 to-blue-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 quantum-effect"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/40 to-blue-500/40 rounded-3xl group-hover:from-cyan-400/50 group-hover:to-blue-400/50 transition-all duration-300 energy-field"></div>        <div class="absolute inset-0 bg-gradient-to-tr from-cyan-300/20 to-teal-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 quantum-effect"></div>
         <span class="text-2xl relative z-10 filter drop-shadow-lg group-hover:scale-110 transition-transform duration-300 neon-glow pulse-wave">🐙+</span>
-        <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:translate-x-full transition-all duration-700 transform -translate-x-full"></div>
+        <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-cyan-300/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:translate-x-full transition-all duration-700 transform -translate-x-full"></div>
       </button>
 
       {/* 軽量化された背景エフェクト */}
@@ -1379,7 +1426,7 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                   </div>
                 </ExpandableText>              </div>
             </section>
-          </FadeIn>
+            </FadeIn>
           {/* Timeline - 新セクション */}          <FadeIn>
             <section>
               <div class="relative mb-12">
@@ -1608,7 +1655,7 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
                     <div class="luxury-button text-sm cursor-not-allowed opacity-50">
                       詳細は近日公開 🔒
                     </div>
-                  </div>
+                </div>
                 </div>
               </div>
               
@@ -1775,3 +1822,159 @@ const App: Component = () => {  // アイコンクリック時のアニメーシ
 };
 
 export default App;
+
+/**
+ * AnimatedDeepSeaParticles コンポーネント
+ * 動きのある深海パーティクルシステム
+ */
+const AnimatedDeepSeaParticles: Component = () => {
+  return (
+    <div class="fixed inset-0 pointer-events-none" style={{"z-index": "10"}}>
+      {/* プランクトン風パーティクル */}
+      <div 
+        class="absolute bg-cyan-400 rounded-full"
+        style={{
+          width: "8px",
+          height: "8px",
+          top: "20%", 
+          left: "10%",
+          "box-shadow": "0 0 20px rgba(0, 255, 255, 0.8)",
+          animation: "planktonFloat 25s infinite ease-in-out, gentleGlow 3s infinite ease-in-out",
+          opacity: "0.7"
+        }}
+      ></div>
+      <div 
+        class="absolute bg-teal-300 rounded-full"
+        style={{
+          width: "6px",
+          height: "6px",
+          top: "40%", 
+          left: "80%",
+          "box-shadow": "0 0 15px rgba(100, 255, 200, 0.6)",
+          animation: "planktonFloat 30s infinite ease-in-out 5s, gentleGlow 2.5s infinite ease-in-out 1s",
+          opacity: "0.6"
+        }}
+      ></div>
+      <div 
+        class="absolute bg-blue-300 rounded-full"
+        style={{
+          width: "10px",
+          height: "10px",
+          top: "70%", 
+          left: "30%",
+          "box-shadow": "0 0 25px rgba(150, 200, 255, 0.7)",
+          animation: "planktonFloat 35s infinite ease-in-out 10s, gentleGlow 4s infinite ease-in-out 2s",
+          opacity: "0.8"
+        }}
+      ></div>
+      <div 
+        class="absolute bg-cyan-200 rounded-full"
+        style={{
+          width: "7px",
+          height: "7px",
+          top: "15%", 
+          left: "60%",
+          "box-shadow": "0 0 18px rgba(200, 255, 255, 0.5)",
+          animation: "planktonFloat 20s infinite ease-in-out 3s, gentleGlow 2s infinite ease-in-out 0.5s",
+          opacity: "0.5"
+        }}
+      ></div>
+      <div 
+        class="absolute bg-teal-400 rounded-full"
+        style={{
+          width: "12px",
+          height: "12px",
+          top: "85%", 
+          left: "70%",
+          "box-shadow": "0 0 30px rgba(0, 200, 150, 0.9)",
+          animation: "planktonFloat 40s infinite ease-in-out 15s, gentleGlow 3.5s infinite ease-in-out 1.5s",
+          opacity: "0.9"
+        }}
+      ></div>
+
+      {/* 気泡パーティクル */}
+      <div 
+        class="absolute rounded-full border border-cyan-300/30"
+        style={{
+          width: "15px",
+          height: "15px",
+          left: "25%",
+          background: "radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(100, 200, 255, 0.1))",
+          "box-shadow": "0 0 20px rgba(100, 200, 255, 0.4), inset 0 0 8px rgba(255, 255, 255, 0.2)",
+          animation: "bubbleRise 12s linear infinite",
+          opacity: "0.6"
+        }}
+      ></div>
+      <div 
+        class="absolute rounded-full border border-blue-300/20"
+        style={{
+          width: "10px",
+          height: "10px",
+          left: "60%",
+          background: "radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), rgba(150, 220, 255, 0.1))",
+          "box-shadow": "0 0 15px rgba(150, 220, 255, 0.3), inset 0 0 5px rgba(255, 255, 255, 0.15)",
+          animation: "bubbleRise 15s linear infinite 3s",
+          opacity: "0.5"
+        }}
+      ></div>
+      <div 
+        class="absolute rounded-full border border-teal-300/25"
+        style={{
+          width: "20px",
+          height: "20px",
+          left: "85%",
+          background: "radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.25), rgba(100, 255, 200, 0.1))",
+          "box-shadow": "0 0 25px rgba(100, 255, 200, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.25)",
+          animation: "bubbleRise 18s linear infinite 7s",
+          opacity: "0.7"
+        }}
+      ></div>
+      <div 
+        class="absolute rounded-full border border-cyan-200/20"
+        style={{
+          width: "8px",
+          height: "8px",
+          left: "45%",
+          background: "radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), rgba(200, 255, 255, 0.08))",
+          "box-shadow": "0 0 12px rgba(200, 255, 255, 0.3), inset 0 0 4px rgba(255, 255, 255, 0.1)",
+          animation: "bubbleRise 10s linear infinite 2s",
+          opacity: "0.4"
+        }}
+      ></div>
+      <div 
+        class="absolute rounded-full border border-blue-200/15"
+        style={{
+          width: "12px",
+          height: "12px",
+          left: "15%",
+          background: "radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.18), rgba(180, 220, 255, 0.08))",
+          "box-shadow": "0 0 18px rgba(180, 220, 255, 0.35), inset 0 0 6px rgba(255, 255, 255, 0.12)",
+          animation: "bubbleRise 14s linear infinite 5s",
+          opacity: "0.45"
+        }}
+      ></div>
+
+      {/* ゆらめく光の筋 */}
+      <div 
+        class="absolute w-1 bg-gradient-to-b from-transparent via-cyan-300/20 to-transparent"
+        style={{
+          height: "200px",
+          left: "35%",
+          top: "10%",
+          animation: "deepSeaSway 8s infinite ease-in-out",
+          opacity: "0.3"
+        }}
+      ></div>
+      <div 
+        class="absolute w-1 bg-gradient-to-b from-transparent via-blue-300/15 to-transparent"
+        style={{
+          height: "150px",
+          left: "75%",
+          top: "30%",
+          animation: "deepSeaSway 12s infinite ease-in-out 3s",
+          opacity: "0.25"
+        }}
+      ></div>
+    </div>
+  );
+};
