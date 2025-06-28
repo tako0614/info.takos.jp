@@ -221,6 +221,11 @@
       inset 0 2px 1px 0 rgba(100, 200, 255, 0.1),
       inset 0 -2px 1px 0 rgba(0, 255, 255, 0.05);
   }
+
+  /* 背景を歪ませるガラスの屈折効果 */
+  .glass-refraction {
+    filter: url(#glass-distortion);
+  }
 }
 
 @keyframes fadeIn {
