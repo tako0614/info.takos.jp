@@ -6,6 +6,7 @@
 .ar-hud-panel {
   background: rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(22px) saturate(120%);
+  -webkit-backdrop-filter: blur(22px) saturate(120%);
   border: 1px solid rgba(0, 255, 255, 0.2);
   border-radius: 12px;
   box-shadow: 
@@ -45,6 +46,9 @@
     transparent 50%
   );
   pointer-events: none;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  transform: scale(1.02);
 }
 
 .ar-hud-section {
