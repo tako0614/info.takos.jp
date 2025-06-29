@@ -246,7 +246,7 @@ export const MarineLifeAnimation: Component<MarineLifeAnimationProps> = (props) 
       alpha: true,
       antialias: true 
     });
-    renderer.physicallyCorrectLights = true;
+    (renderer as any).physicallyCorrectLights = true;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.setSize(window.innerWidth, window.innerHeight);
