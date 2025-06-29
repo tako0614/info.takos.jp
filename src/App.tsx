@@ -3,6 +3,8 @@ import { FadeIn } from './components/ui/FadeIn';
 import { ExpandableText } from './components/ui/ExpandableText';
 import { DeepSeaParticles } from './components/animations/DeepSeaParticles';
 import { DeepSeaBackgroundEffect } from './components/animations/DeepSeaBackgroundEffect';
+import { ScrollDarkeningEffect } from './components/animations/ScrollDarkeningEffect';
+import { MarineLifeAnimation } from './components/animations/MarineLifeAnimation';
 import { TakoAnimation } from './components/animations/TakoAnimation';
 import { AnimatedDeepSeaParticles } from './components/animations/AnimatedDeepSeaParticles';
 import { InteractiveQA } from './components/InteractiveQA';
@@ -28,7 +30,13 @@ const App: Component = () => {
   };
 
   return (
-    <div class="min-h-screen relative overflow-hidden transition-all duration-700 deep-sea-gradient">
+    <div class="min-h-screen relative overflow-hidden transition-all duration-700 enhanced-deep-sea-gradient">
+      {/* Three.js 海洋生物アニメーション */}
+      <MarineLifeAnimation darkMode={true} />
+      
+      {/* スクロール暗化エフェクト */}
+      <ScrollDarkeningEffect />
+      
       {/* 深海パーティクルエフェクト */}
       <DeepSeaParticles darkMode={true} />
       <DeepSeaBackgroundEffect darkMode={true} />
@@ -46,7 +54,7 @@ const App: Component = () => {
       {/* 深海テーマのたこ追加ボタン */}
       <button
         onClick={addTako}
-        class="fixed bottom-4 left-4 z-50 glass-card-deep p-4 rounded-3xl transition-all duration-500 hover:scale-110 hover:rotate-12 text-white overflow-hidden group shadow-2xl hologram-effect card-3d sound-wave-effect"
+        class="fixed bottom-4 left-4 z-50 glass-card-dark p-4 rounded-3xl transition-all duration-500 hover:scale-110 hover:rotate-12 text-white overflow-hidden group shadow-2xl hologram-effect card-3d sound-wave-effect"
         title="たこを増やす"
       >
         <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/40 to-blue-500/40 rounded-3xl group-hover:from-cyan-400/50 group-hover:to-blue-400/50 transition-all duration-300 energy-field"></div>
@@ -73,7 +81,7 @@ const App: Component = () => {
         <div class="absolute top-1/3 -right-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div class="relative z-10 text-white min-h-screen p-8 backdrop-blur-sm">
+      <div class="relative z-10 text-white min-h-[500vh] p-8 backdrop-blur-sm">
         {/* ヘッダーセクション */}
         <FadeIn class="text-center py-16">
           {/* より高度なプロフィール画像 */}
@@ -152,7 +160,7 @@ const App: Component = () => {
 
           {/* 強化されたクォートセクション */}
           <div 
-            class="mt-8 p-8 rounded-3xl glass-effect-dark cursor-pointer transition-all duration-700 hover:scale-105 hover:-translate-y-2 max-w-lg mx-auto relative overflow-hidden group hologram-effect card-3d sound-wave-effect"
+            class="mt-8 p-8 rounded-3xl glass-card-dark cursor-pointer transition-all duration-700 hover:scale-105 hover:-translate-y-2 max-w-lg mx-auto relative overflow-hidden group hologram-effect card-3d sound-wave-effect"
             onClick={nextQuote}
           >
             <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-pink-500/10 to-cyan-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
