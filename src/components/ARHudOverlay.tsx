@@ -354,8 +354,8 @@ export const ARHudOverlay: Component<ARHudOverlayProps> = () => {
         </div>
       </div>
 
-      {/* パフォーマンス情報オーバーレイ - 右下（スクロールプログレスの上） */}
-      <div class="absolute bottom-32 right-4">
+      {/* パフォーマンス情報オーバーレイ - 右下（深海ソナーの上） */}
+      <div class="absolute bottom-48 right-4">
         <div class="ar-hud-panel card-3d quantum-effect magnetic-field p-4 w-48">
           <div class="flex items-center mb-3">
             <span class="text-lg mr-2 pulse-wave">{performanceSection.icon}</span>
@@ -396,23 +396,58 @@ export const ARHudOverlay: Component<ARHudOverlayProps> = () => {
         </div>
       </div>
 
-      {/* ミニマップ/プログレス - 右下 */}
+      {/* 深海探索モニター - 右下 */}
       <div class="absolute bottom-4 right-4">
-        <div class="ar-hud-panel card-3d quantum-effect magnetic-field p-4 w-48">
+        <div class="ar-hud-panel card-3d quantum-effect magnetic-field p-4 w-52">
           <div class="text-center mb-3">
-            <span class="text-cyan-400 text-xs font-mono neon-glow typing-effect">SCROLL_MATRIX</span>
+            <span class="text-cyan-400 text-xs font-mono neon-glow typing-effect">DEEP_SEA_SONAR</span>
           </div>
-          <div class="w-full bg-gray-700/50 rounded-full h-2 mb-3 hud-progress">
-            <div class="bg-gradient-to-r from-cyan-400 to-purple-400 h-2 rounded-full transition-all duration-300" 
-                 style={{ width: `${scrollProgress()}%` }}></div>
+          
+          {/* 深度メーター */}
+          <div class="w-full bg-gray-800/70 rounded-full h-3 mb-3 hud-progress relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-600/30 via-blue-400/30 to-gray-600/30"></div>
+            <div 
+              class="bg-gradient-to-r from-blue-400 via-cyan-400 to-gray-300 h-3 rounded-full transition-all duration-500 relative z-10" 
+              style={{ width: `${scrollProgress()}%` }}
+            >
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
+            </div>
           </div>
-          <div class="grid grid-cols-3 gap-1 text-xs text-gray-400 font-mono">
-            <div class={`text-center sound-wave-effect ${scrollProgress() < 33 ? 'text-cyan-400 neon-glow' : ''}`}>TOP</div>
-            <div class={`text-center sound-wave-effect ${scrollProgress() >= 33 && scrollProgress() < 66 ? 'text-cyan-400 neon-glow' : ''}`}>MID</div>
-            <div class={`text-center sound-wave-effect ${scrollProgress() >= 66 ? 'text-cyan-400 neon-glow' : ''}`}>END</div>
+          
+          {/* 海洋層インジケーター */}
+          <div class="grid grid-cols-5 gap-1 text-xs text-gray-400 font-mono mb-2">
+            <div class={`text-center sound-wave-effect transition-all duration-300 ${scrollProgress() < 20 ? 'text-blue-300 neon-glow scale-110' : ''}`}>
+              🌊<br/>海面
+            </div>
+            <div class={`text-center sound-wave-effect transition-all duration-300 ${scrollProgress() >= 20 && scrollProgress() < 40 ? 'text-blue-400 neon-glow scale-110' : ''}`}>
+              🌀<br/>薄明
+            </div>
+            <div class={`text-center sound-wave-effect transition-all duration-300 ${scrollProgress() >= 40 && scrollProgress() < 60 ? 'text-indigo-400 neon-glow scale-110' : ''}`}>
+              🌑<br/>漸深
+            </div>
+            <div class={`text-center sound-wave-effect transition-all duration-300 ${scrollProgress() >= 60 && scrollProgress() < 80 ? 'text-purple-400 neon-glow scale-110' : ''}`}>
+              🔥<br/>深海
+            </div>
+            <div class={`text-center sound-wave-effect transition-all duration-300 ${scrollProgress() >= 80 ? 'text-gray-300 neon-glow scale-110' : ''}`}>
+              🏔️<br/>超深
+            </div>
           </div>
-          <div class="text-center mt-2 text-xs text-purple-400 font-mono neon-glow">
-            {Math.round(scrollProgress())}% COMPLETE
+          
+          {/* 現在深度表示 */}
+          <div class="text-center mt-2 space-y-1">
+            <div class="text-xs text-cyan-400 font-mono neon-glow">
+              深度: {Math.round(scrollProgress() * 110)}m
+            </div>
+            <div class="text-xs text-purple-400 font-mono neon-glow">
+              {(() => {
+                const progress = scrollProgress();
+                if (progress < 20) return "SURFACE ZONE";
+                if (progress < 40) return "TWILIGHT ZONE";
+                if (progress < 60) return "MIDNIGHT ZONE";
+                if (progress < 80) return "ABYSSAL ZONE";
+                return "HADAL ZONE";
+              })()}
+            </div>
           </div>
         </div>
       </div>

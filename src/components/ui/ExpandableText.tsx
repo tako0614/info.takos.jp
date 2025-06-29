@@ -15,7 +15,7 @@ export const ExpandableText: Component<ExpandableTextProps> = (props) => {
   const [expanded, setExpanded] = createSignal(props.initiallyExpanded || false);
 
   return (
-    <div class={`glass-card-deep p-8 rounded-3xl relative overflow-hidden ${props.class}`}>
+    <div class={`glass-card-dark p-8 rounded-3xl relative overflow-hidden ${props.class}`}>
       <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
       <div class="relative z-10">
         <div 

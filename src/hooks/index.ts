@@ -1,5 +1,7 @@
 import { createSignal, onMount, onCleanup } from 'solid-js';
 
+export { useScrollDarkening } from './useScrollDarkening';
+
 export function useTime() {
   const [currentTime, setCurrentTime] = createSignal(new Date());
 
