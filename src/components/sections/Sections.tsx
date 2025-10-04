@@ -8,17 +8,12 @@ export const AboutSection: Component = () => (
     <section>
       <div class="relative mb-12">
         <div class="flex items-center space-x-4">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-2xl shadow-purple-500/30 hologram-effect">
-            <span class="text-3xl">👤</span>
-          </div>
           <div>
             <h2 class="text-4xl font-bold neon-glow">
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-300">About Me</span>
             </h2>
-            <div class="text-sm text-gray-400 font-mono mt-2">自己紹介 | PROFILE.exe</div>
           </div>
         </div>
-        <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-purple-500/30 rounded-2xl animate-pulse"></div>
         <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-pink-500/20 rounded-xl"></div>
       </div>
       
@@ -62,17 +57,12 @@ export const SkillsSection: Component = () => (
     <section>
       <div class="relative mb-12">
         <div class="flex items-center space-x-4">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center shadow-2xl shadow-yellow-500/30 hologram-effect">
-            <span class="text-3xl">🛠️</span>
-          </div>
           <div>
             <h2 class="text-4xl font-bold neon-glow">
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-300">Skills</span>
             </h2>
-            <div class="text-sm text-gray-400 font-mono mt-2">技術スタック | SKILLS.json</div>
           </div>
         </div>
-        <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-yellow-500/30 rounded-2xl animate-pulse"></div>
         <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-orange-500/20 rounded-xl"></div>
       </div>
       
@@ -121,17 +111,12 @@ export const TimelineSection: Component = () => (
     <section>
       <div class="relative mb-12">
         <div class="flex items-center space-x-4">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center shadow-2xl shadow-green-500/30 hologram-effect">
-            <span class="text-3xl">⏱️</span>
-          </div>
           <div>
             <h2 class="text-4xl font-bold neon-glow">
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-teal-400 to-green-300">Timeline</span>
             </h2>
-            <div class="text-sm text-gray-400 font-mono mt-2">人生の軌跡 | TIMELINE.log</div>
           </div>
         </div>
-        <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-green-500/30 rounded-2xl animate-pulse"></div>
         <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-teal-500/20 rounded-xl"></div>
       </div>
       
