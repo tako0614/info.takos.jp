@@ -221,17 +221,12 @@ const App: Component = () => {
             <section>
               <div class="relative mb-12">
                 <div class="flex items-center space-x-4">
-                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-2xl shadow-blue-500/30 hologram-effect">
-                    <span class="text-3xl">📊</span>
-                  </div>
                   <div>
                     <h2 class="text-4xl font-bold neon-glow">
                       <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-300">Status</span>
                     </h2>
-                    <div class="text-sm text-gray-400 font-mono mt-2">現在の状況 | STATUS.dat</div>
                   </div>
                 </div>
-                <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-blue-500/30 rounded-2xl animate-pulse"></div>
                 <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-cyan-500/20 rounded-xl"></div>
               </div>
 
@@ -365,17 +360,12 @@ const App: Component = () => {
             <section>
               <div class="relative mb-12">
                 <div class="flex items-center space-x-4">
-                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-red-500 flex items-center justify-center shadow-2xl shadow-pink-500/30 hologram-effect">
-                    <span class="text-3xl">🚀</span>
-                  </div>
                   <div>
                     <h2 class="text-4xl font-bold neon-glow">
                       <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-red-400 to-pink-300">Projects</span>
                     </h2>
-                    <div class="text-sm text-gray-400 font-mono mt-2">開発プロジェクト | PROJECTS.md</div>
                   </div>
                 </div>
-                <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-pink-500/30 rounded-2xl animate-pulse"></div>
                 <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-red-500/20 rounded-xl"></div>
               </div>
 
@@ -502,17 +492,12 @@ const App: Component = () => {
             <section>
               <div class="relative mb-12">
                 <div class="flex items-center space-x-4">
-                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center shadow-2xl shadow-cyan-500/30 hologram-effect">
-                    <span class="text-3xl">🔗</span>
-                  </div>
                   <div>
                     <h2 class="text-4xl font-bold neon-glow">
                       <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300">相互リンク</span>
                     </h2>
-                    <div class="text-sm text-gray-400 font-mono mt-2">友人・仲間 | LINKS.cfg</div>
                   </div>
                 </div>
-                <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-cyan-500/30 rounded-2xl animate-pulse"></div>
                 <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-blue-500/20 rounded-xl"></div>
               </div>
               
