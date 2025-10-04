@@ -1,14 +1,9 @@
 import { Component, createSignal, For } from 'solid-js';
 import { FadeIn } from './components/ui/FadeIn';
 import { ExpandableText } from './components/ui/ExpandableText';
-import { DeepSeaParticles } from './components/animations/DeepSeaParticles';
-import { DeepSeaBackgroundEffect } from './components/animations/DeepSeaBackgroundEffect';
 import { ScrollDarkeningEffect } from './components/animations/ScrollDarkeningEffect';
-import { MarineLifeAnimation } from './components/animations/MarineLifeAnimation';
 import { TakoAnimation } from './components/animations/TakoAnimation';
-import { AnimatedDeepSeaParticles } from './components/animations/AnimatedDeepSeaParticles';
 import { InteractiveQA } from './components/InteractiveQA';
-import { ARHudOverlay } from './components/ARHudOverlay';
 import { AboutSection, SkillsSection, TimelineSection } from './components/sections/Sections';
 import { quotes, mutualLinks } from './data/staticData';
 import type { TakoInstance } from './types';
@@ -31,25 +26,11 @@ const App: Component = () => {
 
   return (
     <div class="min-h-screen relative overflow-hidden transition-all duration-700 enhanced-deep-sea-gradient">
-      {/* Three.js 海洋生物アニメーション */}
-      <MarineLifeAnimation darkMode={true} />
-      
       {/* スクロール暗化エフェクト */}
       <ScrollDarkeningEffect />
-      
-      {/* 深海パーティクルエフェクト */}
-      <DeepSeaParticles darkMode={true} />
-      <DeepSeaBackgroundEffect darkMode={true} />
-      {/* 動くパーティクル */}
-      <AnimatedDeepSeaParticles />
-      
-      {/* TakoAnimationコンポーネントを<For>でレンダリング */}
       <For each={takoInstances()}>
         {(tako) => <TakoAnimation id={tako.id} onClick={addTako} />}
       </For>
-
-      {/* AR HUDオーバーレイ */}
-      <ARHudOverlay />
 
       {/* 深海テーマのたこ追加ボタン */}
       <button
