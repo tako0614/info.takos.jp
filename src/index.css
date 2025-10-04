@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* スクロールに応じて暗くなる背景エフェクト */
 .scroll-darkening-background {
