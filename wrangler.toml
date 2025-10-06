@@ -1,0 +1,12 @@
+name = "info-takos-jp"
+main = "worker/index.ts"
+compatibility_date = "2024-01-01"
+
+# Assets設定 (ビルド後の静的ファイル)
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+
+# 環境変数（必要に応じて）
+[vars]
+ZENN_USERNAME = "takoserver"
