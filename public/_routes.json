@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "include": [
+    "/api/zenn*"
+  ],
+  "exclude": [
+    "/*"
+  ]
+}

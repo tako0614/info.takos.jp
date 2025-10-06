@@ -9,4 +9,3 @@ export * from './components/animations/DeepSeaBackgroundEffect';
 export * from './components/animations/TakoAnimation';
 export * from './components/animations/AnimatedDeepSeaParticles';
 export * from './components/InteractiveQA';
-export * from './components/ARHudOverlay';

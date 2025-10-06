@@ -13,11 +13,8 @@ export async function fetchZennArticles(
   order: 'latest' | 'liked' = 'latest'
 ): Promise<DisplayArticle[]> {
   try {
-    // 開発環境ではViteプロキシを使用、本番環境では直接APIを叩く
-    const isDev = import.meta.env.DEV;
-    const url = isDev 
-      ? `/api/zenn?username=${USERNAME}&order=${order}&page=${page}`
-      : `https://zenn.dev/api/articles?username=${USERNAME}&order=${order}&page=${page}`;
+    // 開発環境ではViteプロキシ、本番環境ではWorkers APIを使用
+    const url = `/api/zenn?username=${USERNAME}&order=${order}&page=${page}`;
     
     const response = await fetch(url);
     
