@@ -5,7 +5,7 @@ import { GitHubIcon, XLogo, MailIcon, ChatIcon } from './components/ui/Icons';
 import { ScrollDarkeningEffect } from './components/animations/ScrollDarkeningEffect';
 import { TakoAnimation } from './components/animations/TakoAnimation';
 import { InteractiveQA } from './components/InteractiveQA';
-import { AboutSection, SkillsSection, TimelineSection } from './components/sections/Sections';
+import { AboutSection, SkillsSection, TimelineSection, ArticlesSection } from './components/sections/Sections';
 import { mutualLinks } from './data/staticData';
 import type { TakoInstance } from './types';
 
@@ -323,6 +323,9 @@ const App: Component = () => {
           {/* Skills */}
           <SkillsSection />
 
+          {/* Articles - Zenn記事 */}
+          <ArticlesSection />
+
           {/* Projects */}
           <FadeIn>
             <section>
@@ -353,40 +356,9 @@ const App: Component = () => {
                       </div>
                     </div>
                     
-                    {/* ターミナル風プロジェクト情報 */}
-                    <div class="terminal-display mb-6 text-xs">
-                      <div class="text-green-400">$ git log --oneline --graph</div>
-                      <div class="text-gray-300 mt-1">
-                        * a7f2d3e feat: distributed chat protocol<br/>
-                        * 8c1a9f4 refactor: encryption layer<br/>
-                        * 2b5e7a1 init: project foundation
-                      </div>
-                      <div class="terminal-cursor"></div>
-                    </div>
-                    
                     <p class={`text-gray-300 mb-6 leading-relaxed luxury-paragraph`}>
                       <span class="text-purple-400 font-medium">分散型チャットSNS</span>。Matrixのような<span class="text-cyan-400">分散型・暗号化機能</span>と、LINEのような<span class="text-pink-400">直感的UI/UX</span>の融合を目指しています。
                     </p>
-                    
-                    {/* 技術スタック */}
-                    <div class="mb-6">
-                      <h4 class="text-sm font-mono text-cyan-400 mb-3">TECH_STACK:</h4>
-                      <div class="flex flex-wrap gap-2">
-                        <span class={`px-3 py-1 rounded-full text-xs luxury-button border border-purple-500/30`}>Deno</span>
-                        <span class={`px-3 py-1 rounded-full text-xs luxury-button border border-blue-500/30`}>SolidJS</span>
-                        <span class={`px-3 py-1 rounded-full text-xs luxury-button border border-green-500/30`}>E2E暗号化</span>
-                      </div>
-                    </div>
-                    
-                    {/* プログレスバー */}
-                    <div class="mb-6">
-                      <div class="flex justify-between items-center mb-2">
-                        <span class="text-sm font-mono text-gray-400">開発進捗</span>
-                        <span class="text-sm font-mono text-purple-400">67%</span>
-                      </div>
-                      <div class="data-bar" style="--progress: 67%"></div>
-                    </div>
-                    
                     <div class="flex justify-between items-center">
                       <a href="https://github.com/tako0614/takos" class={`luxury-button text-sm`}>
                         リポジトリを見る →
@@ -397,50 +369,7 @@ const App: Component = () => {
                     </div>
                   </div>
                 </div>
-                
-                {/* 将来のプロジェクト用のプレースホルダー */}
-                <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden group neon-border liquid-effect`}>
-                  <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div class="relative z-10">
-                    <div class="flex items-center mb-6">
-                      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center mr-4 shadow-xl group-hover:scale-110 transition-transform duration-300 pulse-wave">
-                        <span class="text-3xl neon-glow">🔮</span>
-                      </div>
-                      <div>
-                        <h3 class="text-2xl font-bold neon-glow">Next Project</h3>
-                        <div class="status-indicator mt-2">
-                          <span class="text-yellow-400">PLANNING</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div class="terminal-display mb-6 text-xs">
-                      <div class="text-green-400">$ ideate --next-innovation</div>
-                      <div class="text-gray-300 mt-1">
-                        &gt; Analyzing market gaps...<br/>
-                        &gt; Evaluating tech stack options...<br/>
-                        &gt; Defining target audience...
-                      </div>
-                      <div class="terminal-cursor"></div>
-                    </div>
-                    
-                    <p class={`text-gray-300 mb-6 leading-relaxed luxury-paragraph`}>
-                      次世代プロジェクトを構想中。<span class="text-cyan-400 font-medium">AI</span>、<span class="text-blue-400 font-medium">ブロックチェーン</span>、<span class="text-purple-400 font-medium">量子コンピューティング</span>を統合した革新的なソリューションを目指しています。
-                    </p>
-                    
-                    <div class="mb-6">
-                      <div class="flex justify-between items-center mb-2">
-                        <span class="text-sm font-mono text-gray-400">企画進捗</span>
-                        <span class="text-sm font-mono text-cyan-400">23%</span>
-                      </div>
-                      <div class="data-bar" style="--progress: 23%"></div>
-                    </div>
-                    
-                    <div class="luxury-button text-sm cursor-not-allowed opacity-50">
-                      詳細は近日公開 🔒
-                    </div>
-                  </div>
-                </div>
+
               </div>
               
               <div class="mt-8">
