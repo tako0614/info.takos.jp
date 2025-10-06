@@ -122,15 +122,6 @@ const App: Component = () => {
             <span class="luxury-mono text-cyan-400">IDENTITY:</span> 
             <span class="gradient-text-luxury luxury-text-title">Tomiyama Shota</span>
           </div>
-          
-          <div class="text-center mb-6">
-            <p class="luxury-paragraph text-lg">
-              <span class="text-purple-400 font-medium">次世代デジタル・アーキテクト</span> × <span class="text-cyan-400 font-medium">革新的テクノロジスト</span>
-            </p>
-            <p class="luxury-caption mt-2">
-              DEVELOPING THE FUTURE • CREATING TOMORROW
-            </p>
-          </div>
         
           {/* 強化されたソーシャルリンク */}
           <div class="flex justify-center mt-10 space-x-6">
