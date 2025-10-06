@@ -18,19 +18,15 @@ export const GitHubIcon: Component<IconProps> = (props) => (
 export const XLogo: Component<IconProps> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.5"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    viewBox="0 0 300 271"
+    width="300"
+    height="271"
+    fill="currentColor"
     aria-hidden={props.title ? undefined : true}
     {...props}
   >
     {props.title ? <title>{props.title}</title> : null}
-    {/* Two stylized diagonal strokes to resemble the modern X logo */}
-    <path d="M18.5 5.5c-1.6 2.6-6.6 7.2-8 8.4-1.4 1.2-3.9 3.6-5 5" />
-    <path d="M5.5 5.5c1.6 2.6 6.6 7.2 8 8.4 1.4 1.2 3.9 3.6 5 5" transform="translate(0 0) scale(1 -1) translate(0 -24)" />
+    <path d="m236 0h46l-101 115 118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123-113-148h94.9l65.5 86.6zm-16.1 244h25.5l-165-218h-27.4z" />
   </svg>
 );
 
