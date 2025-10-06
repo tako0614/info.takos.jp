@@ -44,7 +44,7 @@ export const AboutSection: Component = () => (
             
             <p>テクノロジーの発展は、創造性と自由という人間の本質的精神を具現化する究極の手段であると認識しています。<span class="gradient-text-luxury">コードを書く行為</span>は私にとって新たな価値創造そのものであり、開発プロセス自体が芸術的自己表現の一形態なのです。</p>
             
-            <p class="luxury-quote text-center my-8">私は常に独自の思想を保持し、自らの野心に対して誠実であり続けたいと考えています</p>
+            
           </div>
         </ExpandableText>
       </div>
@@ -142,7 +142,7 @@ export const TimelineSection: Component = () => (
           <div class="luxury-paragraph space-y-4">
             <p>今後5年間においては、<span class="text-purple-400 font-medium">技術的専門性の深化</span>と並行して、プロジェクトの規模拡大に戦略的に取り組む計画です。高校卒業後は、<span class="text-blue-400 font-medium">情報科学</span>と<span class="text-green-400 font-medium">経営学</span>の両分野における学術的基盤を構築しながら、<span class="gradient-text-luxury">スタートアップ企業の創設</span>も視野に入れています。</p>
             
-            <p class="luxury-quote text-center my-6">究極の目標は、生命科学の革命による不老不死の実現、そして日本の再興という壮大なビジョンです。</p>
+            
             
             <p>10年後のビジョンとして、自らが率いる<span class="text-cyan-400 font-medium">技術革新チーム</span>を組織し、<span class="text-purple-400 font-medium">分散型システム</span>と<span class="text-pink-400 font-medium">プライバシー保護技術</span>の分野において、世界的に認知される革新的サービスの創出を目標としています。</p>
             

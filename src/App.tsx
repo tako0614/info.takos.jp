@@ -1,11 +1,12 @@
 import { Component, createSignal, For } from 'solid-js';
 import { FadeIn } from './components/ui/FadeIn';
 import { ExpandableText } from './components/ui/ExpandableText';
+import { GitHubIcon, XLogo, MailIcon, ChatIcon } from './components/ui/Icons';
 import { ScrollDarkeningEffect } from './components/animations/ScrollDarkeningEffect';
 import { TakoAnimation } from './components/animations/TakoAnimation';
 import { InteractiveQA } from './components/InteractiveQA';
 import { AboutSection, SkillsSection, TimelineSection } from './components/sections/Sections';
-import { quotes, mutualLinks } from './data/staticData';
+import { mutualLinks } from './data/staticData';
 import type { TakoInstance } from './types';
 
 const App: Component = () => {
@@ -16,14 +17,6 @@ const App: Component = () => {
   const addTako = () => {
     setTakoInstances([...takoInstances(), { id: Date.now() }]);
   };
-
-  const [quote, setQuote] = createSignal(quotes[Math.floor(Math.random() * quotes.length)]);
-
-  // quoteクリック時に新しい名言を表示する関数
-  const nextQuote = () => {
-    setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-  };
-
   return (
     <div class="min-h-screen relative overflow-hidden transition-all duration-700 enhanced-deep-sea-gradient">
       {/* スクロール暗化エフェクト */}
@@ -138,50 +131,25 @@ const App: Component = () => {
               DEVELOPING THE FUTURE • CREATING TOMORROW
             </p>
           </div>
-
-          {/* 強化されたクォートセクション */}
-          <div 
-            class="mt-8 p-8 rounded-3xl glass-card-dark cursor-pointer transition-all duration-700 hover:scale-105 hover:-translate-y-2 max-w-lg mx-auto relative overflow-hidden group hologram-effect card-3d sound-wave-effect"
-            onClick={nextQuote}
-          >
-            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-pink-500/10 to-cyan-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
-            <div class="absolute inset-0 animate-pulse quantum-effect">
-              <div class="h-full w-full bg-gradient-to-r from-transparent via-white/5 to-transparent rounded-3xl"></div>
-            </div>
-            <div class="relative z-10">
-              <div class="text-4xl text-purple-400 mb-3 text-center neon-glow pulse-wave">"</div>
-              <p class="text-lg font-medium text-gray-200 text-center leading-relaxed mb-4 typing-effect">
-                {quote()}
-              </p>
-              <div class="text-4xl text-purple-400 text-center rotate-180 neon-glow pulse-wave">"</div>
-              <div class="flex items-center justify-center mt-4 space-x-2">
-                <div class="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse energy-field"></div>
-                <p class="text-sm text-gray-400 font-light neon-glow">
-                  クリックで名言を変更
-                </p>
-                <div class="w-2 h-2 bg-gradient-to-r from-pink-400 to-cyan-400 rounded-full animate-pulse energy-field" style="animation-delay: 0.5s"></div>
-              </div>
-            </div>
-          </div>
-          
+        
           {/* 強化されたソーシャルリンク */}
           <div class="flex justify-center mt-10 space-x-6">
             <a href="https://github.com/tako0614" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
               <div class="absolute -inset-2 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
               <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
-                <span class="text-2xl filter drop-shadow-lg neon-glow">📂</span>
+                <GitHubIcon class="w-7 h-7 text-2xl filter drop-shadow-lg neon-glow" aria-hidden={false} title="GitHub" />
               </div>
             </a>
             <a href="https://x.com/takoserver_com" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
               <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
               <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-cyan-500 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
-                <span class="text-2xl filter drop-shadow-lg neon-glow">🐦</span>
+                <XLogo class="w-7 h-7 text-2xl filter drop-shadow-lg neon-glow" aria-hidden={false} title="X / Twitter" />
               </div>
             </a>
             <a href="mailto:contact@tako.example.com" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
               <div class="absolute -inset-2 bg-gradient-to-r from-red-600 to-pink-600 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
               <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-red-500 to-pink-500 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
-                <span class="text-2xl filter drop-shadow-lg neon-glow">✉️</span>
+                <MailIcon class="w-7 h-7 text-2xl filter drop-shadow-lg neon-glow" aria-hidden={false} title="Email" />
               </div>
             </a>
           </div>
@@ -553,9 +521,6 @@ const App: Component = () => {
             <section class="text-center">
               <div class="relative mb-12 flex justify-center">
                 <div class="flex items-center space-x-4">
-                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center shadow-2xl shadow-red-500/30 hologram-effect">
-                    <span class="text-3xl">📞</span>
-                  </div>
                   <div>
                     <h2 class="text-4xl font-bold neon-glow">
                       <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-300">Contact</span>
@@ -563,8 +528,6 @@ const App: Component = () => {
                     <div class="text-sm text-gray-400 font-mono mt-2">連絡手段 | CONTACT.ini</div>
                   </div>
                 </div>
-                <div class="absolute -top-2 -left-2 w-20 h-20 border-2 border-red-500/30 rounded-2xl animate-pulse"></div>
-                <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-orange-500/20 rounded-xl"></div>
               </div>
               
               <p class={`max-w-lg mx-auto mb-6 md:mb-8 text-sm md:text-base text-gray-300 px-4`}>
@@ -578,7 +541,7 @@ const App: Component = () => {
                 >
                   <div class="absolute inset-0 bg-gradient-to-r from-green-500/10 to-teal-500/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center mb-2 md:mb-0 md:mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
-                    <span class="text-lg md:text-2xl">💬</span>
+                    <ChatIcon class="text-lg md:text-2xl w-6 h-6" aria-hidden={false} title="OpenChat" />
                   </div>
                   <span class="font-semibold text-xs md:text-base relative z-10 text-center md:text-left">OpenChat</span>
                 </a>
@@ -589,7 +552,7 @@ const App: Component = () => {
                 >
                   <div class="absolute inset-0 bg-gradient-to-r from-gray-500/10 to-gray-700/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mb-2 md:mb-0 md:mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
-                    <span class="text-lg md:text-2xl">📂</span>
+                    <GitHubIcon class="text-lg md:text-2xl w-6 h-6" aria-hidden={false} title="GitHub" />
                   </div>
                   <span class="font-semibold text-xs md:text-base relative z-10 text-center md:text-left">GitHub</span>
                 </a>
@@ -600,7 +563,7 @@ const App: Component = () => {
                 >
                   <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-2 md:mb-0 md:mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
-                    <span class="text-lg md:text-2xl">🐦</span>
+                    <XLogo class="text-lg md:text-2xl w-6 h-6" aria-hidden={false} title="X / Twitter" />
                   </div>
                   <span class="font-semibold text-xs md:text-base relative z-10 text-center md:text-left">Twitter・X</span>
                 </a>
@@ -611,7 +574,7 @@ const App: Component = () => {
                 >
                   <div class="absolute inset-0 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center mb-2 md:mb-0 md:mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
-                    <span class="text-lg md:text-2xl">✉️</span>
+                    <MailIcon class="text-lg md:text-2xl w-6 h-6" aria-hidden={false} title="Email" />
                   </div>
                   <span class="font-semibold text-xs md:text-base relative z-10 text-center md:text-left">Email</span>
                 </a>
