@@ -1,11 +1,5 @@
 import type { MutualLink, SkillData, TimelineItem } from '../types';
 
-export const quotes = [
-  "思想がない人に価値はない",
-  "手段が目的化している人は、何も生み出せない",
-  "勝利こそ正義",
-];
-
 export const mutualLinks: MutualLink[] = [
   {
     name: "371ちゃん",
