@@ -4,8 +4,7 @@ import { ExpandableText } from './components/ui/ExpandableText';
 import { GitHubIcon, XLogo, MailIcon, ChatIcon } from './components/ui/Icons';
 import { ScrollDarkeningEffect } from './components/animations/ScrollDarkeningEffect';
 import { TakoAnimation } from './components/animations/TakoAnimation';
-import { InteractiveQA } from './components/InteractiveQA';
-import { AboutSection, SkillsSection, TimelineSection, ArticlesSection } from './components/sections/Sections';
+import { AboutSection, SkillsSection, ArticlesSection } from './components/sections/Sections';
 import { mutualLinks } from './data/staticData';
 import type { TakoInstance } from './types';
 
@@ -146,31 +145,6 @@ const App: Component = () => {
           </div>
         </FadeIn>
 
-        {/* インタラクティブな質問選択機能 - モバイル専用セクション */}
-        <FadeIn>
-          <section class="max-w-6xl mx-auto mb-16 lg:hidden px-4">
-            <div class="glass-card-dark p-4 md:p-6 rounded-2xl md:rounded-3xl relative overflow-hidden neon-border terminal-display">
-              <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-2xl md:rounded-3xl"></div>
-              <div class="relative z-10">
-                <div class="text-center mb-4 md:mb-6">
-                  <div class="status-indicator mb-3">
-                    <span class="text-green-400">ONLINE</span>
-                  </div>
-                  <h2 class="text-xl md:text-2xl font-bold text-cyan-400 mb-2 glitch-effect" data-text="🐙 TAKO INDEX">🐙 TAKO INDEX</h2>
-                  <div class="terminal-display text-xs mb-3">
-                    <span class="text-green-400">$ ./tako_index.exe --interactive</span>
-                    <div class="terminal-cursor"></div>
-                  </div>
-                  <p class="text-xs md:text-sm text-gray-400">
-                    <span class="luxury-mono">SELECT MODULE FOR DATA ACCESS</span>
-                  </p>
-                </div>
-                <InteractiveQA />
-              </div>
-            </div>
-          </section>
-        </FadeIn>
-
         <main class="max-w-4xl mx-auto space-y-20">
           {/* About Me - 拡張セクション */}
           <AboutSection />
@@ -309,7 +283,6 @@ const App: Component = () => {
           </FadeIn>
 
           {/* Timeline - 新セクション */}
-          <TimelineSection />
 
           {/* Skills */}
           <SkillsSection />
