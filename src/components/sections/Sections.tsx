@@ -1,5 +1,5 @@
 import { Component, For, createResource, Show } from 'solid-js';
-import { skillsData, timelineData, aboutData, timelineExtraData } from '../../data/staticData';
+import { skillsData, aboutData } from '../../data/staticData';
 import { FadeIn } from '../ui/FadeIn';
 import { ExpandableText } from '../ui/ExpandableText';
 import { fetchZennArticles } from '../../api/zenn';
@@ -19,8 +19,6 @@ export const AboutSection: Component = () => (
       </div>
       
       <div class="space-y-6">
-        <p class="luxury-paragraph-lead text-center px-4 py-6 rounded-2xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 luxury-text-hover" innerHTML={aboutData.intro}>
-        </p>
 
         <ExpandableText title={aboutData.vision.title} initiallyExpanded={true}>
           <div class="luxury-paragraph space-y-4" innerHTML={aboutData.vision.content}>
@@ -90,46 +88,6 @@ export const SkillsSection: Component = () => (
   </FadeIn>
 );
 
-export const TimelineSection: Component = () => (
-  <FadeIn>
-    <section>
-      <div class="relative mb-12">
-        <div class="flex items-center space-x-4">
-          <div>
-            <h2 class="text-4xl font-bold neon-glow">
-              <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-teal-400 to-green-300">Timeline</span>
-            </h2>
-          </div>
-        </div>
-        <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-teal-500/20 rounded-xl"></div>
-      </div>
-      
-      <div class="relative border-l-4 border-purple-400/30 ml-6 space-y-10 py-4">
-        <For each={timelineData}>
-          {(item) => (
-            <div class="relative">
-              <div class={`absolute -left-10 mt-1.5 h-6 w-6 rounded-full border-4 border-purple-500 bg-gray-900 shadow-lg`}></div>
-              <div class={`glass-card-dark p-6 rounded-2xl ml-2 relative overflow-hidden group`}>
-                <div class="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="relative z-10">
-                  <h3 class={`text-lg font-semibold mb-2 text-purple-300`}>{item.year} - {item.title}</h3>
-                  <p class={`text-gray-300`}>{item.text}</p>
-                </div>
-              </div>
-            </div>
-          )}
-        </For>
-      </div>
-      
-      <div class="mt-8">
-        <ExpandableText title={timelineExtraData.future.title} initiallyExpanded={true}>
-          <div class="luxury-paragraph space-y-4" innerHTML={timelineExtraData.future.content}>
-          </div>
-        </ExpandableText>
-      </div>
-    </section>
-  </FadeIn>
-);
 
 export const ArticlesSection: Component = () => {
   const [articles] = createResource(async () => {

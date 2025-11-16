@@ -30,9 +30,3 @@ export interface SkillData {
   color: string;
   level: number;
 }
-
-export interface TimelineItem {
-  year: string;
-  title: string;
-  text: string;
-}
