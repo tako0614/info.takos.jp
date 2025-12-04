@@ -7,6 +7,10 @@ import { TakoAnimation } from './components/animations/TakoAnimation';
 import { AboutSection, SkillsSection, ArticlesSection } from './components/sections/Sections';
 import { mutualLinks } from './data/staticData';
 import type { TakoInstance } from './types';
+import { FiUser, FiCalendar, FiMapPin, FiBookOpen, FiCoffee } from 'solid-icons/fi';
+import { HiOutlineAcademicCap } from 'solid-icons/hi';
+import { BiRegularBuildingHouse } from 'solid-icons/bi';
+import { IoFishOutline } from 'solid-icons/io';
 
 const App: Component = () => {
   // アイコンクリック時のアニメーション状態（トグル）
@@ -160,7 +164,6 @@ const App: Component = () => {
                     </h2>
                   </div>
                 </div>
-                <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-cyan-500/20 rounded-xl"></div>
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -168,9 +171,7 @@ const App: Component = () => {
                   <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10 space-y-6">
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
-                        <span class="text-2xl">👤</span>
-                      </div>
+                      <FiUser size={24} class="text-purple-400" />
                       <div>
                         <h3 class="luxury-text-subtitle neon-glow">お名前</h3>
                         <p class="luxury-paragraph text-base">
@@ -179,18 +180,14 @@ const App: Component = () => {
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
-                        <span class="text-2xl">🎂</span>
-                      </div>
+                      <FiCalendar size={24} class="text-cyan-400" />
                       <div>
                         <h3 class="luxury-text-subtitle neon-glow">年齢</h3>
                         <p class="luxury-paragraph text-base"><span class="text-cyan-400 font-medium">16</span>歳 <span class="luxury-caption">高校生世代</span></p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
-                        <span class="text-2xl">📍</span>
-                      </div>
+                      <FiMapPin size={24} class="text-green-400" />
                       <div>
                         <h3 class="luxury-text-subtitle neon-glow">拠点</h3>
                         <p class="luxury-paragraph text-base">
@@ -199,9 +196,7 @@ const App: Component = () => {
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
-                        <span class="text-2xl">🎓</span>
-                      </div>
+                      <HiOutlineAcademicCap size={24} class="text-orange-400" />
                       <div>
                         <h3 class="luxury-text-subtitle neon-glow">教育機関</h3>
                         <p class="luxury-paragraph text-base">
@@ -217,9 +212,7 @@ const App: Component = () => {
                   <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10 space-y-6">
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
-                        <span class="text-2xl">🍣</span>
-                      </div>
+                      <IoFishOutline size={24} class="text-yellow-400" />
                       <div>
                         <h3 class="luxury-text-subtitle neon-glow">料理の嗜好</h3>
                         <p class="luxury-paragraph text-base">
@@ -228,9 +221,7 @@ const App: Component = () => {
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
-                        <span class="text-2xl">📚</span>
-                      </div>
+                      <FiBookOpen size={24} class="text-pink-400" />
                       <div>
                         <h3 class="luxury-text-subtitle neon-glow">愛読作品</h3>
                         <p class="luxury-paragraph text-base">
@@ -240,9 +231,7 @@ const App: Component = () => {
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
-                        <span class="text-2xl">☕</span>
-                      </div>
+                      <FiCoffee size={24} class="text-cyan-400" />
                       <div>
                         <h3 class="luxury-text-subtitle neon-glow">愛飲品</h3>
                         <p class="luxury-paragraph text-base">
@@ -252,9 +241,7 @@ const App: Component = () => {
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                      <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-lg pulse-wave neon-glow">
-                        <span class="text-2xl">🏛️</span>
-                      </div>
+                      <BiRegularBuildingHouse size={24} class="text-indigo-400" />
                       <div>
                         <h3 class="luxury-text-subtitle neon-glow">政治的指向</h3>
                         <p class="luxury-paragraph text-base">
@@ -299,7 +286,6 @@ const App: Component = () => {
                     </h2>
                   </div>
                 </div>
-                <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-red-500/20 rounded-xl"></div>
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -307,9 +293,7 @@ const App: Component = () => {
                   <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10">
                     <div class="flex items-center mb-6">
-                      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mr-4 shadow-xl group-hover:scale-110 transition-transform duration-300 pulse-wave">
-                        <span class="text-3xl neon-glow">💬</span>
-                      </div>
+                      <img src="/icon.png" alt="takos" class="w-16 h-16 rounded-2xl mr-4 shadow-xl group-hover:scale-110 transition-transform duration-300" />
                       <div>
                         <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="takos">takos</h3>
                         <div class="status-indicator mt-2">
@@ -317,21 +301,36 @@ const App: Component = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                     <p class={`text-gray-300 mb-6 leading-relaxed luxury-paragraph`}>
-                      <span class="text-purple-400 font-medium">分散型チャットSNS</span>。Matrixのような<span class="text-cyan-400">分散型・暗号化機能</span>と、LINEのような<span class="text-pink-400">直感的UI/UX</span>の融合を目指しています。
+                      <span class="text-purple-400 font-medium">web自主基盤ソフトウェア</span>
                     </p>
                     <div class="flex justify-between items-center">
                       <a href="https://github.com/tako0614/takos" class={`luxury-button text-sm`}>
                         リポジトリを見る →
                       </a>
-                      <div class="text-xs text-gray-500 font-mono">
-                        Last commit: 2h ago
-                      </div>
                     </div>
                   </div>
                 </div>
 
+                <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
+                  <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                      <img src="/infonode.svg" alt="infonode" class="w-16 h-16 rounded-2xl mr-4 shadow-xl group-hover:scale-110 transition-transform duration-300" />
+                      <div>
+                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="infonode">infonode</h3>
+                        <div class="status-indicator mt-2">
+                          <span class="text-yellow-400">IN DEVELOPMENT</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <p class={`text-gray-300 mb-6 leading-relaxed luxury-paragraph`}>
+                      <span class="text-cyan-400 font-medium">graphによる情報整理基盤</span>と<span class="text-blue-400 font-medium">AI agentによる自動化ソフトウェア</span>
+                    </p>
+                  </div>
+                </div>
               </div>
               
               <div class="mt-8">

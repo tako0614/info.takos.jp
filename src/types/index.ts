@@ -1,3 +1,5 @@
+import type { Component } from 'solid-js';
+
 export interface QuestionData {
   content: string;
 }
@@ -26,7 +28,7 @@ export interface TakoInstance {
 export interface SkillData {
   title: string;
   text: string;
-  icon: string;
+  icon: Component<{ size?: number; class?: string }>;
   color: string;
   level: number;
 }

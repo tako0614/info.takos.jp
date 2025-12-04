@@ -3,6 +3,7 @@ import { skillsData, aboutData } from '../../data/staticData';
 import { FadeIn } from '../ui/FadeIn';
 import { ExpandableText } from '../ui/ExpandableText';
 import { fetchZennArticles } from '../../api/zenn';
+import { FiHeart, FiBookOpen } from 'solid-icons/fi';
 
 export const AboutSection: Component = () => (
   <FadeIn>
@@ -54,9 +55,7 @@ export const SkillsSection: Component = () => (
             <div class={`group glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-2 relative overflow-hidden hologram-effect card-3d sound-wave-effect neon-border`}>
               <div class={`absolute inset-0 bg-gradient-to-br ${skill.color.replace(/500/g, '500/5')} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field`}></div>
               <div class="relative z-10">
-                <div class={`w-16 h-16 mb-6 rounded-2xl flex items-center justify-center bg-gradient-to-br ${skill.color} shadow-xl group-hover:scale-110 transition-transform duration-300 pulse-wave`}>
-                  <span class="text-3xl filter drop-shadow-sm neon-glow">{skill.icon}</span>
-                </div>
+                <skill.icon size={32} class="text-white/80 mb-6 group-hover:scale-110 transition-transform duration-300" />
                 <h3 class="font-bold text-xl mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 transition-all duration-300 neon-glow">{skill.title}</h3>
                 <p class={`text-gray-300 leading-relaxed mb-4`}>{skill.text}</p>
                 
@@ -106,7 +105,6 @@ export const ArticlesSection: Component = () => {
               <p class="text-gray-400 mt-2">Zennで執筆した技術記事</p>
             </div>
           </div>
-          <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-cyan-500/20 rounded-xl"></div>
         </div>
 
         <Show 
@@ -131,9 +129,7 @@ export const ArticlesSection: Component = () => {
                   
                   <div class="relative z-10">
                     {/* 絵文字アイコン */}
-                    <div class="w-16 h-16 mb-4 rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-500/20 to-cyan-500/20 shadow-xl group-hover:scale-110 transition-transform duration-300 pulse-wave">
-                      <span class="text-4xl filter drop-shadow-sm neon-glow">{article.emoji}</span>
-                    </div>
+                    <span class="text-4xl mb-4 block group-hover:scale-110 transition-transform duration-300">{article.emoji}</span>
                     
                     {/* タイトル */}
                     <h3 class="font-bold text-lg mb-3 line-clamp-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-cyan-400 transition-all duration-300 neon-glow min-h-[3.5rem]">
@@ -143,7 +139,7 @@ export const ArticlesSection: Component = () => {
                     {/* メタ情報 */}
                     <div class="flex items-center justify-between text-sm text-gray-400 mb-3">
                       <div class="flex items-center space-x-1">
-                        <span class="text-pink-400">❤️</span>
+                        <FiHeart size={14} class="text-pink-400" />
                         <span>{article.likedCount}</span>
                       </div>
                       <time class="text-xs">
@@ -179,7 +175,7 @@ export const ArticlesSection: Component = () => {
               rel="noopener noreferrer"
               class="inline-flex items-center glass-card-dark px-8 py-4 rounded-2xl transition-all duration-300 hover:scale-105 group neon-border"
             >
-              <span class="text-lg mr-2">📚</span>
+              <FiBookOpen size={20} class="mr-2 text-blue-400" />
               <span class="text-gray-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-cyan-400 transition-all duration-300">
                 すべての記事を見る
               </span>
