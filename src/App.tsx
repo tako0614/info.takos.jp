@@ -327,7 +327,7 @@ const App: Component = () => {
                     </div>
 
                     <p class={`text-gray-300 mb-6 leading-relaxed luxury-paragraph`}>
-                      <span class="text-cyan-400 font-medium">graphによる情報整理基盤</span>と<span class="text-blue-400 font-medium">AI agentによる自動化ソフトウェア</span>
+                      <span class="text-cyan-400 font-medium">glaphによる情報整理基盤</span>と<span class="text-blue-400 font-medium">AI agentによる自動化ソフトウェア</span>
                     </p>
                   </div>
                 </div>
