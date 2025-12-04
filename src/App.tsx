@@ -258,9 +258,9 @@ const App: Component = () => {
                       <div>
                         <h3 class="luxury-text-subtitle neon-glow">政治的指向</h3>
                         <p class="luxury-paragraph text-base">
-                          <span class="text-indigo-400 font-medium">日本維新の会</span>, <span class="text-purple-400 font-medium">国民民主党</span>, <span class="text-red-400 font-medium">日本保守党</span>
+                          <span class="text-indigo-400 font-medium">日本維新の会</span>, <span class="text-blue-400 font-medium">自由民主党</span>
                         </p>
-                        <p class="luxury-caption">改革志向・中道保守</p>
+                        <p class="luxury-caption">改革志向・保守</p>
                       </div>
                     </div>
                   </div>
@@ -271,11 +271,9 @@ const App: Component = () => {
               <div class="mt-8">
                 <ExpandableText title="私の日常" initiallyExpanded={true}>
                   <div class="luxury-paragraph space-y-4">
-                    <p>平日における私の生活リズムは、学業と自己開発のバランスを重視した構成となっています。学校教育を終えた後、<span class="text-blue-400 font-medium">予備校での学習</span>に21時まで専念し、帰宅後は深夜2時まで<span class="gradient-text-luxury">takos プロジェクト</span>の開発に情熱を注いでいます。</p>
-                    
-                    <p>休日においては、主にtakosの開発作業に集中しており、技術的革新と創造的問題解決に没頭しています。プロジェクトが一定の段階に到達した際には、<span class="text-purple-400 font-medium">週末の予備校通学</span>も検討しており、学術的知識の更なる深化を目指しています。</p>
-                    
-                    <p class="text-gray-300 italic border-l-4 border-cyan-500/50 pl-4">この密度の高いスケジュールは、将来への投資として位置づけており、知識と技術、両方の領域での成長を追求しています。</p>
+                    普段は高校生活を送りながら、自身のプロダクト開発に励んでいます。学校終わってからすべての時間を開発に費やしています。
+                    また、土日や放課後はバイトがある日はバイトをしてバイト終わったらすぐに開発に戻ります。そのバイト代はAIのサブスクに全部注ぎ込んでいます。
+                    睡眠時間と学校とコーディングは両立できるわけもなく、睡眠時間は平均4〜5時間程度です。助けてください。
                   </div>
                 </ExpandableText>
               </div>
