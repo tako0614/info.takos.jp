@@ -26,6 +26,11 @@ export const mutualLinks: MutualLink[] = [
     name: "akku",
     url: "https://akku1139.github.io",
     banner: "https://akku1139.github.io/banners/320x100.png",
+  },
+    {
+    name: "techfish",
+    url: "https://techfish.dev/",
+    banner: "https://cdn.sakana11.org/banner.jpg",
   }
 ];
 
