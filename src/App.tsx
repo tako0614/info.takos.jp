@@ -134,13 +134,13 @@ const App: Component = () => {
                 <GitHubIcon class="w-7 h-7 text-2xl filter drop-shadow-lg neon-glow" aria-hidden={false} title="GitHub" />
               </div>
             </a>
-            <a href="https://x.com/takoserver_com" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
+            <a href="https://x.com/takos_jp" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
               <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
               <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-cyan-500 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
                 <XLogo class="w-7 h-7 text-2xl filter drop-shadow-lg neon-glow" aria-hidden={false} title="X / Twitter" />
               </div>
             </a>
-            <a href="mailto:contact@tako.example.com" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
+            <a href="mailto:shoutatomiyama0614@gmail.com" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
               <div class="absolute -inset-2 bg-gradient-to-r from-red-600 to-pink-600 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
               <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-red-500 to-pink-500 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
                 <MailIcon class="w-7 h-7 text-2xl filter drop-shadow-lg neon-glow" aria-hidden={false} title="Email" />
@@ -448,7 +448,7 @@ const App: Component = () => {
                 </a>
                 
                 <a
-                  href="https://x.com/takoserver_com"
+                  href="https://x.com/takos_jp"
                   class={`group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
                 >
                   <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -459,7 +459,7 @@ const App: Component = () => {
                 </a>
                 
                 <a
-                  href="mailto:contact@tako.example.com"
+                  href="mailto:shoutatomiyama0614@gmail.com"
                   class={`group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
                 >
                   <div class="absolute inset-0 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
