@@ -288,7 +288,7 @@ const App: Component = () => {
                 </div>
               </div>
 
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10">
@@ -329,6 +329,32 @@ const App: Component = () => {
                     <p class={`text-gray-300 mb-6 leading-relaxed luxury-paragraph`}>
                       <span class="text-cyan-400 font-medium">glaphによる情報整理基盤</span>と<span class="text-blue-400 font-medium">AI agentによる自動化ソフトウェア</span>
                     </p>
+                  </div>
+                </div>
+
+                <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
+                  <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                      <div class="w-16 h-16 rounded-2xl mr-4 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-3xl">
+                        🎵
+                      </div>
+                      <div>
+                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="music.takos.jp">music.takos.jp</h3>
+                        <div class="status-indicator mt-2">
+                          <span class="text-green-400">RELEASED</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <p class={`text-gray-300 mb-6 leading-relaxed luxury-paragraph`}>
+                      <span class="text-green-400 font-medium">作曲用プログラミング言語</span>
+                    </p>
+                    <div class="flex justify-between items-center">
+                      <a href="https://music.takos.jp" class={`luxury-button text-sm`}>
+                        サイトを見る →
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
