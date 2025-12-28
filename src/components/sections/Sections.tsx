@@ -2,6 +2,7 @@ import { Component, For, createResource, Show } from 'solid-js';
 import { skillsData, aboutData } from '../../data/staticData';
 import { FadeIn } from '../ui/FadeIn';
 import { ExpandableText } from '../ui/ExpandableText';
+import { FloatingCard } from '../ui/FloatingCard';
 import { fetchZennArticles } from '../../api/zenn';
 import { FiHeart, FiBookOpen } from 'solid-icons/fi';
 
@@ -51,14 +52,15 @@ export const SkillsSection: Component = () => (
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <For each={skillsData}>
-          {(skill) => (
+          {(skill, index) => (
+            <FloatingCard floatIntensity={0.8 + (index() % 3) * 0.2}>
             <div class={`group glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-2 relative overflow-hidden hologram-effect card-3d sound-wave-effect neon-border`}>
               <div class={`absolute inset-0 bg-gradient-to-br ${skill.color.replace(/500/g, '500/5')} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field`}></div>
               <div class="relative z-10">
                 <skill.icon size={32} class="text-white/80 mb-6 group-hover:scale-110 transition-transform duration-300" />
                 <h3 class="font-bold text-xl mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 transition-all duration-300 neon-glow">{skill.title}</h3>
                 <p class={`text-gray-300 leading-relaxed mb-4`}>{skill.text}</p>
-                
+
                 {/* スキルレベルバー */}
                 <div class="mb-3">
                   <div class="flex justify-between items-center mb-2">
@@ -67,13 +69,14 @@ export const SkillsSection: Component = () => (
                   </div>
                   <div class="data-bar" style={`--progress: ${skill.level}%`}></div>
                 </div>
-                
+
                 {/* ステータスインジケーター */}
                 <div class="status-indicator text-xs">
                   <span class="text-green-400">ACTIVE</span>
                 </div>
               </div>
             </div>
+            </FloatingCard>
           )}
         </For>
       </div>
@@ -118,24 +121,25 @@ export const ArticlesSection: Component = () => {
         >
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <For each={articles()}>
-              {(article) => (
+              {(article, index) => (
+                <FloatingCard floatIntensity={0.7 + (index() % 3) * 0.3}>
                 <a
                   href={article.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group glass-card-dark p-6 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden hologram-effect card-3d neon-border"
+                  class="block group glass-card-dark p-6 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden hologram-effect card-3d neon-border"
                 >
                   <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
-                  
+
                   <div class="relative z-10">
                     {/* 絵文字アイコン */}
                     <span class="text-4xl mb-4 block group-hover:scale-110 transition-transform duration-300">{article.emoji}</span>
-                    
+
                     {/* タイトル */}
                     <h3 class="font-bold text-lg mb-3 line-clamp-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-cyan-400 transition-all duration-300 neon-glow min-h-[3.5rem]">
                       {article.title}
                     </h3>
-                    
+
                     {/* メタ情報 */}
                     <div class="flex items-center justify-between text-sm text-gray-400 mb-3">
                       <div class="flex items-center space-x-1">
@@ -150,7 +154,7 @@ export const ArticlesSection: Component = () => {
                         })}
                       </time>
                     </div>
-                    
+
                     {/* 読むボタン */}
                     <div class="flex items-center text-cyan-400 font-medium text-sm group-hover:translate-x-2 transition-transform duration-300">
                       <span>記事を読む</span>
@@ -159,16 +163,18 @@ export const ArticlesSection: Component = () => {
                       </svg>
                     </div>
                   </div>
-                  
+
                   {/* ホログラム効果 */}
                   <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-cyan-300/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:translate-x-full transition-all duration-700 transform -translate-x-full"></div>
                 </a>
+                </FloatingCard>
               )}
             </For>
           </div>
 
           {/* Zennプロフィールへのリンク */}
           <div class="mt-8 text-center">
+            <FloatingCard floatIntensity={0.6} class="inline-block">
             <a
               href="https://zenn.dev/takoserver"
               target="_blank"
@@ -183,6 +189,7 @@ export const ArticlesSection: Component = () => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </a>
+            </FloatingCard>
           </div>
 
           {/* エラー表示 */}
