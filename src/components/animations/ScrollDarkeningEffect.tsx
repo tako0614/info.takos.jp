@@ -5,9 +5,9 @@ export const ScrollDarkeningEffect: Component = () => {
   const { darkness, scrollProgress, getDepthLayer } = useScrollDarkening();
   const [particles, setParticles] = createSignal<Array<{id: number, x: number, y: number, delay: number}>>([]);
 
-  // 深海の生物発光パーティクルを生成
+  // 深海の生物発光パーティクルを生成（軽量化: 20→8個）
   onMount(() => {
-    const particleArray = Array.from({ length: 20 }, (_, i) => ({
+    const particleArray = Array.from({ length: 8 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,

@@ -1,118 +1,36 @@
 @import "tailwindcss";
 
-/* スクロールに応じて暗くなる背景エフェクト */
-.scroll-darkening-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  pointer-events: none;
-  z-index: -1;
-  background: linear-gradient(
-    180deg,
-    /* 上部：深海の表層 - 明るめの青 */
-    #1e3a8a 0%,
-    #1e40af 5%,
-    #1d4ed8 10%,
-    /* 中層：暗くなり始める */
-    #1e293b 20%,
-    #0f172a 30%,
-    #0c1017 40%,
-    /* 深層：だんだん暗く */
-    #0a0d14 50%,
-    #080b11 60%,
-    #06090e 70%,
-    /* 深海底：ほぼ真っ黒 */
-    #04060a 80%,
-    #020407 90%,
-    #000000 100%
-  );
-  background-size: 100% 500vh; /* ページの5倍の高さでグラデーション */
-  background-attachment: local;
-  animation: backgroundFlow 60s ease-in-out infinite;
-}
-
-/* 動的な深海エフェクト */
-@keyframes backgroundFlow {
-  0%, 100% {
-    background-position: 0% 0%;
-    filter: brightness(1) contrast(1.1);
-  }
-  25% {
-    background-position: 0% -10%;
-    filter: brightness(0.95) contrast(1.15);
-  }
-  50% {
-    background-position: 0% -5%;
-    filter: brightness(0.9) contrast(1.2);
-  }
-  75% {
-    background-position: 0% -15%;
-    filter: brightness(0.85) contrast(1.1);
-  }
-}
-
-/* スクロールエフェクト用のオーバーレイ */
-.depth-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 1;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.1) 25%,
-    rgba(0, 0, 0, 0.3) 50%,
-    rgba(0, 0, 0, 0.6) 75%,
-    rgba(0, 0, 0, 0.9) 100%
-  );
-  background-size: 100% 300vh;
-  background-attachment: local;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
 /* 深海テーマの改良版グラデーション */
 .enhanced-deep-sea-gradient {
   background: linear-gradient(
     180deg,
-    /* 海面付近 */
     #0f172a 0%,
     #1e293b 5%,
     #334155 10%,
-    /* 浅い深海 */
     #1e293b 20%,
     #0f172a 30%,
     #020617 40%,
-    /* 中深海 */
     #000511 50%,
     #00030a 60%,
     #000207 70%,
-    /* 深海底 */
     #000103 80%,
     #000001 90%,
     #000000 100%
   );
-  min-height: 500vh; /* ページを長くしてスクロール効果を実現 */
+  min-height: 500vh;
 }
 
 @layer utilities {
-  /* Chrome, Safari用 */
+  /* スクロールバー非表示 */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-
-  /* IE, Edge用 */
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
 
-  /* テキストの行制限用クラス */
+  /* テキストの行制限 */
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -121,56 +39,7 @@
     overflow: hidden;
   }
 
-  /* グラデーションボーダー */
-  .border-gradient-purple {
-    border-image: linear-gradient(90deg, rgba(168, 85, 247, 0.5), rgba(236, 72, 153, 0.5), rgba(6, 182, 212, 0.5)) 1;
-  }
-
-  .border-gradient-blue {
-    border-image: linear-gradient(90deg, rgba(59, 130, 246, 0.7), rgba(168, 85, 247, 0.7), rgba(6, 182, 212, 0.7)) 1;
-  }
-
-  /* リアルなガラスエフェクト */
-  .glass-effect {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.125);
-    box-shadow: 
-      0 8px 32px 0 rgba(31, 38, 135, 0.15),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
-      inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
-  }
-
-  /* ガラスエフェクト - 統一されたダークテーマ */
-  .glass-effect-dark {
-    /* 廃止予定 - glass-card-dark を使用してください */
-    background: rgba(15, 23, 42, 0.15);
-    backdrop-filter: blur(20px) saturate(200%);
-    -webkit-backdrop-filter: blur(20px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 
-      0 8px 32px 0 rgba(0, 0, 0, 0.25),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
-      inset 0 -1px 0 0 rgba(255, 255, 255, 0.05);
-  }
-
-  .glass-card {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.12) 0%,
-      rgba(255, 255, 255, 0.06) 100%
-    );
-    backdrop-filter: blur(25px) saturate(180%);
-    -webkit-backdrop-filter: blur(25px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 
-      0 12px 40px 0 rgba(31, 38, 135, 0.2),
-      inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
-      inset 0 -2px 1px 0 rgba(255, 255, 255, 0.1);
-  }
-
-  /* ガラスカード - 統一されたダークテーマ（推奨） */
+  /* ガラスカード - ダークテーマ */
   .glass-card-dark {
     background: linear-gradient(
       135deg,
@@ -180,195 +49,16 @@
     backdrop-filter: blur(30px) saturate(200%);
     -webkit-backdrop-filter: blur(30px) saturate(200%);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 
+    box-shadow:
       0 15px 45px 0 rgba(0, 0, 0, 0.3),
       inset 0 2px 1px 0 rgba(255, 255, 255, 0.15),
       inset 0 -2px 1px 0 rgba(255, 255, 255, 0.08);
-  }
-
-  .glass-button {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
-      0 4px 16px 0 rgba(31, 38, 135, 0.15),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .glass-button:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 
-      0 8px 24px 0 rgba(31, 38, 135, 0.25),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
-    transform: translateY(-2px);
-  }
-
-  .glass-button-dark {
-    background: rgba(15, 23, 42, 0.2);
-    backdrop-filter: blur(15px) saturate(180%);
-    -webkit-backdrop-filter: blur(15px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 
-      0 4px 16px 0 rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
-  }
-
-  .glass-button-dark:hover {
-    background: rgba(15, 23, 42, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 
-      0 8px 24px 0 rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-  }
-
-  /* 深海テーマ用のアニメーション */
-  @keyframes planktonFloat {
-    0%, 100% {
-      transform: translateY(0) translateX(0) rotate(0deg);
-      opacity: 0.3;
-    }
-    25% {
-      transform: translateY(-15px) translateX(10px) rotate(90deg);
-      opacity: 0.8;
-    }
-    50% {
-      transform: translateY(-8px) translateX(-12px) rotate(180deg);
-      opacity: 0.6;
-    }
-    75% {
-      transform: translateY(-20px) translateX(8px) rotate(270deg);
-      opacity: 0.9;
-    }
-  }
-
-  @keyframes bubbleRise {
-    0% {
-      transform: translateY(100vh) scale(0.5);
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.3;
-    }
-    90% {
-      opacity: 0.6;
-    }
-    100% {
-      transform: translateY(-100px) scale(1.2);
-      opacity: 0;
-    }
-  }
-
-  @keyframes gentleGlow {
-    0%, 100% {
-      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-      filter: brightness(1);
-    }
-    50% {
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-      filter: brightness(1.3);
-    }
-  }
-
-  @keyframes deepSeaSway {
-    0%, 100% {
-      transform: translateX(0) rotate(0deg);
-    }
-    25% {
-      transform: translateX(5px) rotate(1deg);
-    }
-    50% {
-      transform: translateX(-3px) rotate(-1deg);
-    }
-    75% {
-      transform: translateX(7px) rotate(0.5deg);
-    }
-  }
-
-  /* 深海グラデーション */
-  .deep-sea-gradient {
-    background: linear-gradient(
-      180deg,
-      #0a0a0a 0%,
-      #0f1419 15%,
-      #1a202c 30%,
-      #2d3748 50%,
-      #1a202c 70%,
-      #0f1419 85%,
-      #000000 100%
-    );
-  }
-
-  .deep-sea-particles {
-    background: radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 40%, rgba(100, 200, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(0, 150, 200, 0.06) 0%, transparent 50%);
-  }
-
-  /* 深海テーマ用ガラスエフェクト - 廃止予定 */
-  /* 代わりに glass-card-dark を使用してください */
-  .glass-card-deep {
-    background: linear-gradient(
-      135deg,
-      rgba(5, 10, 15, 0.4) 0%,
-      rgba(10, 15, 25, 0.2) 100%
-    );
-    backdrop-filter: blur(35px) saturate(150%);
-    -webkit-backdrop-filter: blur(35px) saturate(150%);
-    border: 1px solid rgba(100, 200, 255, 0.15);
-    box-shadow: 
-      0 20px 50px 0 rgba(0, 0, 0, 0.5),
-      inset 0 2px 1px 0 rgba(100, 200, 255, 0.1),
-      inset 0 -2px 1px 0 rgba(0, 255, 255, 0.05);
   }
 
   /* 水の屈折効果 */
   .water-distortion {
     filter: blur(0.5px);
     transform: perspective(1000px) rotateX(0.5deg);
-    animation: waterWave 8s infinite ease-in-out;
-  }
-
-  @keyframes waterWave {
-    0%, 100% {
-      filter: blur(0.5px) brightness(1);
-      transform: perspective(1000px) rotateX(0.5deg) translateY(0);
-    }
-    25% {
-      filter: blur(0.8px) brightness(0.95);
-      transform: perspective(1000px) rotateX(0.3deg) translateY(-2px);
-    }
-    50% {
-      filter: blur(0.3px) brightness(1.05);
-      transform: perspective(1000px) rotateX(0.7deg) translateY(1px);
-    }
-    75% {
-      filter: blur(0.6px) brightness(0.98);
-      transform: perspective(1000px) rotateX(0.2deg) translateY(-1px);
-    }
-  }
-
-  /* 深度に応じた圧力エフェクト */
-  .pressure-effect {
-    transition: all 2s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* 海底に近づくにつれての重力感 */
-  .deep-gravity {
-    transform-style: preserve-3d;
-    animation: deepGravity 20s infinite ease-in-out;
-  }
-
-  @keyframes deepGravity {
-    0%, 100% {
-      transform: translateZ(0) scale(1);
-    }
-    50% {
-      transform: translateZ(-10px) scale(0.98);
-    }
   }
 
   /* 深海生物の光 */
@@ -383,204 +73,100 @@
   }
 
   @keyframes bioluminesce {
-    0%, 100% { 
-      opacity: 0; 
-      transform: scale(1);
-    }
-    50% { 
-      opacity: 0.8; 
-      transform: scale(1.5);
-    }
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.5); }
   }
 }
 
+/* フェードイン */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* モダンなパーティクルアニメーション */
-@keyframes modernFloat {
-  0%, 100% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
-  }
-  25% {
-    transform: translate3d(30px, -40px, 0) rotate(90deg);
-  }
-  50% {
-    transform: translate3d(-25px, 30px, 0) rotate(180deg);
-  }
-  75% {
-    transform: translate3d(40px, 20px, 0) rotate(270deg);
-  }
-}
-
-@keyframes modernPulse {
-  0%, 100% { 
-    opacity: 0.3; 
-    transform: scale(1);
-  }
-  50% { 
-    opacity: 0.8; 
-    transform: scale(1.2);
-  }
-}
-
-@keyframes floatParticle {
-  0%, 100% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(50px, -50px);
-  }
-  50% {
-    transform: translate(-30px, 40px);
-  }
-  75% {
-    transform: translate(60px, 30px);
-  }
-}
-
-@keyframes fadeInOut {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
-}
-
-@keyframes wave {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  50% {
-    transform: translate(-3%, 2%) rotate(180deg);
-  }
-  100% {
-    transform: translate(0, 0) rotate(360deg);
-  }
-}
-
-@keyframes gradientShift {
-  0% { 
-    background-position: 0% 50%;
-    opacity: 0.6;
-  }
-  50% { 
-    background-position: 100% 50%; 
-    opacity: 0.9;
-  }
-  100% { 
-    background-position: 0% 50%;
-    opacity: 0.6;
-  }
-}
-
-@keyframes gradientShiftAlt {
-  0% { 
-    background-position: 100% 50%;
-    opacity: 0.5;
-  }
-  50% { 
-    background-position: 0% 50%; 
-    opacity: 0.8;
-  }
-  100% { 
-    background-position: 100% 50%;
-    opacity: 0.5;
-  }
-}
-
-@keyframes pulseRadial {
-  0% {
-    transform: scale(1);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.3;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
 }
 
 .animate-fadeIn {
   animation: fadeIn 1s ease forwards;
 }
 
-.animate-wave {
-  animation: wave 25s infinite linear;
-}
-
-.animate-gradientShift {
-  animation: gradientShift 15s infinite ease;
-  background-size: 400% 400%;
-}
-
-.animate-gradientShiftAlt {
-  animation: gradientShiftAlt 12s infinite ease;
-  background-size: 400% 400%;
-}
-
-.bg-radial-pulse-dark {
-  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
-  animation: pulseRadial 8s infinite;
-}
-
-.bg-radial-pulse-light {
-  background: radial-gradient(circle at center, rgba(96, 165, 250, 0.2) 0%, transparent 70%);
-  animation: pulseRadial 8s infinite;
+/* フロート */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
 }
 
 .animate-float {
   animation: float 8s ease-in-out infinite;
 }
 
-.animate-float-delayed {
-  animation: float 10s ease-in-out 1s infinite;
-}
-
-.animate-float-slow {
-  animation: float 12s ease-in-out 2s infinite;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes backgroundZoom {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
+/* 360度回転 */
 @keyframes spinOnce {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes modernRotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .animate-spinOnce {
   animation: spinOnce 0.8s ease-in-out;
+}
+
+/* 回転アニメーション */
+.animate-spin-slow {
+  animation: spinOnce 20s linear infinite;
+}
+
+.animate-reverse-spin {
+  animation: spinOnce 15s linear infinite reverse;
+}
+
+/* プロフィール発光 */
+@keyframes profileGlow {
+  0% { box-shadow: 0 0 60px rgba(168, 85, 247, 0.8), 0 0 120px rgba(168, 85, 247, 0.4); }
+  100% { box-shadow: 0 0 80px rgba(59, 130, 246, 0.8), 0 0 160px rgba(59, 130, 246, 0.4); }
+}
+
+@keyframes energyPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes titleShimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+}
+
+/* ラグジュアリーテキスト */
+.luxury-text-title {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.luxury-text-subtitle {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.luxury-paragraph {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+}
+
+.luxury-paragraph-lead {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.luxury-mono {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.9em;
+}
+
+.luxury-caption {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.gradient-text-luxury {
+  background: linear-gradient(135deg, #a78bfa, #818cf8, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
