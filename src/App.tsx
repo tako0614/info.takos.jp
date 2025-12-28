@@ -153,6 +153,147 @@ const App: Component = () => {
           {/* About Me - 拡張セクション */}
           <AboutSection />
 
+          {/* Projects - メインセクション */}
+          <FadeIn>
+            <section>
+              <div class="relative mb-12">
+                <div class="flex items-center space-x-4">
+                  <div>
+                    <h2 class="text-5xl font-bold neon-glow">
+                      <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-red-400 to-pink-300">Projects</span>
+                    </h2>
+                    <p class="text-gray-400 mt-2 text-lg">開発中・公開中のプロダクト</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* takos - メインプロジェクト */}
+                <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect md:col-span-2`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
+                  <div class="relative z-10 flex flex-col md:flex-row md:items-center gap-6">
+                    <img src="/icon.png" alt="takos" class="w-24 h-24 rounded-3xl shadow-2xl group-hover:scale-110 transition-transform duration-300" />
+                    <div class="flex-1">
+                      <div class="flex items-center gap-4 mb-3">
+                        <h3 class="text-3xl font-bold neon-glow glitch-effect" data-text="takos">takos</h3>
+                        <div class="status-indicator">
+                          <span class="text-green-400 text-sm">ACTIVE DEV</span>
+                        </div>
+                      </div>
+                      <p class="text-gray-300 text-lg leading-relaxed luxury-paragraph mb-4">
+                        <span class="text-purple-400 font-medium">web自主基盤ソフトウェア</span> - プライバシーを重視した分散型プラットフォーム
+                      </p>
+                      <a href="https://github.com/tako0614/takos" class="luxury-button inline-block">
+                        リポジトリを見る →
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* infonode */}
+                <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
+                  <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                      <img src="/infonode.svg" alt="infonode" class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300" />
+                      <div>
+                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="infonode">infonode</h3>
+                        <div class="status-indicator mt-2">
+                          <span class="text-yellow-400">IN DEVELOPMENT</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed luxury-paragraph text-lg">
+                      <span class="text-cyan-400 font-medium">graphによる情報整理基盤</span>と<span class="text-blue-400 font-medium">AI agentによる自動化ソフトウェア</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* music.takos.jp */}
+                <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
+                  <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-4xl">
+                        🎵
+                      </div>
+                      <div>
+                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="music.takos.jp">music.takos.jp</h3>
+                        <div class="status-indicator mt-2">
+                          <span class="text-green-400">RELEASED</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed luxury-paragraph text-lg mb-4">
+                      <span class="text-green-400 font-medium">作曲用プログラミング言語</span>
+                    </p>
+                    <a href="https://music.takos.jp" class="luxury-button inline-block">
+                      サイトを見る →
+                    </a>
+                  </div>
+                </div>
+
+                {/* roadtome */}
+                <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-amber-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
+                  <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-4xl">
+                        🛤️
+                      </div>
+                      <div>
+                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="roadtome">roadtome</h3>
+                        <div class="status-indicator mt-2">
+                          <span class="text-green-400">RELEASED</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed luxury-paragraph text-lg mb-4">
+                      <span class="text-orange-400 font-medium">road.takos.jp</span>
+                    </p>
+                    <a href="https://road.takos.jp" class="luxury-button inline-block">
+                      サイトを見る →
+                    </a>
+                  </div>
+                </div>
+
+                {/* tako card */}
+                <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-rose-500/10 to-pink-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
+                  <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-4xl">
+                        🃏
+                      </div>
+                      <div>
+                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="tako card">tako card</h3>
+                        <div class="status-indicator mt-2">
+                          <span class="text-green-400">RELEASED</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed luxury-paragraph text-lg mb-4">
+                      <span class="text-rose-400 font-medium">card.takos.jp</span>
+                    </p>
+                    <a href="https://card.takos.jp" class="luxury-button inline-block">
+                      サイトを見る →
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-8">
+                <ExpandableText title="プロジェクト開発ポリシー">
+                  <p>私のプロジェクト開発において最も重視しているのは、<strong>シンプル</strong>と<strong>機能性</strong>の両立です。多くの現代サービスは便利さとプライバシーを天秤にかけていますが、私は両方を同時に実現できると信じています。</p>
+
+                  <p class="mt-4">また、持続可能な開発のために、コードの品質と再利用性も重視しています。きれいなコード構造と十分なドキュメントは、長期的にプロジェクトを維持するために不可欠だと考えています。</p>
+
+                  <p class="mt-4">プロジェクトのアイデアは日常生活の中での不便さや課題から生まれることが多く、自分自身が本当に必要だと感じるものを作るようにしています。そうすることで、開発のモチベーションを維持できると思っています。</p>
+                </ExpandableText>
+              </div>
+            </section>
+          </FadeIn>
+
           {/* Status */}
           <FadeIn>
             <section>
@@ -274,102 +415,6 @@ const App: Component = () => {
 
           {/* Articles - Zenn記事 */}
           <ArticlesSection />
-
-          {/* Projects */}
-          <FadeIn>
-            <section>
-              <div class="relative mb-12">
-                <div class="flex items-center space-x-4">
-                  <div>
-                    <h2 class="text-4xl font-bold neon-glow">
-                      <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-red-400 to-pink-300">Projects</span>
-                    </h2>
-                  </div>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
-                  <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
-                  <div class="relative z-10">
-                    <div class="flex items-center mb-6">
-                      <img src="/icon.png" alt="takos" class="w-16 h-16 rounded-2xl mr-4 shadow-xl group-hover:scale-110 transition-transform duration-300" />
-                      <div>
-                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="takos">takos</h3>
-                        <div class="status-indicator mt-2">
-                          <span class="text-green-400">ACTIVE DEV</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <p class={`text-gray-300 mb-6 leading-relaxed luxury-paragraph`}>
-                      <span class="text-purple-400 font-medium">web自主基盤ソフトウェア</span>
-                    </p>
-                    <div class="flex justify-between items-center">
-                      <a href="https://github.com/tako0614/takos" class={`luxury-button text-sm`}>
-                        リポジトリを見る →
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
-                  <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
-                  <div class="relative z-10">
-                    <div class="flex items-center mb-6">
-                      <img src="/infonode.svg" alt="infonode" class="w-16 h-16 rounded-2xl mr-4 shadow-xl group-hover:scale-110 transition-transform duration-300" />
-                      <div>
-                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="infonode">infonode</h3>
-                        <div class="status-indicator mt-2">
-                          <span class="text-yellow-400">IN DEVELOPMENT</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <p class={`text-gray-300 mb-6 leading-relaxed luxury-paragraph`}>
-                      <span class="text-cyan-400 font-medium">glaphによる情報整理基盤</span>と<span class="text-blue-400 font-medium">AI agentによる自動化ソフトウェア</span>
-                    </p>
-                  </div>
-                </div>
-
-                <div class={`glass-card-dark p-8 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
-                  <div class="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
-                  <div class="relative z-10">
-                    <div class="flex items-center mb-6">
-                      <div class="w-16 h-16 rounded-2xl mr-4 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-3xl">
-                        🎵
-                      </div>
-                      <div>
-                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="music.takos.jp">music.takos.jp</h3>
-                        <div class="status-indicator mt-2">
-                          <span class="text-green-400">RELEASED</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <p class={`text-gray-300 mb-6 leading-relaxed luxury-paragraph`}>
-                      <span class="text-green-400 font-medium">作曲用プログラミング言語</span>
-                    </p>
-                    <div class="flex justify-between items-center">
-                      <a href="https://music.takos.jp" class={`luxury-button text-sm`}>
-                        サイトを見る →
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="mt-8">
-                <ExpandableText title="プロジェクト開発ポリシー">
-                  <p>私のプロジェクト開発において最も重視しているのは、<strong>シンプル</strong>と<strong>機能性</strong>の両立です。多くの現代サービスは便利さとプライバシーを天秤にかけていますが、私は両方を同時に実現できると信じています。</p>
-                  
-                  <p class="mt-4">また、持続可能な開発のために、コードの品質と再利用性も重視しています。きれいなコード構造と十分なドキュメントは、長期的にプロジェクトを維持するために不可欠だと考えています。</p>
-                  
-                  <p class="mt-4">プロジェクトのアイデアは日常生活の中での不便さや課題から生まれることが多く、自分自身が本当に必要だと感じるものを作るようにしています。そうすることで、開発のモチベーションを維持できると思っています。</p>
-                </ExpandableText>
-              </div>
-            </section>
-          </FadeIn>
 
           {/* Mutual Links */}
           <FadeIn>
