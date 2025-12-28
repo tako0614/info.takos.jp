@@ -1,9 +1,11 @@
 import { Component, createSignal, For } from 'solid-js';
 import { FadeIn } from './components/ui/FadeIn';
 import { ExpandableText } from './components/ui/ExpandableText';
+import { FloatingCard } from './components/ui/FloatingCard';
 import { GitHubIcon, XLogo, MailIcon, ChatIcon } from './components/ui/Icons';
 import { ScrollDarkeningEffect } from './components/animations/ScrollDarkeningEffect';
 import { TakoAnimation } from './components/animations/TakoAnimation';
+import { BubbleEffect } from './components/animations/BubbleEffect';
 import { AboutSection, SkillsSection, ArticlesSection } from './components/sections/Sections';
 import { mutualLinks } from './data/staticData';
 import type { TakoInstance } from './types';
@@ -24,6 +26,8 @@ const App: Component = () => {
     <div class="min-h-screen relative overflow-hidden transition-all duration-700 enhanced-deep-sea-gradient">
       {/* スクロール暗化エフェクト */}
       <ScrollDarkeningEffect />
+      {/* 気泡エフェクト */}
+      <BubbleEffect />
       <For each={takoInstances()}>
         {(tako) => <TakoAnimation id={tako.id} onClick={addTako} />}
       </For>
@@ -128,24 +132,30 @@ const App: Component = () => {
         
           {/* 強化されたソーシャルリンク */}
           <div class="flex justify-center mt-10 space-x-6">
-            <a href="https://github.com/tako0614" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
+            <FloatingCard floatIntensity={0.5}>
+            <a href="https://github.com/tako0614" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect block">
               <div class="absolute -inset-2 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
               <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
                 <GitHubIcon class="w-7 h-7 text-2xl filter drop-shadow-lg neon-glow" aria-hidden={false} title="GitHub" />
               </div>
             </a>
-            <a href="https://x.com/takos_jp" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
+            </FloatingCard>
+            <FloatingCard floatIntensity={0.6}>
+            <a href="https://x.com/takos_jp" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect block">
               <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
               <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-cyan-500 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
                 <XLogo class="w-7 h-7 text-2xl filter drop-shadow-lg neon-glow" aria-hidden={false} title="X / Twitter" />
               </div>
             </a>
-            <a href="mailto:shoutatomiyama0614@gmail.com" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect">
+            </FloatingCard>
+            <FloatingCard floatIntensity={0.55}>
+            <a href="mailto:shoutatomiyama0614@gmail.com" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect block">
               <div class="absolute -inset-2 bg-gradient-to-r from-red-600 to-pink-600 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
               <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-red-500 to-pink-500 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
                 <MailIcon class="w-7 h-7 text-2xl filter drop-shadow-lg neon-glow" aria-hidden={false} title="Email" />
               </div>
             </a>
+            </FloatingCard>
           </div>
         </FadeIn>
 
@@ -169,7 +179,8 @@ const App: Component = () => {
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* takos - メインプロジェクト */}
-                <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect md:col-span-2`}>
+                <FloatingCard class="md:col-span-2" floatIntensity={0.8}>
+                <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10 flex flex-col md:flex-row md:items-center gap-6">
                     <img src="/icon.png" alt="takos" class="w-24 h-24 rounded-3xl shadow-2xl group-hover:scale-110 transition-transform duration-300" />
@@ -189,8 +200,10 @@ const App: Component = () => {
                     </div>
                   </div>
                 </div>
+                </FloatingCard>
 
                 {/* infonode */}
+                <FloatingCard floatIntensity={1.2}>
                 <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10">
@@ -208,8 +221,10 @@ const App: Component = () => {
                     </p>
                   </div>
                 </div>
+                </FloatingCard>
 
                 {/* music.takos.jp */}
+                <FloatingCard floatIntensity={1.0}>
                 <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10">
@@ -232,8 +247,10 @@ const App: Component = () => {
                     </a>
                   </div>
                 </div>
+                </FloatingCard>
 
                 {/* roadtome */}
+                <FloatingCard floatIntensity={1.1}>
                 <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-amber-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10">
@@ -256,8 +273,10 @@ const App: Component = () => {
                     </a>
                   </div>
                 </div>
+                </FloatingCard>
 
                 {/* tako card */}
+                <FloatingCard floatIntensity={0.9}>
                 <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-rose-500/10 to-pink-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10">
@@ -280,6 +299,7 @@ const App: Component = () => {
                     </a>
                   </div>
                 </div>
+                </FloatingCard>
               </div>
 
               <div class="mt-8">
@@ -308,6 +328,7 @@ const App: Component = () => {
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <FloatingCard floatIntensity={1.0}>
                 <div class={`group glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden hologram-effect card-3d sound-wave-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10 space-y-6">
@@ -348,7 +369,9 @@ const App: Component = () => {
                     </div>
                   </div>
                 </div>
+                </FloatingCard>
 
+                <FloatingCard floatIntensity={1.1}>
                 <div class={`group glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden hologram-effect card-3d sound-wave-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10 space-y-6">
@@ -393,6 +416,7 @@ const App: Component = () => {
                     </div>
                   </div>
                 </div>
+                </FloatingCard>
               </div>
 
               {/* 日常生活の節を追加 */}
@@ -432,12 +456,13 @@ const App: Component = () => {
               
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <For each={mutualLinks}>
-                  {(link) => (
+                  {(link, index) => (
+                    <FloatingCard floatIntensity={0.9 + (index() % 3) * 0.15}>
                     <a
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class={`glass-card-dark p-6 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 group relative overflow-hidden`}
+                      class={`block glass-card-dark p-6 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 group relative overflow-hidden`}
                     >
                       <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       <div class="relative z-10">
@@ -461,6 +486,7 @@ const App: Component = () => {
                         </div>
                       </div>
                     </a>
+                    </FloatingCard>
                   )}
                 </For>
               </div>
@@ -496,9 +522,10 @@ const App: Component = () => {
               </p>
               
               <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 max-w-4xl mx-auto px-4">
+                <FloatingCard floatIntensity={0.6}>
                 <a
                   href="https://line.me/ti/g2/Q0c8YJlkh5f_hkDuODxp39XF9A7BOCFqezaAHA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
-                  class={`group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
+                  class="group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden"
                 >
                   <div class="absolute inset-0 bg-gradient-to-r from-green-500/10 to-teal-500/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center mb-2 md:mb-0 md:mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
@@ -506,10 +533,12 @@ const App: Component = () => {
                   </div>
                   <span class="font-semibold text-xs md:text-base relative z-10 text-center md:text-left">OpenChat</span>
                 </a>
-                
+                </FloatingCard>
+
+                <FloatingCard floatIntensity={0.7}>
                 <a
                   href="https://github.com/tako0614"
-                  class={`group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
+                  class="group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden"
                 >
                   <div class="absolute inset-0 bg-gradient-to-r from-gray-500/10 to-gray-700/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mb-2 md:mb-0 md:mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
@@ -517,10 +546,12 @@ const App: Component = () => {
                   </div>
                   <span class="font-semibold text-xs md:text-base relative z-10 text-center md:text-left">GitHub</span>
                 </a>
-                
+                </FloatingCard>
+
+                <FloatingCard floatIntensity={0.65}>
                 <a
                   href="https://x.com/takos_jp"
-                  class={`group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
+                  class="group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden"
                 >
                   <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-2 md:mb-0 md:mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
@@ -528,10 +559,12 @@ const App: Component = () => {
                   </div>
                   <span class="font-semibold text-xs md:text-base relative z-10 text-center md:text-left">Twitter・X</span>
                 </a>
-                
+                </FloatingCard>
+
+                <FloatingCard floatIntensity={0.75}>
                 <a
                   href="mailto:shoutatomiyama0614@gmail.com"
-                  class={`group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden`}
+                  class="group glass-card-dark p-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl transition-all duration-500 flex flex-col md:flex-row items-center hover:scale-105 hover:-translate-y-2 relative overflow-hidden"
                 >
                   <div class="absolute inset-0 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center mb-2 md:mb-0 md:mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
@@ -539,6 +572,7 @@ const App: Component = () => {
                   </div>
                   <span class="font-semibold text-xs md:text-base relative z-10 text-center md:text-left">Email</span>
                 </a>
+                </FloatingCard>
               </div>
             </section>
           </FadeIn>
@@ -546,13 +580,13 @@ const App: Component = () => {
 
         {/* フッター */}
         <FadeIn>
-          <footer class={`text-center text-gray-600 mt-20 border-t pt-8 'border-gray-600`}>
+          <footer class="text-center text-gray-600 mt-20 border-t pt-8 border-gray-600">
             <div class="max-w-4xl mx-auto">
               <p class="text-sm mb-4">
-                このサイトはSolidJS & Tailwind CSSで構築され、Deno Deployでホスティングされています。
-                ソースコードは<a href="https://github.com/tako0614/info.takos.jp" class="text-blue-600 hover:underline">GitHub</a>で公開しています。
+                このサイトはSolidJS & Tailwind CSSで構築され、Cloudflare Pagesでホスティングされています。
+                ソースコードは<a href="https://github.com/tako0614/info.takos.jp" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">GitHub</a>で公開しています。
               </p>
-              <p>© 2024 Tomiyama Shota. All rights reserved.</p>
+              <p>© 2025 Tomiyama Shota. All rights reserved.</p>
             </div>
           </footer>
         </FadeIn>
