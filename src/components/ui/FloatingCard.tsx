@@ -29,6 +29,7 @@ export const FloatingCard: Component<FloatingCardProps> = (props) => {
   let hasMoved = false;
   let longPressTimer: ReturnType<typeof setTimeout> | null = null;
   let isDragMode = false;
+  let currentTouchId: number | null = null;
 
   // タッチデバイス判定
   const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -71,84 +72,59 @@ export const FloatingCard: Component<FloatingCardProps> = (props) => {
     animationId = requestAnimationFrame(animateFloat);
   };
 
-  // タッチイベントを制御してスクロールを止める
-  const handleTouchMove = (e: TouchEvent) => {
-    if (isDragMode) {
-      e.preventDefault();
-    }
-  };
-
-  const startDragMode = (clientX: number, clientY: number) => {
-    isDragMode = true;
-    setIsDragging(true);
-    dragStart = { x: clientX, y: clientY };
-    initialOffset = { ...currentOffset };
-    velocity = { x: 0, y: 0 };
-    hasMoved = false;
-
-    // 振動フィードバック（対応デバイスのみ）
-    if (navigator.vibrate) {
-      navigator.vibrate(50);
-    }
-  };
-
-  const handlePointerDown = (e: PointerEvent) => {
+  // タッチイベントハンドラー
+  const handleTouchStart = (e: TouchEvent) => {
     // ボタンはそのまま動作させる
     if ((e.target as HTMLElement).closest('button')) return;
 
-    // PCの場合は即座にドラッグ開始
-    if (!isTouchDevice()) {
+    const touch = e.touches[0];
+    currentTouchId = touch.identifier;
+    dragStart = { x: touch.clientX, y: touch.clientY };
+
+    longPressTimer = setTimeout(() => {
       isDragMode = true;
       setIsDragging(true);
-      dragStart = { x: e.clientX, y: e.clientY };
       initialOffset = { ...currentOffset };
       velocity = { x: 0, y: 0 };
       hasMoved = false;
 
-      if (cardRef) {
-        cardRef.setPointerCapture(e.pointerId);
+      // 振動フィードバック
+      if (navigator.vibrate) {
+        navigator.vibrate(50);
       }
-      return;
-    }
-
-    // スマホの場合は長押しでドラッグ開始
-    dragStart = { x: e.clientX, y: e.clientY };
-
-    longPressTimer = setTimeout(() => {
-      startDragMode(e.clientX, e.clientY);
     }, LONG_PRESS_DURATION);
   };
 
-  const handlePointerMove = (e: PointerEvent) => {
-    // 長押し待機中に動いたらキャンセル（スクロール優先）
-    if (longPressTimer && !isDragMode) {
-      const deltaX = e.clientX - dragStart.x;
-      const deltaY = e.clientY - dragStart.y;
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+  const handleTouchMove = (e: TouchEvent) => {
+    const touch = Array.from(e.touches).find(t => t.identifier === currentTouchId);
+    if (!touch) return;
 
+    const deltaX = touch.clientX - dragStart.x;
+    const deltaY = touch.clientY - dragStart.y;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+    // 長押し待機中に動いたらキャンセル
+    if (longPressTimer && !isDragMode) {
       if (distance > 10) {
         clearTimeout(longPressTimer);
         longPressTimer = null;
+        currentTouchId = null;
         return;
       }
     }
 
     if (!isDragMode) return;
 
-    const deltaX = e.clientX - dragStart.x;
-    const deltaY = e.clientY - dragStart.y;
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    // ドラッグモード中はスクロールを阻止
+    e.preventDefault();
 
-    // 5px以上動いたらドラッグとみなす
     if (distance > 5) {
       hasMoved = true;
     }
 
-    // 自由に動かせる（制限なし）
     const newX = initialOffset.x + deltaX;
     const newY = initialOffset.y + deltaY;
 
-    // 速度を計算（慣性用）
     velocity.x = (newX - currentOffset.x) * 0.3;
     velocity.y = (newY - currentOffset.y) * 0.3;
 
@@ -157,27 +133,73 @@ export const FloatingCard: Component<FloatingCardProps> = (props) => {
 
     setOffset({ x: currentOffset.x, y: currentOffset.y });
 
-    // ドラッグ方向に傾ける
     setRotation({
       x: -deltaY * 0.05,
       y: deltaX * 0.05
     });
   };
 
-  const handlePointerUp = () => {
-    // 長押しタイマーをクリア
+  const handleTouchEnd = () => {
     if (longPressTimer) {
       clearTimeout(longPressTimer);
       longPressTimer = null;
     }
+
+    currentTouchId = null;
 
     if (!isDragMode) return;
     isDragMode = false;
     setIsDragging(false);
   };
 
+  // マウスイベントハンドラー（PC用）
+  const handleMouseDown = (e: MouseEvent) => {
+    if ((e.target as HTMLElement).closest('button')) return;
+    if (isTouchDevice()) return; // タッチデバイスではマウスイベントを無視
+
+    isDragMode = true;
+    setIsDragging(true);
+    dragStart = { x: e.clientX, y: e.clientY };
+    initialOffset = { ...currentOffset };
+    velocity = { x: 0, y: 0 };
+    hasMoved = false;
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragMode || isTouchDevice()) return;
+
+    const deltaX = e.clientX - dragStart.x;
+    const deltaY = e.clientY - dragStart.y;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+    if (distance > 5) {
+      hasMoved = true;
+    }
+
+    const newX = initialOffset.x + deltaX;
+    const newY = initialOffset.y + deltaY;
+
+    velocity.x = (newX - currentOffset.x) * 0.3;
+    velocity.y = (newY - currentOffset.y) * 0.3;
+
+    currentOffset.x = newX;
+    currentOffset.y = newY;
+
+    setOffset({ x: currentOffset.x, y: currentOffset.y });
+
+    setRotation({
+      x: -deltaY * 0.05,
+      y: deltaX * 0.05
+    });
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragMode || isTouchDevice()) return;
+    isDragMode = false;
+    setIsDragging(false);
+  };
+
   const handleClick = (e: MouseEvent) => {
-    // ドラッグ操作だった場合はクリックをキャンセル
     if (hasMoved) {
       e.preventDefault();
       e.stopPropagation();
@@ -187,10 +209,17 @@ export const FloatingCard: Component<FloatingCardProps> = (props) => {
   onMount(() => {
     animationId = requestAnimationFrame(animateFloat);
 
-    // タッチムーブイベントをpassive: falseで登録（スクロール阻止のため）
     if (cardRef) {
+      // タッチイベントを直接登録（passive: falseでスクロール阻止可能に）
+      cardRef.addEventListener('touchstart', handleTouchStart, { passive: true });
       cardRef.addEventListener('touchmove', handleTouchMove, { passive: false });
+      cardRef.addEventListener('touchend', handleTouchEnd, { passive: true });
+      cardRef.addEventListener('touchcancel', handleTouchEnd, { passive: true });
     }
+
+    // マウスイベントはドキュメント全体で捕捉（ドラッグ中に要素外に出ても追従）
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
   });
 
   onCleanup(() => {
@@ -199,8 +228,13 @@ export const FloatingCard: Component<FloatingCardProps> = (props) => {
       clearTimeout(longPressTimer);
     }
     if (cardRef) {
+      cardRef.removeEventListener('touchstart', handleTouchStart);
       cardRef.removeEventListener('touchmove', handleTouchMove);
+      cardRef.removeEventListener('touchend', handleTouchEnd);
+      cardRef.removeEventListener('touchcancel', handleTouchEnd);
     }
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
   });
 
   return (
@@ -212,12 +246,8 @@ export const FloatingCard: Component<FloatingCardProps> = (props) => {
         transition: isDragging() ? 'none' : 'transform 0.15s ease-out',
         'transform-style': 'preserve-3d',
         perspective: '1000px',
-        'touch-action': 'pan-x pan-y',
       }}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
+      onMouseDown={handleMouseDown}
       onClick={handleClick}
     >
       {props.children}
