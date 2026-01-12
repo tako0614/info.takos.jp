@@ -2,7 +2,7 @@ import { Component, createSignal, onMount, For } from 'solid-js';
 import { useScrollDarkening } from '../../hooks/useScrollDarkening';
 
 export const ScrollDarkeningEffect: Component = () => {
-  const { darkness, scrollProgress, getDepthLayer } = useScrollDarkening();
+  const { darkness, scrollProgress } = useScrollDarkening();
   const [particles, setParticles] = createSignal<Array<{id: number, x: number, y: number, delay: number}>>([]);
 
   // 深海の生物発光パーティクルを生成（軽量化: 20→8個）
@@ -16,19 +16,9 @@ export const ScrollDarkeningEffect: Component = () => {
     setParticles(particleArray);
   });
 
-  const getDepthInfo = () => {
-    const layer = getDepthLayer();
+  const getDepth = () => {
     const depth = Math.round(scrollProgress() * 11000); // 最大11km（マリアナ海溝）
-    
-    const layerInfo = {
-      surface: { name: '海面', depth: '0-200m', color: 'text-blue-300' },
-      twilight: { name: '薄明帯', depth: '200-1000m', color: 'text-blue-500' },
-      midnight: { name: '漸深帯', depth: '1000-4000m', color: 'text-blue-700' },
-      abyssal: { name: '深海帯', depth: '4000-6000m', color: 'text-gray-400' },
-      hadal: { name: '超深海帯', depth: '6000m-', color: 'text-gray-600' }
-    };
-    
-    return { ...layerInfo[layer as keyof typeof layerInfo], depth: `${depth}m` };
+    return `${depth}m`;
   };
 
   return (
@@ -67,14 +57,11 @@ export const ScrollDarkeningEffect: Component = () => {
       {/* 深度インジケーター */}
       <div class="fixed top-4 right-4 z-50 glass-card-dark p-4 rounded-xl text-white">
         <div class="text-xs font-mono space-y-1">
-          <div class={`font-bold ${getDepthInfo().color}`}>
-            {getDepthInfo().name}
-          </div>
           <div class="text-gray-300">
-            深度: {getDepthInfo().depth}
+            深度: {getDepth()}
           </div>
           <div class="w-20 h-1 bg-gray-700 rounded overflow-hidden">
-            <div 
+            <div
               class="h-full bg-gradient-to-r from-blue-400 to-gray-600 transition-all duration-300"
               style={{ width: `${scrollProgress() * 100}%` }}
             />
