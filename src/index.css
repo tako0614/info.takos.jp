@@ -108,14 +108,6 @@
   animation: spinOnce 0.8s ease-in-out;
 }
 
-/* 回転アニメーション */
-.animate-spin-slow {
-  animation: spinOnce 20s linear infinite;
-}
-
-.animate-reverse-spin {
-  animation: spinOnce 15s linear infinite reverse;
-}
 
 /* プロフィール発光 */
 @keyframes profileGlow {

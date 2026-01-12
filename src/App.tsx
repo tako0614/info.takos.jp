@@ -67,10 +67,6 @@ const App: Component = () => {
         <FadeIn class="text-center py-16">
           {/* より高度なプロフィール画像 */}
           <div class="relative w-48 h-48 md:w-56 md:h-56 mx-auto mb-8">
-            {/* 外側のエネルギーリング */}
-            <div class="absolute -inset-8 rounded-full border-2 border-purple-500/20 animate-spin-slow"></div>
-            <div class="absolute -inset-6 rounded-full border border-cyan-500/30 animate-reverse-spin"></div>
-            <div class="absolute -inset-4 rounded-full border border-pink-500/25"></div>
             
             {/* メインプロフィール */}
             <div
@@ -82,40 +78,13 @@ const App: Component = () => {
                 addTako();
               }}
               onAnimationEnd={() => setRotate(false)}
-              style={{
-                background: 'conic-gradient(from 0deg, rgba(168, 85, 247, 0.8), rgba(59, 130, 246, 0.8), rgba(236, 72, 153, 0.8), rgba(34, 197, 94, 0.8), rgba(168, 85, 247, 0.8))',
-                'box-shadow': '0 0 60px rgba(168, 85, 247, 0.8), 0 0 120px rgba(168, 85, 247, 0.4), inset 0 0 30px rgba(255, 255, 255, 0.2)',
-                animation: 'profileGlow 4s ease-in-out infinite alternate, energyPulse 6s ease-in-out infinite'
-              }}
             >
-              {/* 内側のコンテナ */}
-              <div class="absolute inset-2 rounded-full overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 quantum-effect">
-                <img
-                  src="./icon.png"
-                  alt="プロフィールアイコン"
-                  class="w-full h-full object-cover filter brightness-110 contrast-110 saturate-110"
-                />
-                {/* ホログラム効果オーバーレイ */}
-                <div class="absolute inset-0 bg-gradient-to-br from-transparent via-cyan-400/10 to-transparent animate-pulse"></div>
-              </div>
-              
-              {/* 回転するライトリング */}
-              <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/20 to-transparent animate-spin pulse-wave"></div>
-              <div class="absolute inset-1 rounded-full bg-gradient-to-bl from-transparent via-purple-400/20 to-transparent animate-reverse-spin"></div>
-              
-              {/* 上部インジケーター */}
-              <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-8 h-2 bg-gradient-to-r from-purple-500 via-cyan-400 to-purple-500 rounded-full opacity-80 animate-pulse"></div>
-              
-              {/* エネルギー球 */}
-              <div class="absolute top-4 right-4 w-4 h-4 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-bounce shadow-lg shadow-cyan-400/50"></div>
-              <div class="absolute bottom-4 left-4 w-3 h-3 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full animate-pulse shadow-lg shadow-pink-400/50"></div>
+              <img
+                src="./icon.png"
+                alt="プロフィールアイコン"
+                class="w-full h-full object-cover"
+              />
             </div>
-            
-            {/* 浮遊パーティクル */}
-            <div class="absolute top-0 left-8 w-2 h-2 bg-purple-400 rounded-full animate-float opacity-60"></div>
-            <div class="absolute top-8 right-0 w-1.5 h-1.5 bg-cyan-400 rounded-full animate-float opacity-70" style="animation-delay: 1s"></div>
-            <div class="absolute bottom-8 left-0 w-1 h-1 bg-pink-400 rounded-full animate-float opacity-50" style="animation-delay: 2s"></div>
-            <div class="absolute bottom-0 right-8 w-1.5 h-1.5 bg-green-400 rounded-full animate-float opacity-60" style="animation-delay: 0.5s"></div>
           </div>
           
           <div class="relative">
@@ -134,25 +103,25 @@ const App: Component = () => {
           <div class="flex justify-center mt-10 space-x-6">
             <FloatingCard floatIntensity={0.5}>
             <a href="https://github.com/tako0614" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect block">
-              <div class="absolute -inset-2 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
-              <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
-                <GitHubIcon class="w-7 h-7 text-2xl filter drop-shadow-lg neon-glow" aria-hidden={false} title="GitHub" />
+              <div class="absolute -inset-2 bg-gradient-to-r from-gray-800 to-black rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
+              <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-gray-800 to-black backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
+                <GitHubIcon class="w-7 h-7 text-2xl text-white filter drop-shadow-lg neon-glow" aria-hidden={false} title="GitHub" />
               </div>
             </a>
             </FloatingCard>
             <FloatingCard floatIntensity={0.6}>
             <a href="https://x.com/takos_jp" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect block">
-              <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
-              <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-cyan-500 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
-                <XLogo class="w-7 h-7 text-2xl filter drop-shadow-lg neon-glow" aria-hidden={false} title="X / Twitter" />
+              <div class="absolute -inset-2 bg-gradient-to-r from-gray-800 to-black rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
+              <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-gray-800 to-black backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
+                <XLogo class="w-7 h-7 text-2xl text-white filter drop-shadow-lg neon-glow" aria-hidden={false} title="X / Twitter" />
               </div>
             </a>
             </FloatingCard>
             <FloatingCard floatIntensity={0.55}>
             <a href="mailto:shoutatomiyama0614@gmail.com" class="group relative transform transition-all duration-500 hover:scale-125 hover:-translate-y-2 sound-wave-effect block">
-              <div class="absolute -inset-2 bg-gradient-to-r from-red-600 to-pink-600 rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
-              <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-red-500 to-pink-500 backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
-                <MailIcon class="w-7 h-7 text-2xl filter drop-shadow-lg neon-glow" aria-hidden={false} title="Email" />
+              <div class="absolute -inset-2 bg-gradient-to-r from-gray-800 to-black rounded-full blur opacity-0 group-hover:opacity-50 transition duration-500 energy-field"></div>
+              <div class="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-gray-800 to-black backdrop-blur-md border border-white/20 shadow-xl hologram-effect pulse-wave">
+                <MailIcon class="w-7 h-7 text-2xl text-white filter drop-shadow-lg neon-glow" aria-hidden={false} title="Email" />
               </div>
             </a>
             </FloatingCard>
@@ -223,17 +192,17 @@ const App: Component = () => {
                 </div>
                 </FloatingCard>
 
-                {/* music.takos.jp */}
+                {/* tako music */}
                 <FloatingCard floatIntensity={1.0}>
                 <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10">
                     <div class="flex items-center mb-6">
-                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-4xl">
-                        🎵
+                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center overflow-hidden">
+                        <img src="./tako.png" alt="tako music" class="w-full h-full object-cover" />
                       </div>
                       <div>
-                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="music.takos.jp">music.takos.jp</h3>
+                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="tako music">tako music</h3>
                         <div class="status-indicator mt-2">
                           <span class="text-green-400">RELEASED</span>
                         </div>
@@ -255,8 +224,8 @@ const App: Component = () => {
                   <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-amber-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10">
                     <div class="flex items-center mb-6">
-                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-4xl">
-                        🛤️
+                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center overflow-hidden">
+                        <img src="./tako.png" alt="roadtome" class="w-full h-full object-cover" />
                       </div>
                       <div>
                         <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="roadtome">roadtome</h3>
@@ -266,7 +235,7 @@ const App: Component = () => {
                       </div>
                     </div>
                     <p class="text-gray-300 leading-relaxed luxury-paragraph text-lg mb-4">
-                      <span class="text-orange-400 font-medium">road.takos.jp</span>
+                      <span class="text-orange-400 font-medium">目標管理・自己成長ツール</span>
                     </p>
                     <a href="https://road.takos.jp" class="luxury-button inline-block">
                       サイトを見る →
@@ -281,8 +250,8 @@ const App: Component = () => {
                   <div class="absolute inset-0 bg-gradient-to-br from-rose-500/10 to-pink-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10">
                     <div class="flex items-center mb-6">
-                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-4xl">
-                        🃏
+                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center overflow-hidden">
+                        <img src="./tako.png" alt="tako card" class="w-full h-full object-cover" />
                       </div>
                       <div>
                         <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="tako card">tako card</h3>
@@ -292,10 +261,62 @@ const App: Component = () => {
                       </div>
                     </div>
                     <p class="text-gray-300 leading-relaxed luxury-paragraph text-lg mb-4">
-                      <span class="text-rose-400 font-medium">card.takos.jp</span>
+                      <span class="text-rose-400 font-medium">フラッシュカード学習ツール</span>
                     </p>
                     <a href="https://card.takos.jp" class="luxury-button inline-block">
                       サイトを見る →
+                    </a>
+                  </div>
+                </div>
+                </FloatingCard>
+
+                {/* takoscript */}
+                <FloatingCard floatIntensity={1.0}>
+                <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-purple-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
+                  <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center overflow-hidden">
+                        <img src="./tako.png" alt="takoscript" class="w-full h-full object-cover" />
+                      </div>
+                      <div>
+                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="takoscript">takoscript</h3>
+                        <div class="status-indicator mt-2">
+                          <span class="text-green-400">RELEASED</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed luxury-paragraph text-lg mb-4">
+                      <span class="text-violet-400 font-medium">JavaScriptをネイティブコードにコンパイルするコンパイラ兼ランタイム</span>
+                    </p>
+                    <a href="https://github.com/tako0614/takoscript" class="luxury-button inline-block">
+                      リポジトリを見る →
+                    </a>
+                  </div>
+                </div>
+                </FloatingCard>
+
+                {/* yurucommu */}
+                <FloatingCard floatIntensity={1.1}>
+                <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-cyan-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
+                  <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center overflow-hidden">
+                        <img src="./tako.png" alt="yurucommu" class="w-full h-full object-cover" />
+                      </div>
+                      <div>
+                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="yurucommu">yurucommu</h3>
+                        <div class="status-indicator mt-2">
+                          <span class="text-green-400">RELEASED</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed luxury-paragraph text-lg mb-4">
+                      <span class="text-teal-400 font-medium">分散型SNS</span>
+                    </p>
+                    <a href="https://github.com/tako0614/yurucommu" class="luxury-button inline-block">
+                      リポジトリを見る →
                     </a>
                   </div>
                 </div>
@@ -335,7 +356,7 @@ const App: Component = () => {
                     <div class="flex items-center space-x-4">
                       <FiUser size={24} class="text-purple-400" />
                       <div>
-                        <h3 class="luxury-text-subtitle neon-glow">お名前</h3>
+                        <h3 class="luxury-text-subtitle neon-glow">名前</h3>
                         <p class="luxury-paragraph text-base">
                           <span class="gradient-text-luxury">冨山 翔太</span> <span class="luxury-mono text-sm">(Tomiyama Shota)</span>
                         </p>
@@ -345,7 +366,7 @@ const App: Component = () => {
                       <FiCalendar size={24} class="text-cyan-400" />
                       <div>
                         <h3 class="luxury-text-subtitle neon-glow">年齢</h3>
-                        <p class="luxury-paragraph text-base"><span class="text-cyan-400 font-medium">16</span>歳 <span class="luxury-caption">高校生世代</span></p>
+                        <p class="luxury-paragraph text-base"><span class="text-cyan-400 font-medium">17</span>歳</p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
@@ -353,7 +374,7 @@ const App: Component = () => {
                       <div>
                         <h3 class="luxury-text-subtitle neon-glow">拠点</h3>
                         <p class="luxury-paragraph text-base">
-                          <span class="text-green-400 font-medium">大阪市</span>生野区 <span class="luxury-caption">関西圏</span>
+                          <span class="text-green-400 font-medium">大阪市</span>生野区
                         </p>
                       </div>
                     </div>
@@ -364,7 +385,6 @@ const App: Component = () => {
                         <p class="luxury-paragraph text-base">
                           <span class="text-orange-400 font-medium">大阪府立清水谷高等学校</span>
                         </p>
-                        <p class="luxury-caption">公立進学校</p>
                       </div>
                     </div>
                   </div>
@@ -380,7 +400,7 @@ const App: Component = () => {
                       <div>
                         <h3 class="luxury-text-subtitle neon-glow">料理の嗜好</h3>
                         <p class="luxury-paragraph text-base">
-                          <span class="text-yellow-400 font-medium">寿司</span> <span class="luxury-caption">日本料理</span>
+                          <span class="text-yellow-400 font-medium">寿司</span>
                         </p>
                       </div>
                     </div>
@@ -391,7 +411,6 @@ const App: Component = () => {
                         <p class="luxury-paragraph text-base">
                           <span class="gradient-text-luxury">お兄ちゃんはおしまい！</span>
                         </p>
-                        <p class="luxury-caption">日常系コメディ漫画</p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
@@ -401,7 +420,6 @@ const App: Component = () => {
                         <p class="luxury-paragraph text-base">
                           <span class="text-cyan-400 font-medium">サイダー</span>, <span class="text-blue-400 font-medium">コーラ</span>, <span class="text-amber-400 font-medium">コーヒー</span>
                         </p>
-                        <p class="luxury-caption">カフェイン & 炭酸系</p>
                       </div>
                     </div>
                     <div class="flex items-center space-x-4">
@@ -411,7 +429,6 @@ const App: Component = () => {
                         <p class="luxury-paragraph text-base">
                           <span class="text-indigo-400 font-medium">日本維新の会</span>, <span class="text-blue-400 font-medium">自由民主党</span>
                         </p>
-                        <p class="luxury-caption">改革志向・保守</p>
                       </div>
                     </div>
                   </div>
@@ -512,7 +529,6 @@ const App: Component = () => {
                     <h2 class="text-4xl font-bold neon-glow">
                       <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-300">Contact</span>
                     </h2>
-                    <div class="text-sm text-gray-400 font-mono mt-2">連絡手段 | CONTACT.ini</div>
                   </div>
                 </div>
               </div>
