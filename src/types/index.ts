@@ -30,5 +30,4 @@ export interface SkillData {
   text: string;
   icon: Component<{ size?: number; class?: string }>;
   color: string;
-  level: number;
 }
