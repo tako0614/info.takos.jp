@@ -212,7 +212,7 @@ const App: Component = () => {
               onAnimationEnd={() => setRotate(false)}
             >
               <img
-                src="./icon.png"
+                src="./icon.jpg"
                 alt="プロフィールアイコン"
                 class="w-full h-full object-cover"
               />
@@ -284,7 +284,7 @@ const App: Component = () => {
                 <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
                   <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
                   <div class="relative z-10 flex flex-col md:flex-row md:items-center gap-6">
-                    <img src="/icon.png" alt="takos" class="w-24 h-24 rounded-3xl shadow-2xl group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/icon.jpg" alt="takos" class="w-24 h-24 rounded-3xl shadow-2xl group-hover:scale-110 transition-transform duration-300" />
                     <div class="flex-1">
                       <div class="flex items-center gap-4 mb-3">
                         <h3 class="text-3xl font-bold neon-glow glitch-effect" data-text="takos">takos</h3>
