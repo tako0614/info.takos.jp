@@ -26,6 +26,83 @@ const App: Component = () => {
     <div class="min-h-screen relative overflow-hidden transition-all duration-700 enhanced-deep-sea-gradient">
       {/* スクロール暗化エフェクト */}
       <ScrollDarkeningEffect />
+
+      {/* 太陽 - 空のセクション用 */}
+      <div class="absolute top-[8vh] right-[15vw] w-24 h-24 md:w-32 md:h-32 pointer-events-none z-5">
+        <div class="relative w-full h-full">
+          {/* 太陽の光芒 */}
+          <div class="absolute inset-0 bg-gradient-radial from-yellow-200/60 via-orange-300/30 to-transparent rounded-full blur-xl scale-150 animate-pulse"></div>
+          {/* 太陽本体 */}
+          <div class="absolute inset-0 bg-gradient-to-br from-yellow-300 via-yellow-400 to-orange-400 rounded-full shadow-lg"
+               style="box-shadow: 0 0 60px rgba(255, 200, 50, 0.8), 0 0 120px rgba(255, 150, 50, 0.4);">
+          </div>
+        </div>
+      </div>
+
+      {/* 雲 - 空のセクション用 */}
+      <div class="absolute top-[5vh] left-[5vw] pointer-events-none z-4 opacity-80">
+        <div class="w-32 h-12 md:w-48 md:h-16 bg-white/70 rounded-full blur-sm"></div>
+        <div class="w-20 h-10 md:w-28 md:h-12 bg-white/60 rounded-full blur-sm -mt-6 ml-8"></div>
+      </div>
+      <div class="absolute top-[15vh] left-[35vw] pointer-events-none z-4 opacity-70">
+        <div class="w-24 h-10 md:w-36 md:h-14 bg-white/60 rounded-full blur-sm"></div>
+        <div class="w-16 h-8 md:w-24 md:h-10 bg-white/50 rounded-full blur-sm -mt-5 ml-6"></div>
+      </div>
+      <div class="absolute top-[8vh] left-[60vw] pointer-events-none z-4 opacity-60">
+        <div class="w-20 h-8 md:w-32 md:h-12 bg-white/50 rounded-full blur-sm"></div>
+      </div>
+
+      {/* 水面の波 - 空と海の境界 */}
+      <div class="absolute top-[calc(50vh-40px)] left-0 right-0 pointer-events-none z-5 overflow-hidden h-[300px]">
+        {/* 後ろの波 - 空色に近い */}
+        <svg class="wave-layer wave-back absolute top-0 left-0 w-[200%] h-[60px]" viewBox="0 0 1440 60" preserveAspectRatio="none">
+          <path
+            fill="#5DADE2"
+            d="M0,30 C120,50 240,15 360,35 C480,55 600,20 720,35 C840,50 960,20 1080,35 C1200,50 1320,25 1440,40 L1440,60 L0,60 Z"
+          />
+        </svg>
+        {/* 中間の波 - 水面色 */}
+        <svg class="wave-layer wave-mid absolute top-[15px] left-0 w-[200%] h-[50px]" viewBox="0 0 1440 50" preserveAspectRatio="none">
+          <path
+            fill="#2980B9"
+            d="M0,25 C180,10 360,40 540,20 C720,5 900,35 1080,18 C1260,5 1350,30 1440,22 L1440,50 L0,50 Z"
+          />
+        </svg>
+        {/* 前の波 - 海の色と完全にマッチ + 下に大きく伸びる */}
+        <svg class="wave-layer wave-front absolute top-[30px] left-0 w-[200%] h-[270px]" viewBox="0 0 1440 270" preserveAspectRatio="none">
+          <path
+            fill="#1B6B93"
+            d="M0,25 C144,10 288,40 432,22 C576,5 720,38 864,20 C1008,5 1152,35 1296,18 C1368,10 1404,28 1440,22 L1440,270 L0,270 Z"
+          />
+        </svg>
+        {/* 水面の光の反射 */}
+        <div class="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white/20 to-transparent"></div>
+      </div>
+
+      <style>{`
+        .wave-layer {
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+        }
+        .wave-back {
+          animation: waveScroll 12s linear infinite;
+        }
+        .wave-mid {
+          animation: waveScroll 8s linear infinite reverse;
+        }
+        .wave-front {
+          animation: waveScroll 6s linear infinite;
+        }
+        @keyframes waveScroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
+
       {/* 気泡エフェクト */}
       <BubbleEffect />
       <For each={takoInstances()}>
@@ -44,20 +121,20 @@ const App: Component = () => {
         <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-cyan-300/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:translate-x-full transition-all duration-700 transform -translate-x-full"></div>
       </button>
 
-      {/* 軽量化された背景エフェクト */}
+      {/* 軽量化された背景エフェクト - 海のセクションから開始 */}
       <div
-        class="absolute inset-0 bg-[url('/nya.jpg')] bg-cover bg-center opacity-20 mix-blend-overlay"
+        class="absolute left-0 right-0 top-[50vh] bottom-0 bg-[url('/nya.jpg')] bg-cover bg-center opacity-20 mix-blend-overlay"
         aria-hidden="true"
       ></div>
-      
-      {/* ダークモード専用グラデーションオーバーレイ */}
-      <div 
-        class="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-transparent"
+
+      {/* 海のセクション用グラデーションオーバーレイ */}
+      <div
+        class="absolute left-0 right-0 top-[50vh] bottom-0 bg-gradient-to-br from-purple-900/10 to-transparent"
         aria-hidden="true"
       ></div>
-      
-      {/* 軽量化された装飾（アニメーション削除） */}
-      <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+
+      {/* 軽量化された装飾（海のセクション用） */}
+      <div class="absolute top-[50vh] left-0 w-full h-full overflow-hidden pointer-events-none">
         <div class="absolute -top-20 -left-20 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
         <div class="absolute top-1/3 -right-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
       </div>

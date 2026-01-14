@@ -49,7 +49,7 @@ export const BubbleEffect: Component = () => {
   });
 
   return (
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+    <div class="fixed top-[50vh] left-0 right-0 bottom-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
       <For each={bubbles()}>
         {(bubble) => (
           <div
@@ -78,13 +78,13 @@ export const BubbleEffect: Component = () => {
             opacity: 1;
           }
           50% {
-            transform: translateY(-50vh) translateX(20px) scale(1.1);
+            transform: translateY(-25vh) translateX(20px) scale(1.1);
           }
           90% {
-            opacity: 0.8;
+            opacity: 0.6;
           }
           100% {
-            transform: translateY(-110vh) translateX(-10px) scale(0.8);
+            transform: translateY(-50vh) translateX(-10px) scale(0.8);
             opacity: 0;
           }
         }
