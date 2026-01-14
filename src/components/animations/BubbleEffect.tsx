@@ -49,7 +49,11 @@ export const BubbleEffect: Component = () => {
   });
 
   return (
-    <div class="fixed top-[50vh] left-0 right-0 bottom-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+    <div
+      class="fixed left-0 right-0 pointer-events-none overflow-hidden z-3"
+      style="top: 50vh; bottom: 0;"
+      aria-hidden="true"
+    >
       <For each={bubbles()}>
         {(bubble) => (
           <div
@@ -80,11 +84,12 @@ export const BubbleEffect: Component = () => {
           50% {
             transform: translateY(-25vh) translateX(20px) scale(1.1);
           }
-          90% {
+          85% {
             opacity: 0.6;
           }
           100% {
-            transform: translateY(-50vh) translateX(-10px) scale(0.8);
+            /* コンテナ内を下端から上端（水面）まで上昇 */
+            transform: translateY(-52vh) translateX(-10px) scale(0.8);
             opacity: 0;
           }
         }
