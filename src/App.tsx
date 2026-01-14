@@ -27,7 +27,7 @@ const App: Component = () => {
       <ScrollDarkeningEffect />
 
       {/* 太陽 - 空のセクション用 */}
-      <div class="absolute top-[8vh] right-[15vw] w-24 h-24 md:w-32 md:h-32 pointer-events-none z-5">
+      <div class="absolute top-[8vh] right-[15vw] w-24 h-24 md:w-32 md:h-32 pointer-events-none z-[3]">
         <div class="relative w-full h-full">
           {/* 太陽の光芒 */}
           <div class="absolute inset-0 bg-gradient-radial from-yellow-200/60 via-orange-300/30 to-transparent rounded-full blur-xl scale-150 animate-pulse"></div>
@@ -39,20 +39,20 @@ const App: Component = () => {
       </div>
 
       {/* 雲 - 空のセクション用 */}
-      <div class="absolute top-[5vh] left-[5vw] pointer-events-none z-4 opacity-80">
+      <div class="absolute top-[5vh] left-[5vw] pointer-events-none z-[3] opacity-80">
         <div class="w-32 h-12 md:w-48 md:h-16 bg-white/70 rounded-full blur-sm"></div>
         <div class="w-20 h-10 md:w-28 md:h-12 bg-white/60 rounded-full blur-sm -mt-6 ml-8"></div>
       </div>
-      <div class="absolute top-[15vh] left-[35vw] pointer-events-none z-4 opacity-70">
+      <div class="absolute top-[15vh] left-[35vw] pointer-events-none z-[3] opacity-70">
         <div class="w-24 h-10 md:w-36 md:h-14 bg-white/60 rounded-full blur-sm"></div>
         <div class="w-16 h-8 md:w-24 md:h-10 bg-white/50 rounded-full blur-sm -mt-5 ml-6"></div>
       </div>
-      <div class="absolute top-[8vh] left-[60vw] pointer-events-none z-4 opacity-60">
+      <div class="absolute top-[8vh] left-[60vw] pointer-events-none z-[3] opacity-60">
         <div class="w-20 h-8 md:w-32 md:h-12 bg-white/50 rounded-full blur-sm"></div>
       </div>
 
       {/* 水面の波 - 多層で深みを表現 */}
-      <div class="absolute top-[calc(40vh-40px)] left-0 right-0 pointer-events-none z-5 overflow-hidden h-[100vh]">
+      <div class="absolute top-[calc(40vh-40px)] left-0 right-0 pointer-events-none z-[2] overflow-hidden h-[100vh]">
 
         {/* Layer 1: 最奥 - 淡い空色、大きくゆったり */}
         <svg class="wave-1 absolute top-[-5px] left-0 w-[200%] h-[80px]" viewBox="0 0 1440 80" preserveAspectRatio="none">
@@ -105,10 +105,10 @@ const App: Component = () => {
         <div class="absolute top-[10px] left-0 w-[200%] h-[30px] shimmer-layer opacity-30"></div>
       </div>
 
-      {/* 波と背景グラデーションの接続層 */}
+      {/* 波と背景グラデーションの接続層 - 確実にカバー */}
       <div
-        class="absolute left-0 right-0 pointer-events-none z-4"
-        style="top: calc(140vh - 40px); height: 60vh; background: #1B6B93;"
+        class="absolute left-0 right-0 pointer-events-none z-[1]"
+        style="top: calc(140vh - 40px); height: 120vh; background: #1B6B93;"
       ></div>
 
       <style>{`
@@ -188,18 +188,9 @@ const App: Component = () => {
         <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-cyan-300/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:translate-x-full transition-all duration-700 transform -translate-x-full"></div>
       </button>
 
-      {/* 軽量化された背景エフェクト - 海のセクションから開始 */}
-
-
-      {/* 海のセクション用グラデーションオーバーレイ */}
-      <div
-        class="absolute left-0 right-0 top-[40vh] bottom-0 bg-gradient-to-br from-purple-900/10 to-transparent"
-        aria-hidden="true"
-      ></div>
-
-      {/* 軽量化された装飾（海のセクション用） */}
-      <div class="absolute top-[40vh] left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div class="absolute -top-20 -left-20 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+      {/* 軽量化された装飾（深海セクション用） - 境界線を作らないように調整 */}
+      <div class="absolute top-[260vh] left-0 w-full h-[240vh] overflow-hidden pointer-events-none z-1">
+        <div class="absolute top-20 -left-20 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
         <div class="absolute top-1/3 -right-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
       </div>
 
@@ -236,8 +227,8 @@ const App: Component = () => {
           </div>
           
           <div class="luxury-paragraph-lead text-center mb-8">
-            <span class="luxury-mono text-cyan-400">IDENTITY:</span> 
-            <span class="gradient-text-luxury luxury-text-title">Tomiyama Shota</span>
+            <span class="luxury-mono text-amber-300">IDENTITY:</span>
+            <span class="text-white font-bold tracking-wider">Tomiyama Shota</span>
           </div>
         
           {/* 強化されたソーシャルリンク */}
