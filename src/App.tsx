@@ -5,7 +5,6 @@ import { FloatingCard } from './components/ui/FloatingCard';
 import { GitHubIcon, XLogo, MailIcon, ChatIcon } from './components/ui/Icons';
 import { ScrollDarkeningEffect } from './components/animations/ScrollDarkeningEffect';
 import { TakoAnimation } from './components/animations/TakoAnimation';
-import { BubbleEffect } from './components/animations/BubbleEffect';
 import { AboutSection, SkillsSection, ArticlesSection } from './components/sections/Sections';
 import { mutualLinks } from './data/staticData';
 import type { TakoInstance } from './types';
@@ -52,48 +51,118 @@ const App: Component = () => {
         <div class="w-20 h-8 md:w-32 md:h-12 bg-white/50 rounded-full blur-sm"></div>
       </div>
 
-      {/* 水面の波 - 空と海の境界 */}
-      <div class="absolute top-[calc(50vh-40px)] left-0 right-0 pointer-events-none z-5 overflow-hidden h-[300px]">
-        {/* 後ろの波 - 空色に近い */}
-        <svg class="wave-layer wave-back absolute top-0 left-0 w-[200%] h-[60px]" viewBox="0 0 1440 60" preserveAspectRatio="none">
+      {/* 水面の波 - 多層で深みを表現 */}
+      <div class="absolute top-[calc(40vh-40px)] left-0 right-0 pointer-events-none z-5 overflow-hidden h-[100vh]">
+
+        {/* Layer 1: 最奥 - 淡い空色、大きくゆったり */}
+        <svg class="wave-1 absolute top-[-5px] left-0 w-[200%] h-[80px]" viewBox="0 0 1440 80" preserveAspectRatio="none">
           <path
-            fill="#5DADE2"
-            d="M0,30 C120,50 240,15 360,35 C480,55 600,20 720,35 C840,50 960,20 1080,35 C1200,50 1320,25 1440,40 L1440,60 L0,60 Z"
+            fill="rgba(135, 206, 235, 0.6)"
+            d="M0,40 C180,60 360,20 540,45 C720,70 900,25 1080,50 C1260,75 1350,30 1440,45 L1440,80 L0,80 Z"
           />
         </svg>
-        {/* 中間の波 - 水面色 */}
-        <svg class="wave-layer wave-mid absolute top-[15px] left-0 w-[200%] h-[50px]" viewBox="0 0 1440 50" preserveAspectRatio="none">
+
+        {/* Layer 2: 後方 - 水色、少し速く */}
+        <svg class="wave-2 absolute top-[5px] left-0 w-[200%] h-[70px]" viewBox="0 0 1440 70" preserveAspectRatio="none">
           <path
-            fill="#2980B9"
-            d="M0,25 C180,10 360,40 540,20 C720,5 900,35 1080,18 C1260,5 1350,30 1440,22 L1440,50 L0,50 Z"
+            fill="rgba(93, 173, 226, 0.7)"
+            d="M0,35 C120,55 240,15 360,40 C480,65 600,20 720,45 C840,70 960,25 1080,50 C1200,75 1320,30 1440,55 L1440,70 L0,70 Z"
           />
         </svg>
-        {/* 前の波 - 海の色と完全にマッチ + 下に大きく伸びる */}
-        <svg class="wave-layer wave-front absolute top-[30px] left-0 w-[200%] h-[270px]" viewBox="0 0 1440 270" preserveAspectRatio="none">
+
+        {/* Layer 3: 中間 - ターコイズ系、逆方向 */}
+        <svg class="wave-3 absolute top-[15px] left-0 w-[200%] h-[60px]" viewBox="0 0 1440 60" preserveAspectRatio="none">
           <path
-            fill="#1B6B93"
-            d="M0,25 C144,10 288,40 432,22 C576,5 720,38 864,20 C1008,5 1152,35 1296,18 C1368,10 1404,28 1440,22 L1440,270 L0,270 Z"
+            fill="rgba(41, 128, 185, 0.75)"
+            d="M0,30 C144,50 288,10 432,35 C576,60 720,15 864,40 C1008,65 1152,20 1296,45 C1368,55 1404,25 1440,35 L1440,60 L0,60 Z"
           />
         </svg>
-        {/* 水面の光の反射 */}
-        <div class="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white/20 to-transparent"></div>
+
+        {/* Layer 4: 前方 - 深い青 */}
+        <svg class="wave-4 absolute top-[25px] left-0 w-[200%] h-[55px]" viewBox="0 0 1440 55" preserveAspectRatio="none">
+          <path
+            fill="rgba(26, 82, 118, 0.85)"
+            d="M0,28 C180,45 360,10 540,32 C720,55 900,12 1080,35 C1260,58 1350,18 1440,38 L1440,55 L0,55 Z"
+          />
+        </svg>
+
+        {/* Layer 5: 最前面 - 海の色、下に大きく伸びる */}
+        <svg class="wave-5 absolute top-[35px] left-0 w-[200%] h-[calc(100vh-35px)]" viewBox="0 0 1440 1000" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="waveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#1B6B93;stop-opacity:1" />
+              <stop offset="5%" style="stop-color:#1B6B93;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#1B6B93;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#waveGradient)"
+            d="M0,25 C144,8 288,42 432,20 C576,2 720,40 864,18 C1008,0 1152,38 1296,15 C1368,5 1404,30 1440,20 L1440,1000 L0,1000 Z"
+          />
+        </svg>
+
+        {/* 水面のきらめき効果 */}
+        <div class="absolute top-[10px] left-0 w-[200%] h-[30px] shimmer-layer opacity-30"></div>
       </div>
 
+      {/* 波と背景グラデーションの接続層 */}
+      <div
+        class="absolute left-0 right-0 pointer-events-none z-4"
+        style="top: calc(140vh - 40px); height: 60vh; background: #1B6B93;"
+      ></div>
+
       <style>{`
-        .wave-layer {
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
+        .wave-1 {
+          animation: waveFlow 18s ease-in-out infinite;
         }
-        .wave-back {
-          animation: waveScroll 12s linear infinite;
+        .wave-2 {
+          animation: waveFlow 14s ease-in-out infinite;
+          animation-delay: -2s;
         }
-        .wave-mid {
-          animation: waveScroll 8s linear infinite reverse;
+        .wave-3 {
+          animation: waveFlowReverse 11s ease-in-out infinite;
         }
-        .wave-front {
-          animation: waveScroll 6s linear infinite;
+        .wave-4 {
+          animation: waveFlow 9s ease-in-out infinite;
+          animation-delay: -1s;
         }
-        @keyframes waveScroll {
+        .wave-5 {
+          animation: waveFlow 7s ease-in-out infinite;
+        }
+
+        @keyframes waveFlow {
+          0%, 100% {
+            transform: translateX(0);
+          }
+          50% {
+            transform: translateX(-25%);
+          }
+        }
+
+        @keyframes waveFlowReverse {
+          0%, 100% {
+            transform: translateX(-25%);
+          }
+          50% {
+            transform: translateX(0);
+          }
+        }
+
+        .shimmer-layer {
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.4) 15%,
+            transparent 30%,
+            rgba(255, 255, 255, 0.3) 45%,
+            transparent 60%,
+            rgba(255, 255, 255, 0.35) 75%,
+            transparent 90%
+          );
+          animation: shimmer 8s linear infinite;
+        }
+
+        @keyframes shimmer {
           0% {
             transform: translateX(0);
           }
@@ -103,8 +172,6 @@ const App: Component = () => {
         }
       `}</style>
 
-      {/* 気泡エフェクト */}
-      <BubbleEffect />
       <For each={takoInstances()}>
         {(tako) => <TakoAnimation id={tako.id} onClick={addTako} />}
       </For>
@@ -122,24 +189,21 @@ const App: Component = () => {
       </button>
 
       {/* 軽量化された背景エフェクト - 海のセクションから開始 */}
-      <div
-        class="absolute left-0 right-0 top-[50vh] bottom-0 bg-[url('/nya.jpg')] bg-cover bg-center opacity-20 mix-blend-overlay"
-        aria-hidden="true"
-      ></div>
+
 
       {/* 海のセクション用グラデーションオーバーレイ */}
       <div
-        class="absolute left-0 right-0 top-[50vh] bottom-0 bg-gradient-to-br from-purple-900/10 to-transparent"
+        class="absolute left-0 right-0 top-[40vh] bottom-0 bg-gradient-to-br from-purple-900/10 to-transparent"
         aria-hidden="true"
       ></div>
 
       {/* 軽量化された装飾（海のセクション用） */}
-      <div class="absolute top-[50vh] left-0 w-full h-full overflow-hidden pointer-events-none">
+      <div class="absolute top-[40vh] left-0 w-full h-full overflow-hidden pointer-events-none">
         <div class="absolute -top-20 -left-20 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
         <div class="absolute top-1/3 -right-20 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div class="relative z-10 text-white min-h-[500vh] p-8 backdrop-blur-sm">
+      <div class="relative z-10 text-white min-h-[500vh] p-8">
         {/* ヘッダーセクション */}
         <FadeIn class="text-center py-16">
           {/* より高度なプロフィール画像 */}
