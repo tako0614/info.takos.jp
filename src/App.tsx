@@ -88,7 +88,7 @@ const App: Component = () => {
           </div>
           
           <div class="relative">
-            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 relative neon-glow"
+            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-rose-500 to-red-400 relative neon-glow"
                 style="animation: titleShimmer 3s ease-in-out infinite">
               たこ
             </h1>
@@ -282,7 +282,7 @@ const App: Component = () => {
                       <div>
                         <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="takoscript">takoscript</h3>
                         <div class="status-indicator mt-2">
-                          <span class="text-green-400">RELEASED</span>
+                          <span class="text-yellow-400">IN DEVELOPMENT</span>
                         </div>
                       </div>
                     </div>
@@ -308,7 +308,7 @@ const App: Component = () => {
                       <div>
                         <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="yurucommu">yurucommu</h3>
                         <div class="status-indicator mt-2">
-                          <span class="text-green-400">RELEASED</span>
+                          <span class="text-yellow-400">IN DEVELOPMENT</span>
                         </div>
                       </div>
                     </div>
@@ -468,7 +468,6 @@ const App: Component = () => {
                     </h2>
                   </div>
                 </div>
-                <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-blue-500/20 rounded-xl"></div>
               </div>
               
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

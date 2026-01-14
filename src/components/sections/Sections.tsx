@@ -47,7 +47,6 @@ export const SkillsSection: Component = () => (
             </h2>
           </div>
         </div>
-        <div class="absolute -bottom-2 -right-2 w-12 h-12 border border-orange-500/20 rounded-xl"></div>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -58,22 +57,8 @@ export const SkillsSection: Component = () => (
               <div class={`absolute inset-0 bg-gradient-to-br ${skill.color.replace(/500/g, '500/5')} rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field`}></div>
               <div class="relative z-10">
                 <skill.icon size={32} class="text-white/80 mb-6 group-hover:scale-110 transition-transform duration-300" />
-                <h3 class="font-bold text-xl mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-pink-400 transition-all duration-300 neon-glow">{skill.title}</h3>
-                <p class={`text-gray-300 leading-relaxed mb-4`}>{skill.text}</p>
-
-                {/* スキルレベルバー */}
-                <div class="mb-3">
-                  <div class="flex justify-between items-center mb-2">
-                    <span class="text-sm font-mono text-cyan-400">習熟度</span>
-                    <span class="text-sm font-mono text-purple-400">{skill.level}%</span>
-                  </div>
-                  <div class="data-bar" style={`--progress: ${skill.level}%`}></div>
-                </div>
-
-                {/* ステータスインジケーター */}
-                <div class="status-indicator text-xs">
-                  <span class="text-green-400">ACTIVE</span>
-                </div>
+                <h3 class={`font-bold text-xl mb-4 text-transparent bg-clip-text bg-gradient-to-r ${skill.color} transition-all duration-300 neon-glow`}>{skill.title}</h3>
+                <p class={`text-gray-300 leading-relaxed`}>{skill.text}</p>
               </div>
             </div>
             </FloatingCard>

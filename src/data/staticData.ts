@@ -35,12 +35,12 @@ export const mutualLinks: MutualLink[] = [
 ];
 
 export const skillsData: SkillData[] = [
-  { title: "Frontend", text: "Preact, SolidJS, Tailwind CSS", icon: HiOutlinePaintBrush, color: "from-blue-500 to-indigo-600", level: 85 },
-  { title: "Backend", text: "Node.js, Deno, PHP, Laravel, Hono", icon: FiServer, color: "from-green-500 to-teal-600", level: 78 },
-  { title: "Tools", text: "Git, Docker, Deno Deploy", icon: FiTool, color: "from-purple-500 to-pink-600", level: 82 },
-  { title: "Infrastructure", text: "Proxmox, k8s, Linux", icon: BiRegularServer, color: "from-red-500 to-orange-600", level: 70 },
-  { title: "Languages", text: "JavaScript, TypeScript, PHP, Rust (学習中)", icon: FiCode, color: "from-yellow-500 to-amber-600", level: 88 },
-  { title: "Other", text: "UI/UX Design, SEO基礎, グラフィックデザイン", icon: IoSparklesOutline, color: "from-cyan-500 to-blue-600", level: 75 },
+  { title: "Frontend", text: "React, Next.js, Preact, SolidJS, Tailwind CSS", icon: HiOutlinePaintBrush, color: "from-blue-500 to-indigo-600" },
+  { title: "Backend", text: "Node.js, Deno, PHP, Laravel, Hono", icon: FiServer, color: "from-green-500 to-teal-600" },
+  { title: "Tools", text: "Git, Docker, Deno Deploy", icon: FiTool, color: "from-purple-500 to-pink-600" },
+  { title: "Infrastructure", text: "GCP, AWS, Cloudflare, Proxmox, k8s, Linux", icon: BiRegularServer, color: "from-red-500 to-orange-600" },
+  { title: "Languages", text: "JavaScript, TypeScript, PHP, Rust", icon: FiCode, color: "from-yellow-500 to-amber-600" },
+  { title: "Other", text: "UI/UX Design, SEO基礎, グラフィックデザイン", icon: IoSparklesOutline, color: "from-cyan-500 to-blue-600" },
 ];
 
 export const aboutData = {
