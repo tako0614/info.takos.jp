@@ -453,6 +453,58 @@ const App: Component = () => {
                   </div>
                 </div>
                 </FloatingCard>
+
+                {/* coding-agent */}
+                <FloatingCard floatIntensity={0.9}>
+                <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:-rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-blue-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
+                  <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center overflow-hidden">
+                        <img src="./tako.png" alt="coding-agent" class="w-full h-full object-cover" />
+                      </div>
+                      <div>
+                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="coding-agent">coding-agent</h3>
+                        <div class="status-indicator mt-2">
+                          <span class="text-yellow-400">IN DEVELOPMENT</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed luxury-paragraph text-lg mb-4">
+                      <span class="text-indigo-400 font-medium">複数のClaude/Codexを並列制御するAI Agentシステム</span>
+                    </p>
+                    <a href="https://github.com/tako0614/coding-agent" class="luxury-button inline-block">
+                      リポジトリを見る →
+                    </a>
+                  </div>
+                </div>
+                </FloatingCard>
+
+                {/* TheTeacher */}
+                <FloatingCard floatIntensity={1.0}>
+                <div class={`glass-card-dark p-10 rounded-3xl transform transition-all duration-500 hover:scale-105 hover:rotate-1 relative overflow-hidden group neon-border hologram-effect`}>
+                  <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-lime-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 energy-field"></div>
+                  <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                      <div class="w-20 h-20 rounded-2xl mr-5 shadow-xl group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-emerald-500 to-lime-600 flex items-center justify-center overflow-hidden">
+                        <img src="./tako.png" alt="TheTeacher" class="w-full h-full object-cover" />
+                      </div>
+                      <div>
+                        <h3 class="text-2xl font-bold neon-glow glitch-effect" data-text="TheTeacher">TheTeacher</h3>
+                        <div class="status-indicator mt-2">
+                          <span class="text-yellow-400">IN DEVELOPMENT</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed luxury-paragraph text-lg mb-4">
+                      <span class="text-emerald-400 font-medium">AI駆動の教育支援プラットフォーム</span>
+                    </p>
+                    <a href="https://github.com/tako0614/TheTeacher" class="luxury-button inline-block">
+                      リポジトリを見る →
+                    </a>
+                  </div>
+                </div>
+                </FloatingCard>
               </div>
 
               <div class="mt-8">

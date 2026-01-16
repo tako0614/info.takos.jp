@@ -4,7 +4,8 @@
       "Bash(npm install:*)",
       "Bash(find:*)",
       "Bash(npm run build:*)",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [],
     "ask": []

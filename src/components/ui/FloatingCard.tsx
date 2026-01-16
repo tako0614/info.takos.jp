@@ -30,13 +30,22 @@ export const FloatingCard: Component<FloatingCardProps> = (props) => {
   let longPressTimer: ReturnType<typeof setTimeout> | null = null;
   let isDragMode = false;
   let currentTouchId: number | null = null;
+  let lastFrameTime = 0;
+  const frameInterval = 1000 / 24; // 24FPS
 
   // タッチデバイス判定
   const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-  const animateFloat = () => {
-    floatPhase += 0.02;
-    floatPhase2 += 0.015;
+  const animateFloat = (currentTime: number = 0) => {
+    animationId = requestAnimationFrame(animateFloat);
+
+    // 24FPSに制限
+    const elapsed = currentTime - lastFrameTime;
+    if (elapsed < frameInterval) return;
+    lastFrameTime = currentTime - (elapsed % frameInterval);
+
+    floatPhase += 0.05; // 60fps→24fpsに合わせて調整 (0.02 * 60/24 ≈ 0.05)
+    floatPhase2 += 0.0375; // 同様に調整 (0.015 * 60/24 ≈ 0.0375)
 
     if (!isDragging()) {
       // 慣性を適用
@@ -68,8 +77,6 @@ export const FloatingCard: Component<FloatingCardProps> = (props) => {
         y: r.y * 0.92 + floatRotY * 0.08
       }));
     }
-
-    animationId = requestAnimationFrame(animateFloat);
   };
 
   // タッチイベントハンドラー
